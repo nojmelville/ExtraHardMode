@@ -153,7 +153,10 @@ public class MoreMonstersTask implements Runnable
         final int maxY = CFG.getInt(RootNode.MONSTER_SPAWNS_IN_LIGHT_MAX_Y, world.getName());
 
         // Only spawn monsters in normal world. End is crowded with endermen and nether is too extreme anyway, add config later
-        int lightLvl = location.getBlock().getLightFromSky();
+        int lightLvl = 15;
+        double yLoc = location.getY();
+        if (yLoc > 255 || yLoc < 0)
+            lightLvl = location.getBlock().getLightFromSky();
         boolean worldOk = world.getEnvironment() == World.Environment.NORMAL;
         boolean depthOk = location.getY() < maxY;
 
