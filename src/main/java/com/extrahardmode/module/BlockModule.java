@@ -119,7 +119,6 @@ public class BlockModule extends EHMModule
         /*
         final boolean breakTorches = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_BREAK_TORCHES, block.getWorld().getName());
         //TODO expand on this, it's only rudimentary, doesnt break torches if there are multiple fallingblocks (only breaks the first)
-
         if (breakTorches)
         {
             Block current = block;
