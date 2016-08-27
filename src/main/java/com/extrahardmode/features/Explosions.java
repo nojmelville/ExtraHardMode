@@ -114,7 +114,7 @@ public class Explosions extends ListenerModule
         // TNT
         if (sourceEntity instanceof TNTPrimed)
         {
-            if (customTntExplosion)
+            if (customTntExplosion && event.getYield() == 0.25)
             {
                 if (!multipleExplosions)
                 {
