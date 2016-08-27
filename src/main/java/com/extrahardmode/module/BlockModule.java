@@ -207,7 +207,7 @@ public class BlockModule extends EHMModule
             if (newDataValue.getData() >= 7)
             {
                 Material material = block.getType();
-                if (material == Material.CROPS || material == Material.CARROT || material == Material.POTATO)
+                if (material == Material.CROPS || material == Material.CARROT || material == Material.POTATO || material == Material.BEETROOT)
                 {
                     int deathProbability = lossRate;
 
@@ -346,7 +346,8 @@ public class BlockModule extends EHMModule
                 || material.equals(Material.POTATO)
                 || material.equals(Material.CARROT)
                 || material.equals(Material.MELON_STEM)
-                || material.equals(Material.PUMPKIN_STEM);
+                || material.equals(Material.PUMPKIN_STEM)
+                || material.equals(Material.BEETROOT);
     }
 
 
