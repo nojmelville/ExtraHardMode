@@ -135,7 +135,7 @@
         <!--PaperSpigot Repo -->
         <repository>
             <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/content/groups/public/</url>
+            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
         </repository>
         <!--WorldGuard Repo -->
         <repository>
