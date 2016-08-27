@@ -605,6 +605,7 @@ or getting very creative in their approach, rather than just using the dirt and 
 Additional Falling Blocks:
     Enable: true
     # wheter falling blocks can break torches, effectively blocking the easy way to farm sand.
+    # This option has been removed/currently doesn't do anything as it causes issues with other falling blocks, nor is it complete. I also don't see how it makes the game more difficult - just seems to make it a tad more tedious at best.
     Break Torches: true
     # if blocks should damage player if they hit him directly
     Dmg Amount When Hitting Players: 2
