@@ -49,10 +49,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -112,6 +109,18 @@ public class Players extends ListenerModule
     {
         if (isArmorWeightEnabled)
             armorCheckingPlayers.put(event.getPlayer(), plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new ArmorWeightTask(plugin, event.getPlayer()), 20L * 5, 20L * 3));
+    }
+
+    /**
+     * Fix #55 (not resetting player speed when entering a EHM-disabled world)
+     */
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
+    void onPlayerChangeWorld(PlayerChangedWorldEvent event)
+    {
+        Player player = event.getPlayer();
+        if (CFG.getBoolean(RootNode.ARMOR_SLOWDOWN_ENABLE, event.getFrom().getName()))
+            if (!CFG.getBoolean(RootNode.ARMOR_SLOWDOWN_ENABLE, player.getWorld().getName()))
+                player.setWalkSpeed(0.2f);
     }
 
 
