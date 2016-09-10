@@ -103,6 +103,7 @@ public class Explosions extends ListenerModule
         final World world = event.getLocation().getWorld();
         final Location location = sourceEntity.getLocation();
 
+        final boolean flyOtherPlugins = CFG.getBoolean(RootNode.EXPLOSIONS_FYLING_BLOCKS_ENABLE_OTHER, world.getName());
         final boolean customGhastExplosion = CFG.getBoolean(RootNode.EXPLOSIONS_GHASTS_ENABLE, world.getName());
         final boolean customTntExplosion = CFG.getBoolean(RootNode.EXPLOSIONS_TNT_ENABLE, world.getName());
         final boolean multipleExplosions = CFG.getBoolean(RootNode.BETTER_TNT, world.getName());
@@ -114,7 +115,6 @@ public class Explosions extends ListenerModule
         // TNT
         if (sourceEntity instanceof TNTPrimed)
         {
-            if (customTntExplosion && event.getYield() == 0.25) //getYield value of 0.25 somewhat insures this is a vanilla TNT explosion.
             {
                 if (!multipleExplosions)
                 {
