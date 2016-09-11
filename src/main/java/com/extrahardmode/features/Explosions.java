@@ -93,7 +93,7 @@ public class Explosions extends ListenerModule
     //   |   / _| (_ | |_| | |__ / _ \|   / | |__ | |\__ \ | | | _|| .` | _||   /
     //   |_|_\___\___|\___/|____/_/ \_\_|_\ |____|___|___/ |_| |___|_|\_|___|_|_\
     //
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    @EventHandler(ignoreCancelled = true)
     public void regularExplosions(EntityExplodeEvent event)
     {
         if (event instanceof FakeEntityExplodeEvent || !(event.getEntity() instanceof Ghast || event.getEntity() instanceof TNTPrimed))
