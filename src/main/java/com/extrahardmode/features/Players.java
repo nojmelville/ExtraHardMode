@@ -96,6 +96,12 @@ public class Players extends ListenerModule
                 isArmorWeightEnabled = true;
                 break;
             }
+        //In case the plugin is reloaded...
+        if (isArmorWeightEnabled && plugin.getServer().getOnlinePlayers().size() > 0)
+        {
+            for (Player player : plugin.getServer().getOnlinePlayers())
+                armorCheckingPlayers.put(player, plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new ArmorWeightTask(plugin, player), 20L * 5, 20L * 3));
+        }
     }
 
     /**
