@@ -120,7 +120,7 @@ public class Players extends ListenerModule
     /**
      * Fix #55 (not resetting player speed when entering a EHM-disabled world)
      */
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.LOW)
     void onPlayerChangeWorld(PlayerChangedWorldEvent event)
     {
         Player player = event.getPlayer();
@@ -163,7 +163,7 @@ public class Players extends ListenerModule
     /**
      * When a Player dies he looses a percentage of his inventory
      */
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onEntityDeath(PlayerDeathEvent event)
     {
         Player player = event.getEntity();
