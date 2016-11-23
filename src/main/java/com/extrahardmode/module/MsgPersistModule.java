@@ -228,7 +228,7 @@ public class MsgPersistModule extends EHMModule
             try
             {
                 if (conn != null) conn.close();
-                if (statement != null) statement.close();
+                if (statement != null && !statement.isClosed()) statement.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
