@@ -160,8 +160,8 @@
     <dependencies>
         <!-- Spigot -->
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
-            <artifactId>paper-api</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
             <version>${mc-version}-${bukkit-ver}</version>
             <scope>provided</scope>
         </dependency>
