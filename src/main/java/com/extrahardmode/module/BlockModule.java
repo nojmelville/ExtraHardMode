@@ -35,7 +35,9 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -144,6 +146,9 @@ public class BlockModule extends EHMModule
             EntityHelper.markForProcessing(plugin, fallingBlock);
 
         EntityHelper.markAsOurs(plugin, fallingBlock);
+
+        //TODO: Figure out how to make cancelable (ultra low priority)
+        plugin.getServer().getPluginManager().callEvent(new EntityChangeBlockEvent(null, block, Material.AIR, (byte)0));
 
         return fallingBlock.getUniqueId();
     }
