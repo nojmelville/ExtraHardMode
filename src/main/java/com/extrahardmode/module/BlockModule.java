@@ -148,7 +148,7 @@ public class BlockModule extends EHMModule
         EntityHelper.markAsOurs(plugin, fallingBlock);
 
         //TODO: Figure out how to make cancelable (ultra low priority)
-        plugin.getServer().getPluginManager().callEvent(new EntityChangeBlockEvent(null, block, Material.AIR, (byte)0));
+        plugin.getServer().getPluginManager().callEvent(new EntityChangeBlockEvent(fallingBlock, block, Material.AIR, (byte)0));
 
         return fallingBlock.getUniqueId();
     }
