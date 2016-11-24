@@ -147,9 +147,9 @@ public class MsgPersistModule extends EHMModule
         {
             try
             {
-                if (conn != null) conn.close();
                 if (aStatement != null && !aStatement.isClosed()) aStatement.close();
                 if (resultSet != null && !resultSet.isClosed()) resultSet.close();
+                if (conn != null) conn.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
@@ -227,8 +227,8 @@ public class MsgPersistModule extends EHMModule
         {
             try
             {
-                if (conn != null) conn.close();
                 if (statement != null && !statement.isClosed()) statement.close();
+                if (conn != null) conn.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
@@ -280,8 +280,8 @@ public class MsgPersistModule extends EHMModule
         {
             try
             {
-                if (conn != null) conn.close();
                 if (statement != null && !statement.isClosed()) statement.close();
+                if (conn != null) conn.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
@@ -342,9 +342,9 @@ public class MsgPersistModule extends EHMModule
         {
             try
             {
-                if (conn != null) conn.close();
-                if (statement != null && !statement.isClosed()) statement.close();
                 if (result != null && !result.isClosed()) result.close();
+                if (statement != null && !statement.isClosed()) statement.close();
+                if (conn != null) conn.close();
             } catch (SQLException e)
             {
                 e.printStackTrace();
