@@ -429,43 +429,31 @@ public class Glydia extends ListenerModule
             if (fireball.getShooter() != null && EntityHelper.shooterType(fireball) == EntityType.ENDER_DRAGON)
             {
             	final boolean alternativeFireball = CFG.getBoolean(RootNode.ALTERNATIVE_FIREBALL, world.getName());
-            	if(alternativeFireball){
+
+            	//Start of "ALTERNATIVE_FIREBALL" spawning method
+            	if(alternativeFireball) {
                 	
                 	int random = plugin.getRandom().nextInt(150);
                 	if (random < 100)
                 	{
     	                if (random < 10)
     	                {
-
-
     	                    spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.BLAZE);
-    	
-
     	                    for (int x1 = -2; x1 <= 2; x1++)
     	                    {
-
     	                        for (int z1 = -2; z1 <= 2; z1++)
     	                        {
-
     	                            for (int y1 = 2; y1 >= -2; y1--)
     	                            {
-
     	                                Block block = fireball.getLocation().add(x1, y1, z1).getBlock();
     	                                Material underType = block.getRelative(BlockFace.DOWN).getType();
-    	                                
     	                                if (block.getType() == Material.AIR && underType != Material.AIR && underType != Material.FIRE)
     	                                {
-
     	                                    block.setType(Material.FIRE);
     	                                }
     	                            }
     	                        }
     	                    }
-    	
-
-
-
-
 
     	                    Location location = fireball.getLocation().add(0, 1, 0);
     	                    for (int i = 0; i < 10; i++)
@@ -519,7 +507,9 @@ public class Glydia extends ListenerModule
     	                    spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ENDERMAN);
     	                }
                 	}
-            	} else {
+            	}
+            	//End of "ALTERNATIVE_FIREBALL" spawning method. Whew.
+            	else {
             		 int random = plugin.getRandom().nextInt(100);
                      if (random < 40)
                      {
@@ -573,9 +563,7 @@ public class Glydia extends ListenerModule
                      {
                          spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ENDERMAN);
                      }
-                 
             	}
-
             }
 
             if (spawnedMonster != null)
