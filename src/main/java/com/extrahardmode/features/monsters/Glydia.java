@@ -483,9 +483,8 @@ public class Glydia extends ListenerModule
 
     	                    for (int i = 0; i < 2; i++)
     	                    {
-    	                        spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE);
+    	                        spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE_VILLAGER);
     	                        EntityHelper.markLootLess(plugin, (LivingEntity) spawnedMonster);
-    	                        Zombie zombie = (Zombie) spawnedMonster;
     	                    }
     	                } else if (random < 80)
     	                {	             
