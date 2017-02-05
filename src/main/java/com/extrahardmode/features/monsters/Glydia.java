@@ -458,24 +458,20 @@ public class Glydia extends ListenerModule
     	                    Location location = fireball.getLocation().add(0, 1, 0);
     	                    for (int i = 0; i < 10; i++)
     	                    {
-
     	                        FallingBlock fire = world.spawnFallingBlock(location, Material.FIRE, (byte) 0);
     	                        Vector velocity = Vector.getRandom();
     	                        if (velocity.getY() < 0)
     	                        {
-
     	                            velocity.setY(velocity.getY() * -1);
     	                        }
 
     	                        if (plugin.getRandom().nextBoolean())
     	                        {
-
     	                            velocity.setZ(velocity.getZ() * -1);
     	                        }
 
     	                        if (plugin.getRandom().nextBoolean())
     	                        {
-
     	                            velocity.setX(velocity.getX() * -1);
     	                        }
 
@@ -487,7 +483,6 @@ public class Glydia extends ListenerModule
 
     	                    for (int i = 0; i < 2; i++)
     	                    {
-
     	                        spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE);
     	                        EntityHelper.markLootLess(plugin, (LivingEntity) spawnedMonster);
     	                        Zombie zombie = (Zombie) spawnedMonster;
@@ -501,9 +496,6 @@ public class Glydia extends ListenerModule
     	                }
     	                else 
     	                {
-
-
-
     	                    spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ENDERMAN);
     	                }
                 	}
@@ -554,10 +546,8 @@ public class Glydia extends ListenerModule
                      {
                          for (int i = 0; i < 2; i++)
                          {
-                             spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE);
+                             spawnedMonster = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE_VILLAGER);
                              EntityHelper.markLootLess(plugin, (LivingEntity) spawnedMonster);
-                             Zombie zombie = (Zombie) spawnedMonster;
-                             zombie.setVillager(true);
                          }
                      } else
                      {
