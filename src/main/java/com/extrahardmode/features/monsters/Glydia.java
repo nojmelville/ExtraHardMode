@@ -500,7 +500,8 @@ public class Glydia extends ListenerModule
     	                }
                 	}
             	}
-            	//End of "ALTERNATIVE_FIREBALL" spawning method. Whew.
+            	//End of "ALTERNATIVE_FIREBALL" spawning method.
+                //Begin of the normal spawning method.
             	else {
             		 int random = plugin.getRandom().nextInt(100);
                      if (random < 40)
