@@ -284,13 +284,13 @@ public class Explosions extends ListenerModule
                     else
                     {
                         Material type = BlockModule.getDroppedMaterial(fallBaby.getMaterial());
-                        if (type == null)
-                            return; //Otherwise we're removing precious block data e.g. chaning wood slab types. See #69
+                        if (type.isBlock() && type == fallBaby.getMaterial()) //preserve blockdata. See issue #69 //Alternatively could block#setType in second condition
+                            return;
                         else if (type.isBlock())
                             block.setType(type);
                         else //if block doesnt drop something that can be placed again... thin glass, redstone ore
                             block.setType(Material.AIR);
-                        event.setCancelled(true); //TODO: is there a reason for this? if event is being called, I'd presume it's changing the block in the first place...
+                        event.setCancelled(true);
                     }
                 }
             }
