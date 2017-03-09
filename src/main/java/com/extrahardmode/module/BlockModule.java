@@ -483,7 +483,7 @@ public class BlockModule extends EHMModule
             case MOB_SPAWNER:
                 return Material.AIR;
         }
-        return mat;
+        return null;
     }
 
 
