@@ -186,6 +186,8 @@ public class Explosions extends ListenerModule
     }
 
 
+    //RoboMWM - remove "compatibility" (see com.extrahardmode.module.ExplosionCompatStorage for more details)
+    /*
     /**
      * Provide compatibility for block protection and logging plugins.
      * <pre>
@@ -199,12 +201,13 @@ public class Explosions extends ListenerModule
      *     5. this code will break blocks manually as a workaround,
      *     because the actual explosion that would break the blocks has to be cancelled
      * </pre>
-     */
+     *
     //     ___ ___  __  __ ___  _ _____ ___ ___ ___ _    ___ _______   __
     //    / __/ _ \|  \/  | _ \/_\_   _|_ _| _ )_ _| |  |_ _|_   _\ \ / /
     //   | (_| (_) | |\/| |  _/ _ \| |  | || _ \| || |__ | |  | |  \ V /
     //    \___\___/|_|  |_|_|/_/ \_\_| |___|___/___|____|___| |_|   |_|
     //
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void provideCompatibility(EntityExplodeEvent event)
     {
@@ -253,6 +256,7 @@ public class Explosions extends ListenerModule
             }
         }
     }
+    */
 
 
     //    _      _   _  _ ___ ___ _  _  ___   ___ _    ___   ___ _  _____
