@@ -100,7 +100,7 @@ public class PigMen extends ListenerModule
      * <p/>
      * Makes Pigmen always angry
      */
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onEntitySpawn(CreatureSpawnEvent event)
     {
         Location location = event.getLocation();

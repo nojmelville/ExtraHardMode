@@ -210,7 +210,7 @@ public class Zombies extends ListenerModule
 
 
     /** Flag Zombies that have been called in as reinforcements to not respawn */
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onZombieReinforcements(CreatureSpawnEvent event)
     {
         if (hasReinforcements && event.getEntity() instanceof Zombie && event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.REINFORCEMENTS)
@@ -233,7 +233,7 @@ public class Zombies extends ListenerModule
             {
 //                event.getBlockBreakEvent().setCancelled(true);
 //                event.getBlockBreakEvent().getBlock().setType(Material.AIR);
-                event.getBlock().getDrops().clear(); //nope, there's another way
+                event.setCancelled(true); //Let the handler take care of it
             }
         }
     }
