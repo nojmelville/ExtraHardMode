@@ -71,7 +71,7 @@ public class TemporaryBlockHandler extends ListenerModule
         }
     }
 
-    //And other weird plugin explosions
+    //And also other plugin-caused explosions (and beds in the nether)
     @EventHandler(ignoreCancelled = true)
     public void onBlockExplosionBreak(BlockExplodeEvent event)
     {
