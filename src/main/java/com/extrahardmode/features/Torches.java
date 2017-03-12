@@ -93,7 +93,7 @@ public class Torches extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.TORCHES);
 
         // FEATURE: players can't attach torches to common "soft" blocks
-        if (block.getType().equals(Material.TORCH) && limitedTorchPlacement && !playerBypasses)
+        if (limitedTorchPlacement && !playerBypasses && block.getType().equals(Material.TORCH))
         {
             Torch torch = new Torch(Material.TORCH, block.getData());
             Material attachmentMaterial = block.getRelative(torch.getAttachedFace()).getType();
