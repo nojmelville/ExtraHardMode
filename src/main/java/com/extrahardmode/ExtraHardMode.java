@@ -79,21 +79,14 @@ public class ExtraHardMode extends JavaPlugin
         // Register modules
         registerModule(RootConfig.class, new RootConfig(this));
         registerModule(MessageConfig.class, new MessageConfig(this));
+
+        File rootFolder = new File(getDataFolder().getPath() + File.separator + "persistence" + File.separator);
+        rootFolder.mkdirs();
+        registerModule(MsgPersistModule.class, new MsgPersistModule(this, rootFolder + File.separator + "messages_count.db"));
+
         registerModule(MsgModule.class, new MsgModule(this));
+
         registerModule(DataStoreModule.class, new DataStoreModule(this));
-
-        //TODO: add these in a (separate?), global config
-        if (isNodeEnabled(RootNode.ENABLE_TUTORIAL))
-        {
-            File rootFolder = new File(getDataFolder().getPath() + File.separator + "persistence" + File.separator);
-            rootFolder.mkdirs();
-            registerModule(MsgPersistModule.class, new MsgPersistModule(this, rootFolder + File.separator + "messages_count.db"));
-            registerModule(Tutorial.class, new Tutorial(this));
-        }
-
-        if (isNodeEnabled(RootNode.ENABLE_DEBUG))
-            registerModule(DebugMode.class, new DebugMode(this));
-
         registerModule(BlockModule.class, new BlockModule(this));
         registerModule(UtilityModule.class, new UtilityModule(this));
         registerModule(PlayerModule.class, new PlayerModule(this));
@@ -105,6 +98,7 @@ public class ExtraHardMode extends JavaPlugin
         registerModule(AntiFarming.class, new AntiFarming(this));
         registerModule(AnimalCrowdControl.class, new AnimalCrowdControl(this));
         registerModule(AntiGrinder.class, new AntiGrinder(this));
+        registerModule(DebugMode.class, new DebugMode(this));
         registerModule(Explosions.class, new Explosions(this));
         registerModule(HardenedStone.class, new HardenedStone(this));
         registerModule(LimitedBuilding.class, new LimitedBuilding(this));
@@ -143,6 +137,8 @@ public class ExtraHardMode extends JavaPlugin
         registerModule(CompatHandler.class, new CompatHandler(this));
         registerModule(ExplosionCompatStorage.class, new ExplosionCompatStorage(this));
 
+        //TODO make modules
+        registerModule(Tutorial.class, new Tutorial(this));
 
         OurRandom.reload();
 
