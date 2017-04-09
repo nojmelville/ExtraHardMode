@@ -80,6 +80,7 @@ public class ExtraHardMode extends JavaPlugin
         registerModule(RootConfig.class, new RootConfig(this));
         registerModule(MessageConfig.class, new MessageConfig(this));
         registerModule(MsgModule.class, new MsgModule(this));
+        registerModule(DataStoreModule.class, new DataStoreModule(this));
 
         //TODO: add these in a (separate?), global config
         if (isNodeEnabled(RootNode.ENABLE_TUTORIAL))
@@ -93,7 +94,6 @@ public class ExtraHardMode extends JavaPlugin
         if (isNodeEnabled(RootNode.ENABLE_DEBUG))
             registerModule(DebugMode.class, new DebugMode(this));
 
-        registerModule(DataStoreModule.class, new DataStoreModule(this));
         registerModule(BlockModule.class, new BlockModule(this));
         registerModule(UtilityModule.class, new UtilityModule(this));
         registerModule(PlayerModule.class, new PlayerModule(this));
