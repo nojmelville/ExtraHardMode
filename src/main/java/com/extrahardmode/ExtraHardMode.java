@@ -79,9 +79,10 @@ public class ExtraHardMode extends JavaPlugin
         // Register modules
         registerModule(RootConfig.class, new RootConfig(this));
         registerModule(MessageConfig.class, new MessageConfig(this));
+        registerModule(MsgModule.class, new MsgModule(this));
 
-        //TODO: add these in a global config?
-        if (!isNodeEnabled(RootNode.DISABLE_TUTORIAL))
+        //TODO: add these in a (separate?), global config
+        if (isNodeEnabled(RootNode.ENABLE_TUTORIAL))
         {
             File rootFolder = new File(getDataFolder().getPath() + File.separator + "persistence" + File.separator);
             rootFolder.mkdirs();
@@ -89,10 +90,8 @@ public class ExtraHardMode extends JavaPlugin
             registerModule(Tutorial.class, new Tutorial(this));
         }
 
-        if (!isNodeEnabled(RootNode.DISABLE_DEBUG))
+        if (isNodeEnabled(RootNode.ENABLE_DEBUG))
             registerModule(DebugMode.class, new DebugMode(this));
-
-        registerModule(MsgModule.class, new MsgModule(this));
 
         registerModule(DataStoreModule.class, new DataStoreModule(this));
         registerModule(BlockModule.class, new BlockModule(this));
