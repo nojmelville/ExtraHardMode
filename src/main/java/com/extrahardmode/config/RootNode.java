@@ -53,14 +53,6 @@ public enum RootNode implements ConfigNode
      */
     PRINT_COMMENTS("Print Comments", VarType.BOOLEAN, true, "If comments like this should be printed"),
     /**
-    * Globally disables certain modules.
-    * 
-    */
-    ENABLE_TUTORIAL("Enable.Tutorial", VarType.BOOLEAN, true,
-            "Enables the tutorial and persistence module"),
-    ENABLE_DEBUG("Enable.Debug", VarType.BOOLEAN, true,
-            "Enables the debug module"),
-    /**
      * list of worlds where extra hard mode rules apply
      */
     WORLDS("Enabled Worlds", VarType.LIST, new DefaultWorlds(),
