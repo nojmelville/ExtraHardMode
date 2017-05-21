@@ -780,7 +780,11 @@ public enum RootNode implements ConfigNode
      */
     ENDER_DRAGON_NO_BUILDING("EnderDragon.No Building Allowed", VarType.BOOLEAN, true,
             "Block building in the end to prevent players from building big protective structures."),
-
+    /**
+     * Sets the health of the Ender Dragon (200 is vanilla)
+     */
+    ENDER_DRAGON_HEALTH("EnderDragon.Health", VarType.INTEGER, SubType.NATURAL_NUMBER, Disable.ZERO, 800,
+            "Sets the health of the Ender Dragon"),
     /**
      * ###########
      * # FARMING #

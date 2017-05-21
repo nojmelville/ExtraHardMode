@@ -360,7 +360,9 @@ public class Glydia extends ListenerModule
             // if he's there, full health
             if (enderDragon != null)
             {
-                enderDragon.setHealth(enderDragon.getMaxHealth());
+            	final int enderDragonHealth = CFG.getInt(RootNode.ENDER_DRAGON_HEALTH, world.getName());
+            	enderDragon.setMaxHealth(enderDragonHealth);
+            	enderDragon.setHealth(enderDragon.getMaxHealth());
             }
 
             // otherwise, spawn one
@@ -370,7 +372,21 @@ public class Glydia extends ListenerModule
             }
         }
     }
-
+    /**
+     * when ender dragon spawns
+     * set new max health
+     * 
+     */
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onEnderDragonSpawn(final CreatureSpawnEvent event) {
+        if (event.getEntityType() == EntityType.ENDER_DRAGON) {
+        	Location location = event.getLocation();
+        	World world = location.getWorld();
+        	final int enderDragonHealth = CFG.getInt(RootNode.ENDER_DRAGON_HEALTH, world.getName());
+            	event.getEntity().setMaxHealth(enderDragonHealth);
+            	event.getEntity().setHealth(event.getEntity().getMaxHealth());
+        }
+    }
 
     /**
      * when an item spawns
