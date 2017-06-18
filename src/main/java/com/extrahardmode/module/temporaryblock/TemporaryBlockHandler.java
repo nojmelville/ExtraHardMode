@@ -40,8 +40,7 @@ public class TemporaryBlockHandler extends ListenerModule
     {
         if (fireTemporaryBlockBreakEvent(event.getBlock()))
         {
-            event.setCancelled(true);
-            event.getBlock().setType(Material.AIR);
+            event.setDropItems(false);
         }
     }
 
