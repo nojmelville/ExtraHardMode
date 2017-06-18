@@ -64,6 +64,8 @@ public class MoreTnt extends ListenerModule
                     case 1:
                         break;
                     default:
+                        if (event.getRecipe().getResult() == null)
+                            return;
                         if (event.getRecipe().getResult().getType().equals(Material.TNT))
                         {
                             //TODO LOW EhmMoreTntEvent
