@@ -64,7 +64,7 @@ public class MoreTnt extends ListenerModule
                     case 1:
                         break;
                     default:
-                        if (event.getRecipe().getResult() == null)
+                        if (event.getRecipe() == null) //1.12 will return null I guess
                             return;
                         if (event.getRecipe().getResult().getType().equals(Material.TNT))
                         {
