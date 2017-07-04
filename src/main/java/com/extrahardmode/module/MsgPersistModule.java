@@ -27,6 +27,7 @@ import com.extrahardmode.config.messages.MessageConfig;
 import com.extrahardmode.config.messages.MessageNode;
 import com.extrahardmode.config.messages.MsgCategory;
 import com.extrahardmode.service.EHMModule;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import org.apache.commons.lang.Validate;
 
@@ -48,8 +49,8 @@ public class MsgPersistModule extends EHMModule
     /** Buffer player ids (playerName, playerId) */
     private Map<String, Integer> playerIdBuffer;
 
-    /** Buffer data from the db (playerid, message, value) */
-    private Table<Integer, MessageNode, Integer> buffer;
+    /** Cache data from the db (playerid, message, value) */
+    private Table<Integer, MessageNode, Integer> cache;
 
 
     /**
@@ -69,6 +70,7 @@ public class MsgPersistModule extends EHMModule
     {
         messages = plugin.getModuleForClass(MessageConfig.class);
         playerIdBuffer = new HashMap<String, Integer>();
+        cache = HashBasedTable.create();
         testJDBC();
         initializeTables();
     }
@@ -262,6 +264,7 @@ public class MsgPersistModule extends EHMModule
     private void set(MessageNode node, int playerId, int value)
     {
         Validate.isTrue(value >= 0, "Count has to be positive");
+        incrementCache(playerId, node, value);
         Connection conn = null;
         Statement statement = null;
         try
@@ -314,6 +317,10 @@ public class MsgPersistModule extends EHMModule
      */
     private int getCountFor(MessageNode node, int playerId)
     {
+        //Check cache first
+        if (cache.contains(playerId, node))
+            return cache.get(playerId, node);
+
         Connection conn = null;
         Statement statement = null;
         ResultSet result = null;
@@ -351,6 +358,9 @@ public class MsgPersistModule extends EHMModule
             }
         }
 
+        //Save to cache
+        cache.put(playerId, node, value);
+
         return value;
     }
 
@@ -370,5 +380,13 @@ public class MsgPersistModule extends EHMModule
                 set(node, playerId, 0);
             }
         }
+    }
+
+    private void incrementCache(int id, MessageNode node, int count)
+    {
+        if (!cache.contains(id, node))
+            return;
+        count += cache.get(id, node);
+        cache.put(id, node, count);
     }
 }
