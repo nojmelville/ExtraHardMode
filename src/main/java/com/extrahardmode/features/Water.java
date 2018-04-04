@@ -37,10 +37,12 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -212,10 +214,13 @@ public class Water extends ListenerModule
      * @param event - Event that occurred.
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    void onPlayerPickupItem(PlayerPickupItemEvent event)
+    void onPlayerPickupItem(EntityPickupItemEvent event)
     {
+        if (event.getEntityType() != EntityType.PLAYER)
+            return;
+
         // FEATURE: players can't swim when they're carrying a lot of weight
-        Player player = event.getPlayer();
+        Player player = (Player)event.getEntity();
         PlayerData playerData = plugin.getModuleForClass(DataStoreModule.class).getPlayerData(player.getName());
         playerData.cachedWeightStatus = -1.0F;
     }
