@@ -177,7 +177,7 @@ public class AntiGrinder extends ListenerModule
                     case GUARDIAN:
                     case ELDER_GUARDIAN:
                         return true;
-                    case SKELETON:
+                    case WITHER_SKELETON:
                     case ENDERMAN:
                     {
                         // tall monsters can get stuck when they spawn like WitherSkeletons
@@ -202,7 +202,7 @@ public class AntiGrinder extends ListenerModule
                         }
                         for (int i = 0; i < adjacentFaces.length; i++)
                         {
-                            adjacentBlocks[i + adjacentFaces.length] = underBlock.getRelative(adjacentFaces[i]);
+                            adjacentBlocks[i + adjacentFaces.length + 1] = underBlock.getRelative(adjacentFaces[i]);
                         }
 
                         for (Block adjacentBlock : adjacentBlocks)
