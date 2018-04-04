@@ -372,6 +372,7 @@ public class Glydia extends ListenerModule
             }
         }
     }
+
     /**
      * when ender dragon spawns
      * set new max health
@@ -383,8 +384,10 @@ public class Glydia extends ListenerModule
         	Location location = event.getLocation();
         	World world = location.getWorld();
         	final int enderDragonHealth = CFG.getInt(RootNode.ENDER_DRAGON_HEALTH, world.getName());
-            	event.getEntity().setMaxHealth(enderDragonHealth);
-            	event.getEntity().setHealth(event.getEntity().getMaxHealth());
+        	if (enderDragonHealth <= 0)
+        	    return;
+            event.getEntity().setMaxHealth(enderDragonHealth);
+            event.getEntity().setHealth(event.getEntity().getMaxHealth());
         }
     }
 
