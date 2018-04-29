@@ -166,6 +166,9 @@ public class AntiGrinder extends ListenerModule
         {
             if (EntityHelper.isLootLess(entity))
             {
+                plugin.debug(world, event.getEntity().getType().name() +
+                        "'s drops at " + entity.getLocation() + " was cleared " +
+                        "(was from a spawner or environmental damage was >50% )");
                 clearDrops(event);
                 return false;
             }
@@ -182,7 +185,11 @@ public class AntiGrinder extends ListenerModule
                     {
                         // tall monsters can get stuck when they spawn like WitherSkeletons
                         if (entity.getEyeLocation().getBlock().getType() != Material.AIR)
+                        {
+                            plugin.debug(world, event.getEntity().getType().name() +
+                                    "'s drops at " + entity.getLocation() + " was cleared (spawned inside a block)");
                             return clearDrops(event);
+                        }
                         break;
                     }
                     default:
@@ -207,8 +214,13 @@ public class AntiGrinder extends ListenerModule
 
                         for (Block adjacentBlock : adjacentBlocks)
                         {
-                            if (adjacentBlock != null && (adjacentBlock.getType() == Material.WATER || adjacentBlock.getType() == Material.STATIONARY_WATER))
+                            if (adjacentBlock != null && (adjacentBlock.getType() == Material.WATER
+                                    || adjacentBlock.getType() == Material.STATIONARY_WATER))
+                            {
+                                plugin.debug(world, event.getEntity().getType().name() +
+                                        "'s drops at " + entity.getLocation() + " was cleared (in/near water)");
                                 return clearDrops(event);
+                            }
                         }
 
                         // also no loot for monsters who can't reach their (melee) killers
@@ -231,7 +243,13 @@ public class AntiGrinder extends ListenerModule
                             {
                                 // monster is blocked at eye level, unable to advance toward killer
                                 if (middleLocation.getBlock().getType() != Material.AIR)
+                                {
+                                    plugin.debug(world, event.getEntity().getType().name() +
+                                            "'s drops at " + entity.getLocation() + " was cleared " +
+                                            "(blocked at eye level, was unable to reach killer)");
                                     return clearDrops(event);
+                                }
+
                                     // monster doesn't have room above to hurdle a foot level block, unable to advance toward killer
                                 else
                                 {
@@ -244,6 +262,9 @@ public class AntiGrinder extends ListenerModule
                                             || bottom.getType() == Material.COBBLE_WALL
                                             || bottom.getType() == Material.NETHER_FENCE)
                                     {
+                                        plugin.debug(world, event.getEntity().getType().name() +
+                                                "'s drops at " + entity.getLocation() + " was cleared " +
+                                                "(Unable to jump over a block due to low ceiling.)");
                                         return clearDrops(event);
                                     }
                                 }

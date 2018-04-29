@@ -172,6 +172,12 @@ public class ExtraHardMode extends JavaPlugin
         new ConfigPlotter(this, getModuleForClass(RootConfig.class));
     }
 
+    public void debug(World world, Object message)
+    {
+        if ((getModuleForClass(RootConfig.class)).getBoolean(RootNode.DEBUG, world.getName()))
+            System.out.println(message);
+    }
+
 
     @Override
     public void onDisable()

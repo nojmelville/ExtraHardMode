@@ -57,6 +57,10 @@ public enum RootNode implements ConfigNode
      */
     WORLDS("Enabled Worlds", VarType.LIST, new DefaultWorlds(),
             "Set the worlds you want ehm active here. F.e. [world, world_nether]. \"@all\" enables ehm for all worlds"),
+    /**
+     * Whether debug messages should be printed to console
+     */
+    DEBUG("Debug", VarType.BOOLEAN, false, "Whether debug messages should be printed to console."),
 
     /**
      * #############
