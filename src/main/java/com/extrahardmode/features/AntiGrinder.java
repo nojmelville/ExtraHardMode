@@ -132,7 +132,7 @@ public class AntiGrinder extends ListenerModule
                             }
                             break;
                         case THE_END:
-                            if (underBlockType != Material.ENDER_STONE && underBlockType != Material.OBSIDIAN && underBlockType != Material.AIR/*dragon*/)
+                            if (underBlockType != Material.END_STONE && underBlockType != Material.OBSIDIAN && underBlockType != Material.AIR/*dragon*/)
                             {
                                 event.setCancelled(true);
                                 return false;
@@ -214,8 +214,7 @@ public class AntiGrinder extends ListenerModule
 
                         for (Block adjacentBlock : adjacentBlocks)
                         {
-                            if (adjacentBlock != null && (adjacentBlock.getType() == Material.WATER
-                                    || adjacentBlock.getType() == Material.STATIONARY_WATER))
+                            if (adjacentBlock != null && (adjacentBlock.getType() == Material.WATER))
                             {
                                 plugin.debug(world, event.getEntity().getType().name() +
                                         "'s drops at " + entity.getLocation() + " was cleared (in/near water)");
@@ -257,10 +256,9 @@ public class AntiGrinder extends ListenerModule
                                     Block top = middleLocation.getBlock().getRelative(BlockFace.UP);
                                     if (top.getType() != Material.AIR &&
                                             bottom.getType() != Material.AIR
-                                            || bottom.getType() == Material.FENCE
-                                            || bottom.getType() == Material.FENCE_GATE
-                                            || bottom.getType() == Material.COBBLE_WALL
-                                            || bottom.getType() == Material.NETHER_FENCE)
+                                            //Since this feature seems to cause issues anyways, I'm gonna do a lazy check for fences and fence gates
+                                            || bottom.getType().name().contains("_FENCE")
+                                            || bottom.getType() == Material.COBBLESTONE_WALL)
                                     {
                                         plugin.debug(world, event.getEntity().getType().name() +
                                                 "'s drops at " + entity.getLocation() + " was cleared " +

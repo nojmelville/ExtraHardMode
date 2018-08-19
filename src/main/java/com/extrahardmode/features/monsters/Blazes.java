@@ -146,7 +146,7 @@ public class Blazes extends ListenerModule
                     // 50% chance of each
                     if (plugin.getRandom().nextInt(2) == 0)
                     {
-                        event.getDrops().add(new ItemStack(Material.SULPHUR, 2));
+                        event.getDrops().add(new ItemStack(Material.GUNPOWDER, 2));
                     } else
                     {
                         event.getDrops().add(new ItemStack(Material.GLOWSTONE_DUST, 2));

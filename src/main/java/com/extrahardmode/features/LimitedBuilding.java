@@ -103,7 +103,7 @@ public class LimitedBuilding extends ListenerModule
             }
 
             // if standing directly over lava, prevent placement
-            else if ((underBlock.getType() == Material.AIR || underBlock.getType() == Material.LAVA || underBlock.getType() == Material.STATIONARY_LAVA)
+            else if ((underBlock.getType() == Material.AIR || underBlock.getType() == Material.LAVA)
                     && !(playerBlock.getType().name().contains("STEP") && playerBlock.getType().name().contains("STAIRS"))
                     && block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
             {

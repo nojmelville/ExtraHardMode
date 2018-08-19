@@ -86,11 +86,11 @@ public class PigMen extends ListenerModule
         {
             Block underBlock = entity.getLocation().getBlock().getRelative(BlockFace.DOWN);
             if (pigWartFortress && underBlock.getType() == Material.NETHER_BRICK)
-                event.getDrops().add(new ItemStack(Material.NETHER_STALK));
+                event.getDrops().add(new ItemStack(Material.NETHER_WART));
 
                 // FEATURE: pig zombies sometimes drop nether wart when slain elsewhere
             else if (pigWartDropEveryWherePercent > 0 && plugin.random(pigWartDropEveryWherePercent))
-                event.getDrops().add(new ItemStack(Material.NETHER_STALK));
+                event.getDrops().add(new ItemStack(Material.NETHER_WART));
         }
     }
 

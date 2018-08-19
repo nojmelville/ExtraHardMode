@@ -60,8 +60,8 @@ public class CaveSpider extends ListenerModule
         // FEATURE: CAVE SPIDERs spawns naturally in swamps.
         if (entityType == EntityType.SPIDER && world.getEnvironment() == World.Environment.NORMAL
         		&& entity.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.GRASS
-                && entity.getLocation().getBlock().getBiome() == Biome.SWAMPLAND  
-                || entity.getLocation().getBlock().getBiome() == Biome.MUTATED_SWAMPLAND 
+                && entity.getLocation().getBlock().getBiome() == Biome.SWAMP
+                || entity.getLocation().getBlock().getBiome() == Biome.SWAMP_HILLS
                 && event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL)
         {
             if (plugin.random(cavespiderSpawnPercent))

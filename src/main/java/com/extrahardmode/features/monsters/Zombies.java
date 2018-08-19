@@ -126,7 +126,7 @@ public class Zombies extends ListenerModule
                     TemporaryBlock tempBlock = null;
                     //Water washes skulls away which then drop to the ground, cancelling the BlockFromToEvent didn't prevent the skull from dropping
                     Material type = entity.getLocation().getBlock().getType();
-                    if (placeSkulls && (type != Material.WATER && type != Material.STATIONARY_WATER))
+                    if (placeSkulls && type != Material.WATER)
                     {
                         Block block = entity.getLocation().getBlock();
                         //Don't replace blocks that aren't air, but aren't solid either
@@ -136,7 +136,7 @@ public class Zombies extends ListenerModule
                             location.setY(location.getY()+1);
                             block = location.getBlock();
                         }
-                        block.setType(Material.SKULL);
+                        block.setType(Material.ZOMBIE_HEAD);
                         Skull skull = (Skull) block.getState();
                         skull.setSkullType(SkullType.ZOMBIE);
                         //Random rotation

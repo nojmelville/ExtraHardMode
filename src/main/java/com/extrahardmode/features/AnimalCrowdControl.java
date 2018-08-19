@@ -8,6 +8,7 @@ import com.extrahardmode.module.MsgModule;
 import com.extrahardmode.service.ListenerModule;
 import java.util.List;
 import org.bukkit.Effect;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
@@ -133,7 +134,7 @@ public class AnimalCrowdControl extends ListenerModule {
                     }
                     
                     if(dizziness < maxDizziness) {
-                       world.spigot().playEffect(animal.getLocation(), Effect.VILLAGER_THUNDERCLOUD);
+                       world.spawnParticle(Particle.VILLAGER_ANGRY, animal.getLocation(), 1); //TODO: confirm if this works
                     }
                     dizziness++;
                 }

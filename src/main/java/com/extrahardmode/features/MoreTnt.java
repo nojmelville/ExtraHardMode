@@ -74,7 +74,7 @@ public class MoreTnt extends ListenerModule
                             CraftingInventory craftInv = event.getInventory();
 
                             //The vanilla tnt recipe
-                            ShapedRecipe vanillaTnt = new ShapedRecipe(new ItemStack(Material.TNT)).shape("gsg", "sgs", "gsg").setIngredient('g', Material.SULPHUR).setIngredient('s', Material.SAND);
+                            ShapedRecipe vanillaTnt = new ShapedRecipe(new ItemStack(Material.TNT)).shape("gsg", "sgs", "gsg").setIngredient('g', Material.GUNPOWDER).setIngredient('s', Material.SAND);
 
                             //Multiply the amount of tnt in enabled worlds
                             if (UtilityModule.isSameRecipe(craftRecipe, vanillaTnt))

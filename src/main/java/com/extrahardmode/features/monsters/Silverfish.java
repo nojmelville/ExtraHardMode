@@ -77,7 +77,7 @@ public class Silverfish extends ListenerModule
         //Prevent Silverfish from entering blocks?
         if (silverFishCantEnter)
         {
-            if (event.getEntity().getType() == EntityType.SILVERFISH && event.getTo() == Material.MONSTER_EGGS)
+            if (event.getEntity().getType() == EntityType.SILVERFISH && event.getTo() == Material.INFESTED_STONE) //TODO: check for other infested variants? (1.13 change)
             {
                 event.setCancelled(true);
             }

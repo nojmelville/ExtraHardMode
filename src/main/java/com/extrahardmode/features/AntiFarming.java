@@ -110,7 +110,7 @@ public class AntiFarming extends ListenerModule
                 Material materialInHand = player.getItemInHand().getType();
 
                 // if bonemeal, cancel the event
-                if (materialInHand == Material.INK_SACK) // bukkit labels bonemeal as ink sack
+                if (materialInHand == Material.BONE_MEAL)
                 {
                     event.setCancelled(true);
                 }
@@ -137,10 +137,10 @@ public class AntiFarming extends ListenerModule
         // FEATURE: no nether wart farming (always drops exactly 1 nether wart when broken)
         if (!playerBypasses && noFarmingNetherWart)
         {
-            if (block.getType() == Material.NETHER_WARTS)
+            if (block.getType() == Material.NETHER_WART_BLOCK)
             {
                 block.getDrops().clear();
-                block.getDrops().add(new ItemStack(Material.NETHER_STALK));
+                block.getDrops().add(new ItemStack(Material.NETHER_WART));
             }
         }
     }
@@ -162,7 +162,7 @@ public class AntiFarming extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.ANTIFARMING);
 
         // FEATURE: no farming/placing nether wart
-        if (!playerBypasses && noFarmingNetherWart && block.getType() == Material.NETHER_WARTS)
+        if (!playerBypasses && noFarmingNetherWart && block.getType() == Material.NETHER_WART_BLOCK)
         {
             placeEvent.setCancelled(true);
             return;

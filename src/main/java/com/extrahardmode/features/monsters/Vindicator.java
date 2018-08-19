@@ -58,8 +58,7 @@ public class Vindicator extends ListenerModule
 
         // FEATURE: Vindicator spawns naturally 
         if (entityType == EntityType.SKELETON && world.getEnvironment() == World.Environment.NORMAL
-                && entity.getLocation().getBlock().getBiome() == Biome.ROOFED_FOREST 
-                || entity.getLocation().getBlock().getBiome() == Biome.MUTATED_ROOFED_FOREST
+                && entity.getLocation().getBlock().getBiome() == Biome.FOREST //TODO: formerly roofed and mutated roofed forest. Need confirmation from @erik1988 if this is sufficient
                 && event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL)
         {
             if (plugin.random(vindicatorSpawnPercent))

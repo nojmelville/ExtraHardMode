@@ -167,7 +167,7 @@ public class Spiders extends ListenerModule
 
                         if (!nextToCactus)
                         {
-                            block.setType(Material.WEB);
+                            block.setType(Material.COBWEB);
                             changedBlocks.add(block);
                         }
                     }

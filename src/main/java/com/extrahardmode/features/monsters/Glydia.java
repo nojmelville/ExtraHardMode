@@ -107,7 +107,7 @@ public class Glydia extends ListenerModule
         // FEATURE: very limited building in the end, players are allowed to break only end stone, and only to create a stair up to ground level
         if (endNoBuilding && world.getEnvironment() == World.Environment.THE_END && !playerBypass)
         {
-            if (block.getType() != Material.ENDER_STONE)
+            if (block.getType() != Material.END_STONE)
             {
                 breakEvent.setCancelled(true);
                 messenger.send(player, MessageNode.LIMITED_END_BUILDING);
@@ -177,7 +177,7 @@ public class Glydia extends ListenerModule
         {
             if (glydiaDropsEggs)
             {
-                ItemStack itemStack = new ItemStack(Material.MONSTER_EGG, 2, (short) 120);
+                ItemStack itemStack = new ItemStack(Material.INFESTED_STONE, 2, (short) 120);
                 world.dropItemNaturally(entity.getLocation().add(10, 0, 0), itemStack);
             }
 

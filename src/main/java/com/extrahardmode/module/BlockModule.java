@@ -31,6 +31,7 @@ import com.extrahardmode.service.EHMModule;
 import com.extrahardmode.task.BlockPhysicsCheckTask;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -109,10 +110,10 @@ public class BlockModule extends EHMModule
             return null;
 
         // grass and mycel become dirt when they fall
-        if ((block.getType() == Material.GRASS || block.getType() == Material.MYCEL) && CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_TURN_TO_DIRT, block.getWorld().getName()))
+        if ((block.getType() == Material.GRASS || block.getType() == Material.MYCELIUM) && CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_TURN_TO_DIRT, block.getWorld().getName()))
             block.setType(Material.DIRT);
 
-        FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation().add(0.5D, 0.0D, 0.5D), block.getTypeId(), block.getData());
+        FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation().add(0.5D, 0.0D, 0.5D), block.getBlockData());
         fallingBlock.setDropItem(CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_DROP_ITEM, block.getWorld().getName()));
         // remove original block
         CompatHandler.logFallingBlockFall(block);
@@ -146,7 +147,7 @@ public class BlockModule extends EHMModule
         EntityHelper.markAsOurs(plugin, fallingBlock);
 
         //TODO: Figure out how to make cancelable (ultra low priority)
-        plugin.getServer().getPluginManager().callEvent(new EntityChangeBlockEvent(fallingBlock, block, Material.AIR, (byte)0));
+        plugin.getServer().getPluginManager().callEvent(new EntityChangeBlockEvent(fallingBlock, block, Material.AIR.createBlockData()));
 
         return fallingBlock.getUniqueId();
     }
@@ -212,7 +213,7 @@ public class BlockModule extends EHMModule
             if (newDataValue.getData() >= 7)
             {
                 Material material = block.getType();
-                if (material == Material.CROPS || material == Material.CARROT || material == Material.POTATO || material == Material.BEETROOT_BLOCK)
+                if (material == Material.WHEAT || material == Material.CARROTS || material == Material.POTATOES || material == Material.BEETROOTS)
                 {
                     int deathProbability = lossRate;
 
@@ -233,7 +234,7 @@ public class BlockModule extends EHMModule
                         // unwatered crops are more likely to die
                         Block belowBlock = block.getRelative(BlockFace.DOWN);
                         byte moistureLevel = 0;
-                        if (belowBlock.getType() == Material.SOIL)
+                        if (belowBlock.getType() == Material.FARMLAND)
                         {
                             moistureLevel = belowBlock.getData();
                         }
@@ -296,11 +297,11 @@ public class BlockModule extends EHMModule
      * @param loc    Center of the search area
      * @param height how many blocks up to check
      * @param radius of the search (cubic search radius)
-     * @param type   of Material to search for
+     * @param tag   of Material to search for
      *
      * @return all the Block with the given Type in the specified radius
      */
-    public Block[] getBlocksInArea(Location loc, int height, int radius, Material type)
+    public Block[] getBlocksInArea(Location loc, int height, int radius, Tag tag)
     {
         List<Block> blocks = new ArrayList<Block>();
         //Height
@@ -311,7 +312,7 @@ public class BlockModule extends EHMModule
                 for (int z = -radius; z <= radius; z++)
                 {
                     Block checkBlock = loc.getBlock().getRelative(x, y, z);
-                    if (checkBlock.getType().equals(type))
+                    if (tag.isTagged(checkBlock.getType()))
                     {
                         blocks.add(checkBlock);
                     }
@@ -332,12 +333,12 @@ public class BlockModule extends EHMModule
     public boolean breaksFallingBlock(Material mat)
     {
         return (mat.isTransparent() &&
-                mat != Material.PORTAL &&
-                mat != Material.ENDER_PORTAL) ||
-                mat == Material.WEB ||
+                mat != Material.NETHER_PORTAL &&
+                mat != Material.END_PORTAL) ||
+                mat == Material.COBWEB ||
                 mat == Material.DAYLIGHT_DETECTOR ||
-                mat == Material.TRAP_DOOR ||
-                mat == Material.SIGN_POST ||
+                Tag.TRAPDOORS.isTagged(mat) ||
+                mat == Material.SIGN ||
                 mat == Material.WALL_SIGN ||
                 //Match all slabs besides double slab
                 slabPattern.matcher(mat.name()).matches();
@@ -347,12 +348,12 @@ public class BlockModule extends EHMModule
     /** Returns if Material is a plant that should be affected by the farming Rules */
     public boolean isPlant(Material material)
     {
-        return material.equals(Material.CROPS)
+        return material.equals(Material.WHEAT)
                 || material.equals(Material.POTATO)
                 || material.equals(Material.CARROT)
                 || material.equals(Material.MELON_STEM)
                 || material.equals(Material.PUMPKIN_STEM)
-                || material.equals(Material.BEETROOT_BLOCK);
+                || material.equals(Material.BEETROOTS);
     }
 
 
@@ -365,8 +366,8 @@ public class BlockModule extends EHMModule
      */
     public static boolean isHorseFood(Material material)
     {
-        return material.equals(Material.CARROT_ITEM)
-                || material.equals(Material.POTATO_ITEM)
+        return material.equals(Material.CARROT)
+                || material.equals(Material.POTATO)
                 || material.equals(Material.APPLE)
                 //|| material.equals(Material.HAY_BLOCK)
                 || material.equals(Material.WHEAT);
@@ -383,7 +384,7 @@ public class BlockModule extends EHMModule
                 || material.name().endsWith("BUCKET") //water, milk, lava,..
                 || material.equals(Material.BOW)
                 || material.equals(Material.FISHING_ROD)
-                || material.equals(Material.WATCH)
+                || material.equals(Material.CLOCK)
                 || material.equals(Material.COMPASS)
                 || material.equals(Material.FLINT_AND_STEEL);
     }
@@ -458,29 +459,30 @@ public class BlockModule extends EHMModule
      */
     public static Material getDroppedMaterial(Material mat)
     {
+        if (Tag.LEAVES.isTagged(mat))
+            return Material.AIR;
+
         switch (mat)
         {
             case GRASS:
-            case SOIL:
+            case FARMLAND:
                 return Material.DIRT;
             case STONE:
                 return Material.COBBLESTONE;
             case COAL_ORE:
                 return Material.COAL;
             case LAPIS_ORE:
-                return Material.INK_SACK;
+                return Material.INK_SAC;
             case EMERALD_ORE:
                 return Material.EMERALD;
             case REDSTONE_ORE:
-            case GLOWING_REDSTONE_ORE:
                 return Material.REDSTONE;
             case DIAMOND_ORE:
                 return Material.DIAMOND;
-            case QUARTZ_ORE:
+            case NETHER_QUARTZ_ORE:
                 return Material.QUARTZ;
             case ICE:
-            case LEAVES:
-            case MOB_SPAWNER:
+            case SPAWNER:
                 return Material.AIR;
         }
         return mat;

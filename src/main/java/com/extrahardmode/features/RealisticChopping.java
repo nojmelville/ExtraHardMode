@@ -31,6 +31,7 @@ import com.extrahardmode.service.Feature;
 import com.extrahardmode.service.ListenerModule;
 import com.extrahardmode.task.FallingLogsTask;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -99,64 +100,51 @@ public class RealisticChopping extends ListenerModule
         final boolean playerHasBypass = playerModule.playerBypasses(player, Feature.REALISTIC_CHOPPING);
 
         // FEATURE: trees chop more naturally
-        if ((block.getType() == Material.LOG || block.getType() == Material.LOG_2) && betterTreeChoppingEnabled && !playerHasBypass)
+        if (Tag.LOGS.isTagged(block.getType()) && betterTreeChoppingEnabled && !playerHasBypass)
         {
             //Are there any leaves above the log? -> tree
             boolean isTree = false;
-            checkers:
             for (int i = 1; i < 30; i++)
             {
                 Material upType = block.getRelative(BlockFace.UP, i).getType();
-                switch (upType)
+                //skip to next iteration
+                //if something other than log/air this is most likely part of a building
+                if (Tag.LEAVES.isTagged(upType))
                 {
-                    case LEAVES:
-                    case LEAVES_2:
-                    {
-                        isTree = true;
-                        break checkers;
-                    }
-                    case AIR:
-                    case LOG:
-                    case LOG_2:
-                    {
-                        break; //skip to next iteration
-                    }
-                    default: //if something other than log/air this is most likely part of a building
-                    {
-                        break checkers;
-                    }
+                    isTree = true;
+                    break;
+                }
+                else if (!Tag.LOGS.isTagged(upType))
+                {
+                    break;
                 }
             }
 
             if (isTree)
             {
                 Block aboveLog = block.getRelative(BlockFace.UP);
-                loop:
                 for (int limit = 0; limit < 30; limit++)
                 {
-                    switch (aboveLog.getType())
+                    Material aboveLogType = aboveLog.getType();//can air fall?
+//we reached something that is not part of a tree or leaves
+                    if (aboveLogType == Material.AIR)
                     {
-                        case AIR:
+                        List<Block> logs = new LinkedList<Block>(Arrays.asList(blockModule.getBlocksInArea(aboveLog.getLocation(), 3, 5, Tag.LOGS)));
+                        for (Block log : logs)
                         {
-                            List<Block> logs = new LinkedList<Block>(Arrays.asList(blockModule.getBlocksInArea(aboveLog.getLocation(), 1, 5, Material.LOG)));
-                            logs.addAll(Arrays.asList(blockModule.getBlocksInArea(aboveLog.getLocation(), 3, 5, Material.LOG_2)));
-                            for (Block log : logs)
-                            {
-                                //TODO EhmRealisticChoppingLooseLogEvent
-                                //check 2 blocks down for logs to see if it it's a stem
-                                if (log.getRelative(BlockFace.DOWN).getType() != Material.LOG && !(log.getRelative(BlockFace.DOWN, 2).getType() == Material.LOG || log.getRelative(BlockFace.DOWN, 2).getType() == Material.LOG_2))
-                                    plugin.getServer().getScheduler().runTaskLater(plugin, new FallingLogsTask(plugin, log), plugin.getRandom().nextInt(50/*so they don't fall at once*/));
-                            }
-                            break; //can air fall?
+                            //TODO EhmRealisticChoppingLooseLogEvent
+                            //check 2 blocks down for logs to see if it it's a stem
+                            if (!Tag.LOGS.isTagged(log.getRelative(BlockFace.DOWN).getType()))
+                                plugin.getServer().getScheduler().runTaskLater(plugin, new FallingLogsTask(plugin, log), plugin.getRandom().nextInt(50/*so they don't fall at once*/));
                         }
-                        case LOG:
-                        case LOG_2:
-                        {
-                            blockModule.applyPhysics(aboveLog, false);
-                            break;
-                        }
-                        default: //we reached something that is not part of a tree or leaves
-                            break loop;
+                    }
+                    else if (Tag.LOGS.isTagged(aboveLogType))
+                    {
+                        blockModule.applyPhysics(aboveLog, false);
+                    }
+                    else
+                    {
+                        break;
                     }
                     aboveLog = aboveLog.getRelative(BlockFace.UP);
                 }
