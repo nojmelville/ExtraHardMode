@@ -60,9 +60,9 @@ public class EvaporateWaterTask implements Runnable
     @Override
     public void run()
     {
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER)
+        if (block.getType() == Material.WATER)
         {
-            block.setData((byte) 1);
+            //block.setData((byte) 1); //TODO: 1.13: how do you turn a water source block into a non source?
             //Finished processing
             blockModule.removeMark(block);
         }

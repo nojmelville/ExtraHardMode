@@ -126,8 +126,8 @@ public class Torches extends ListenerModule
                 switch (attachmentMaterial)
                 {
                     case DIRT:
-                    case GRASS:
-                    case LONG_GRASS:
+                    case GRASS_BLOCK:
+                    case GRASS: //TODO: idk how one can attach a torch to LONG_GRASS...
                     case SAND:
                     case GRAVEL:
                         if (soundFizzEnabled)

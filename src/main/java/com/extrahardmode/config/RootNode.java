@@ -1448,10 +1448,11 @@ public enum RootNode implements ConfigNode
             this.add(new BlockType(Material.GRASS));
             this.add(new BlockType(Material.COBBLESTONE));
             this.add(new BlockType(Material.MOSSY_COBBLESTONE));
-            this.add(new BlockType(Material.DOUBLE_STEP, (short) 3)); //cobble double halfslabs
-            this.add(new BlockType(Material.STEP, (short) 3)); //normal
-            this.add(new BlockType(Material.STEP, (short) 11)); //upside
-            this.add(new BlockType(Material.MYCEL));
+            //TODO: 1.13
+//            this.add(new BlockType(Material.DOUBLE_STEP, (short) 3)); //cobble double halfslabs
+//            this.add(new BlockType(Material.STEP, (short) 3)); //normal
+//            this.add(new BlockType(Material.STEP, (short) 11)); //upside
+//            this.add(new BlockType(Material.MYCEL));
         }
     }
 
@@ -1472,7 +1473,6 @@ public enum RootNode implements ConfigNode
             this.add(new BlockType(Material.GOLD_ORE));
             this.add(new BlockType(Material.LAPIS_ORE));
             this.add(new BlockType(Material.REDSTONE_ORE));
-            this.add(new BlockType(Material.GLOWING_REDSTONE_ORE));
             this.add(new BlockType(Material.EMERALD_ORE));
             this.add(new BlockType(Material.DIAMOND_ORE));
         }
@@ -1520,7 +1520,7 @@ public enum RootNode implements ConfigNode
             this.add(new BlockType(Material.DIAMOND_AXE));
             this.add(new BlockType(Material.DIAMOND_SWORD));
             this.add(new BlockType(Material.DIAMOND_PICKAXE));
-            this.add(new BlockType(Material.DIAMOND_SPADE));
+            this.add(new BlockType(Material.DIAMOND_SHOVEL));
 
         }
     }

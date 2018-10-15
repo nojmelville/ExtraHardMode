@@ -98,7 +98,7 @@ public class EhmHardenedStoneEvent extends Event
      */
     public int getToolId()
     {
-        return tool.getTypeId();
+        return tool.getType().getId();
     }
 
 

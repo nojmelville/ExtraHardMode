@@ -178,7 +178,7 @@ public class PlayerModule extends EHMModule
                         case LEATHER_HELMET:
                             points += 0.04;
                             break;
-                        case GOLD_HELMET:
+                        case GOLDEN_HELMET:
                         case CHAINMAIL_HELMET:
                         case IRON_HELMET:
                             points += 0.08;
@@ -195,7 +195,7 @@ public class PlayerModule extends EHMModule
                         case LEATHER_CHESTPLATE:
                             points += 0.12;
                             break;
-                        case GOLD_CHESTPLATE:
+                        case GOLDEN_CHESTPLATE:
                         case CHAINMAIL_CHESTPLATE:
                             points += 0.2;
                             break;
@@ -214,7 +214,7 @@ public class PlayerModule extends EHMModule
                         case LEATHER_LEGGINGS:
                             points += 0.08;
                             break;
-                        case GOLD_LEGGINGS:
+                        case GOLDEN_LEGGINGS:
                             points += 0.12;
                             break;
                         case CHAINMAIL_LEGGINGS:
@@ -233,7 +233,7 @@ public class PlayerModule extends EHMModule
                     switch (armor.getType())
                     {
                         case LEATHER_BOOTS:
-                        case GOLD_BOOTS:
+                        case GOLDEN_BOOTS:
                         case CHAINMAIL_BOOTS:
                             points += 0.04;
                             break;

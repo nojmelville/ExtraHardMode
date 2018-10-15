@@ -52,17 +52,17 @@ public class CompatHandler extends EHMModule
 
     public static void logFallingBlockFall(Block block)
     {
-        if (block != null)
-            for (IBlockLogger logger : blockLoggerPls)
-                logger.logFallingBlockFall(block);
+//        if (block != null)
+//            for (IBlockLogger logger : blockLoggerPls)
+//                logger.logFallingBlockFall(block);
     }
 
 
     public static void logFallingBlockLand(BlockState block)
     {
-        if (block != null)
-            for (IBlockLogger logger : blockLoggerPls)
-                logger.logFallingBlockLand(block);
+//        if (block != null)
+//            for (IBlockLogger logger : blockLoggerPls)
+//                logger.logFallingBlockLand(block);
     }
 
 
@@ -80,25 +80,25 @@ public class CompatHandler extends EHMModule
 //            blockLoggerPls.add(prismCompat);
 
         //HawkEye Reloaded
-        try
-        {
-            CompatHawkEye compatHawkEye = new CompatHawkEye(plugin);
-            if (compatHawkEye.isEnabled())
-                blockLoggerPls.add(compatHawkEye);
-        } catch (Error ignored) //ClassNotFoundException, but that doesn't catch for whatever reason, whateeeeever
-        {
-            //Static API I guess, stop wasting my time any further or you are gonna get removed
-        }
-
-        //CoreProtect
-        CompatCoreProtect compatCoreProtect = new CompatCoreProtect(plugin);
-        if (compatCoreProtect.isEnabled())
-            blockLoggerPls.add(compatCoreProtect);
-
-        //LogBlock
-        CompatLogBlock compatLogBlock = new CompatLogBlock(plugin);
-        if (compatLogBlock.isEnabled())
-            blockLoggerPls.add(compatLogBlock);
+//        try
+//        {
+//            CompatHawkEye compatHawkEye = new CompatHawkEye(plugin);
+//            if (compatHawkEye.isEnabled())
+//                blockLoggerPls.add(compatHawkEye);
+//        } catch (Error ignored) //ClassNotFoundException, but that doesn't catch for whatever reason, whateeeeever
+//        {
+//            //Static API I guess, stop wasting my time any further or you are gonna get removed
+//        }
+//
+//        //CoreProtect
+//        CompatCoreProtect compatCoreProtect = new CompatCoreProtect(plugin);
+//        if (compatCoreProtect.isEnabled())
+//            blockLoggerPls.add(compatCoreProtect);
+//
+//        //LogBlock
+//        CompatLogBlock compatLogBlock = new CompatLogBlock(plugin);
+//        if (compatLogBlock.isEnabled())
+//            blockLoggerPls.add(compatLogBlock);
     }
 
 

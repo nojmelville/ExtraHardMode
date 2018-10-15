@@ -77,7 +77,7 @@ public class BlockRelationsList
     public BlockType get(Block block)
     {
         for (Map.Entry<BlockType, BlockType> entry : mBlockRelations.entrySet())
-            if (entry.getKey().matches(block.getTypeId(), block.getData()))
+            if (entry.getKey().matches(block.getType().getId(), block.getData()))
                 return entry.getValue();
         return null;
     }

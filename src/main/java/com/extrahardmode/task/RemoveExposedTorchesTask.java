@@ -30,6 +30,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Snow;
 
 /**
  * Task to remove exposed torches.
@@ -123,30 +124,31 @@ public class RemoveExposedTorchesTask implements Runnable
                                 }
                                 break loopDown;
                             }
-                            case CROPS:
+                            case WHEAT_SEEDS: //TODO: 1.13: need to confirm if = CROPS and below
                             case MELON_STEM:
                             case CARROT:
                             case PUMPKIN_STEM:
                             case POTATO:
-                            case RED_ROSE:
-                            case YELLOW_FLOWER:
-                            case LONG_GRASS:
-                            case BEETROOT_BLOCK:
+                            case ROSE_RED: //RED_ROSE
+                            case DANDELION: //YELLOW FLOWER
+                            case GRASS: //I still can't recall if the replacement for LONG_GRASS is GRASS or TALL_GRASS...
+                            case TALL_GRASS:
+                            case BEETROOT_SEEDS: //BEETROOT_BLOCK
                             {
                                 if (snowBreaksCrops && temperature <= 0.15) //cold biomes in which snow falls
                                 {
                                     if (plugin.getRandom().nextInt(5) == 1)
                                         block.breakNaturally();
                                     //Snow can't be placed if its tilled soil
-                                    if (block.getRelative(BlockFace.DOWN).getType() == Material.SOIL)
+                                    if (block.getRelative(BlockFace.DOWN).getType() == Material.FARMLAND)
                                         block.getRelative(BlockFace.DOWN).setType(Material.DIRT);
                                     block.setType(Material.SNOW);
                                     if (plugin.getRandom().nextBoolean())
                                     {
-                                        block.setData((byte) 1);
+                                        ((Snow)block.getBlockData()).setLayers(1); //TODO: 1.13: block.setData(1) and 2, respectively
                                     } else
                                     {
-                                        block.setData((byte) 2);
+                                        ((Snow)block.getBlockData()).setLayers(2);
                                     }
                                 }
                                 break loopDown;

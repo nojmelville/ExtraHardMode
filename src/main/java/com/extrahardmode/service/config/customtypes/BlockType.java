@@ -182,6 +182,10 @@ public final class BlockType
                 return material;
         return null;
     }
+    public Material getType()
+    {
+        return getMaterial(blockId);
+    }
 
 
     public boolean isValid()

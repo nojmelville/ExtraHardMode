@@ -8,7 +8,6 @@ import com.extrahardmode.config.messages.MessageNode;
 import com.extrahardmode.config.messages.MsgCategory;
 import com.extrahardmode.events.*;
 import com.extrahardmode.module.BlockModule;
-import com.extrahardmode.module.MaterialHelper;
 import com.extrahardmode.module.MsgModule;
 import com.extrahardmode.service.FindAndReplace;
 import com.extrahardmode.service.ListenerModule;
@@ -243,7 +242,7 @@ public class Tutorial extends ListenerModule
             final Player player = event.getPlayer();
             final Block block = event.getBlock();
             //Too dark
-            if (block.getType() == Material.SOIL)
+            if (block.getType() == Material.FARMLAND)
             {
                 Block above = block.getRelative(BlockFace.UP);
                 if (above.getLightFromSky() < 10)
@@ -328,7 +327,7 @@ public class Tutorial extends ListenerModule
         {
             if (items.length() > 0)
                 items.append(", ");
-            items.append(MaterialHelper.print(item));
+            items.append(item.getType().toString());
         }
 
         //Only print if items have been removed

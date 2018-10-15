@@ -114,7 +114,7 @@ public class EntityHelper
         Block[] blocks = {feetBlock, headBlock};
         for (Block block : blocks)
         {
-            if (block.getType() == Material.WEB)
+            if (block.getType() == Material.COBWEB)
             {
                 block.setType(Material.AIR);
             }
@@ -256,7 +256,7 @@ public class EntityHelper
                     entity.getEquipment().setItemInHand(new ItemStack(Material.BOW));
                     break;
                 case PIG_ZOMBIE:
-                    entity.getEquipment().setItemInHand(new ItemStack(Material.GOLD_SWORD));
+                    entity.getEquipment().setItemInHand(new ItemStack(Material.GOLDEN_SWORD));
                     break;
             }
         if (entity != null && CompatHandler.canMonsterSpawn(loc))

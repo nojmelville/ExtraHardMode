@@ -117,7 +117,7 @@ public class Water extends ListenerModule
                 PlayerData playerData = plugin.getModuleForClass(DataStoreModule.class).getPlayerData(player.getName());
                 // only when in water
                 Block underFromBlock = fromBlock.getRelative(BlockFace.DOWN);
-                if (fromBlock.getType() == Material.STATIONARY_WATER && toBlock.getType() == Material.STATIONARY_WATER && underFromBlock.getType() == Material.STATIONARY_WATER && underFromBlock.getRelative(BlockFace.DOWN).getType() == Material.STATIONARY_WATER)
+                if (fromBlock.getType() == Material.WATER && toBlock.getType() == Material.WATER && underFromBlock.getType() == Material.WATER && underFromBlock.getRelative(BlockFace.DOWN).getType() == Material.WATER)
                 {
                     // if no cached value, calculate
                     if (playerData.cachedWeightStatus <= 0)
@@ -153,7 +153,7 @@ public class Water extends ListenerModule
                         for (BlockFace face : faces)
                         {
                             Material nearType = loc.getBlock().getRelative(face).getType();
-                            if (nearType.equals(Material.STATIONARY_WATER))
+                            if (nearType.equals(Material.WATER))
                                 isWaterNear = true;
                         }
                         if (isWaterNear)

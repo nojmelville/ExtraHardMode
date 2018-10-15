@@ -28,7 +28,7 @@ public class BlockTypeList
 
     public boolean contains(Block block)
     {
-        BlockType type = blockTypeMap.get(block.getTypeId());
+        BlockType type = blockTypeMap.get(block.getType().getId());
         return type != null && type.matches(block);
     }
 

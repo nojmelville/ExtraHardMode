@@ -61,7 +61,7 @@ public class WebCleanupTask implements Runnable
             if (!block.getChunk().isLoaded())
             {
                 continue;
-            } else if (block.getType() == Material.WEB)
+            } else if (block.getType() == Material.COBWEB)
             {
                 // only turn webs to air. there's a chance the web may have been
                 // replaced since it was placed.

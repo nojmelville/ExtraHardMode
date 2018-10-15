@@ -148,7 +148,8 @@ public class HardenedStone extends ListenerModule
                 Block adjacentBlock = block.getRelative(face);
                 if (stoneBlocks.contains(adjacentBlock))
                 {
-                    adjacentBlock.setTypeIdAndData(stoneBlocks.get(adjacentBlock).getBlockId(), stoneBlocks.get(adjacentBlock).getByteMeta(), true);
+                    //TODO: 1.13: adjacentBlock.setTypeIdAndData(stoneBlocks.get(adjacentBlock).getBlockId(), stoneBlocks.get(adjacentBlock).getByteMeta(), true);
+                    adjacentBlock.setType(stoneBlocks.get(adjacentBlock).getType());
                     if (applyPhysics)
                         blockModule.applyPhysics(adjacentBlock, true);
                 }

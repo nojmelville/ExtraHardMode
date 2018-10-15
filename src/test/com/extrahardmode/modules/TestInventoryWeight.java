@@ -98,7 +98,7 @@ public class TestInventoryWeight
         ItemStack[] inv = new ItemStack[4 * 9];
 
         inv[0] = new ItemStack(Material.DIAMOND_SWORD);
-        inv[5] = new ItemStack(Material.DIAMOND_SPADE);
+        inv[5] = new ItemStack(Material.DIAMOND_SHOVEL);
         inv[7] = new ItemStack(Material.FLINT_AND_STEEL);
 
         inv[9] = new ItemStack(Material.BOOK, 32);

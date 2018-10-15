@@ -71,79 +71,82 @@ public class FallingLogsTask implements Runnable
     }
 
 
+    //TODO: 1.13
+    //Needs to look for leaves/logs that are the same species as the block, instead of just any logs/leaves
+    //Or just flat out remove, since there are other tree feller plugins that may be better.
     @Override
     public void run()
     {
-        if (block != null)
-        {
-            /* Prevent wooden structures near trees from being affected*/
-            if (blockModule.getBlocksInArea(block.getLocation(), 2, 1, Material.LEAVES).length > 3 ||
-                    blockModule.getBlocksInArea(block.getLocation(), 2, 1, Material.LEAVES_2).length > 3)
-            {
-                //Clear the area below of leaves
-                Block below = block;
-                List<Block> looseLogs = new ArrayList<Block>();
-                List<Block> tempBlocks = new ArrayList<Block>();
-                looseLogs.add(block);
-                checkBelow:
-                for (int i = 0; below.getY() > 0; i++)
-                {
-                    below = below.getRelative(BlockFace.DOWN);
-                    switch (below.getType())
-                    {
-                        case AIR:
-                        {
-                            //go one down
-                            //All blocks above this can fall now that there is an air block
-                            looseLogs.addAll(tempBlocks);
-                            tempBlocks.clear();
-                            break;
-                        }
-                        case LEAVES:
-                        case LEAVES_2:
-                        {
-                            below.breakNaturally();
-                            break;
-                        }
-                        case LOG:
-                        case LOG_2:
-                        {
-                            //Prevent Logs on adjacent sides (Jungle Tree) from turning to FallingBlocks and some of them turning into items
-                            switch (below.getRelative(BlockFace.DOWN).getType())
-                            {
-                                case AIR:
-                                case LEAVES:
-                                    tempBlocks.add(below);
-                            }
-                            break;
-                        }
-                        default: //we hit the block where the FallingBlock will land
-                        {
-                            if (blockModule.breaksFallingBlock(below.getType()))
-                            {
-                                below.breakNaturally();
-                            } else
-                            {
-                                break checkBelow;
-                            }
-                        }
-                    }
-                }
-
-                for (int i = 0; i < looseLogs.size(); i++)
-                {
-                    final Block looseLog = looseLogs.get(i);
-                    plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            blockModule.applyPhysics(looseLog, true);
-                        }
-                    }, i /*delay to prevent FallingBlock collision*/);
-
-                }
-            }
-        }
+//        if (block != null)
+//        {
+//            /* Prevent wooden structures near trees from being affected*/
+//            if (blockModule.getBlocksInArea(block.getLocation(), 2, 1, Material.LEAVES).length > 3 ||
+//                    blockModule.getBlocksInArea(block.getLocation(), 2, 1, Material.LEAVES_2).length > 3)
+//            {
+//                //Clear the area below of leaves
+//                Block below = block;
+//                List<Block> looseLogs = new ArrayList<Block>();
+//                List<Block> tempBlocks = new ArrayList<Block>();
+//                looseLogs.add(block);
+//                checkBelow:
+//                for (int i = 0; below.getY() > 0; i++)
+//                {
+//                    below = below.getRelative(BlockFace.DOWN);
+//                    switch (below.getType())
+//                    {
+//                        case AIR:
+//                        {
+//                            //go one down
+//                            //All blocks above this can fall now that there is an air block
+//                            looseLogs.addAll(tempBlocks);
+//                            tempBlocks.clear();
+//                            break;
+//                        }
+//                        case LEAVES:
+//                        case LEAVES_2:
+//                        {
+//                            below.breakNaturally();
+//                            break;
+//                        }
+//                        case LOG:
+//                        case LOG_2:
+//                        {
+//                            //Prevent Logs on adjacent sides (Jungle Tree) from turning to FallingBlocks and some of them turning into items
+//                            switch (below.getRelative(BlockFace.DOWN).getType())
+//                            {
+//                                case AIR:
+//                                case LEAVES:
+//                                    tempBlocks.add(below);
+//                            }
+//                            break;
+//                        }
+//                        default: //we hit the block where the FallingBlock will land
+//                        {
+//                            if (blockModule.breaksFallingBlock(below.getType()))
+//                            {
+//                                below.breakNaturally();
+//                            } else
+//                            {
+//                                break checkBelow;
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                for (int i = 0; i < looseLogs.size(); i++)
+//                {
+//                    final Block looseLog = looseLogs.get(i);
+//                    plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable()
+//                    {
+//                        @Override
+//                        public void run()
+//                        {
+//                            blockModule.applyPhysics(looseLog, true);
+//                        }
+//                    }, i /*delay to prevent FallingBlock collision*/);
+//
+//                }
+//            }
+//        }
     }
 }

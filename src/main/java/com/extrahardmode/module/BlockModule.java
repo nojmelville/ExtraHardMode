@@ -378,7 +378,7 @@ public class BlockModule extends EHMModule
     public static boolean isTool(Material material)
     {
         return material.name().endsWith("AXE") //axe & pickaxe
-                || material.name().endsWith("SPADE")
+                || material.name().endsWith("SHOVEL")
                 || material.name().endsWith("SWORD")
                 || material.name().endsWith("HOE")
                 || material.name().endsWith("BUCKET") //water, milk, lava,..

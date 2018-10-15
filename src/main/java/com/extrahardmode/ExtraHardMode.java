@@ -38,6 +38,7 @@ import com.extrahardmode.service.OurRandom;
 import com.extrahardmode.task.ArmorWeightTask;
 import com.extrahardmode.task.MoreMonstersTask;
 import com.extrahardmode.task.WeightCheckTask;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +47,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Callable;
 
 
 /**
@@ -76,6 +78,20 @@ public class ExtraHardMode extends JavaPlugin
     @Override
     public void onEnable()
     {
+        try
+        {
+            Metrics metrics = new Metrics(this);
+            metrics.addCustomChart(new Metrics.SimplePie("bukkit_implementation", new Callable<String>()
+            {
+                @Override
+                public String call() throws Exception
+                {
+                    return getServer().getVersion().split("-")[1];
+                }
+            }));
+        }
+        catch (Throwable ignored){}
+
         // Register modules
         registerModule(RootConfig.class, new RootConfig(this));
         registerModule(MessageConfig.class, new MessageConfig(this));
