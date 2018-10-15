@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public final class BlockType
 {
-    private static Pattern seperators = Pattern.compile("[^A-Za-z0-9_]");
+    private static Pattern separators = Pattern.compile("[^A-Za-z0-9_]");
     private int blockId = -1;
     private Set<Short> meta = new LinkedHashSet<Short>();
 
@@ -109,13 +109,13 @@ public final class BlockType
 
     public boolean matches(Block block)
     {
-        return matches(block.getTypeId(), block.getData());
+        return matches(block.getType().getId(), block.getData());
     }
 
 
     public boolean matches(ItemStack stack)
     {
-        return matches(stack.getTypeId(), stack.getData().getData());
+        return matches(stack.getType().getId(), stack.getData().getData());
     }
 
 
@@ -127,7 +127,7 @@ public final class BlockType
         int blockId;
         Set<Short> meta = new HashSet<Short>();
         input = RegexHelper.trimWhitespace(input);
-        String[] splitted = seperators.split(input);
+        String[] splitted = separators.split(input);
         if (splitted.length == 0)
             return null;
         //BLOCK META
@@ -158,7 +158,7 @@ public final class BlockType
     public String saveToString()
     {
         StringBuilder builder = new StringBuilder();
-        Material material = Material.getMaterial(blockId);
+        Material material = getMaterial(blockId);
         builder.append(material != null ? material.name() : blockId);
 
         boolean first = true;
@@ -171,6 +171,16 @@ public final class BlockType
         }
 
         return builder.toString();
+    }
+
+    //Temporary thing for for 1.13 compatibility
+    //TODO: remove when properly supporting 1.13 (if there's even a use for this package at this point)
+    private Material getMaterial(int id)
+    {
+        for (Material material : Material.values())
+            if (material.getId() == id)
+                return material;
+        return null;
     }
 
 
