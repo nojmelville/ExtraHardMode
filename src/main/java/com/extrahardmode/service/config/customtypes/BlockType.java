@@ -13,14 +13,12 @@ import java.util.regex.Pattern;
  * Holds one blocktype, but a range of metadata for that block.
  * F.e. this could have meta for spruce, oak and jungle wood, but exclude birch.
  *
- * RoboMWM - this class is no longer that useful since 1.13 "flattened" IDs. Durability value is now only used for tools afaik.
- *
  * @author Diemex
  */
 public final class BlockType
 {
-    private static Pattern separators = Pattern.compile("[^A-Za-z0-9_]");
-    private Material material;
+    private static Pattern seperators = Pattern.compile("[^A-Za-z0-9_]");
+    private int blockId = -1;
     private Set<Short> meta = new LinkedHashSet<Short>();
 
 
@@ -30,39 +28,37 @@ public final class BlockType
     }
 
 
-    @Deprecated
-    //Used for default tool durabilities??
     public BlockType(Material mat, Short... meta)
     {
-        this.material = mat;
+        this.blockId = mat.getId();
         Collections.addAll(this.meta, meta);
     }
 
 
-//    public BlockType(int blockId, Short... meta)
-//    {
-//        this.blockId = blockId;
-//        Collections.addAll(this.meta, meta);
-//    }
-//
-//
-//    public BlockType(int blockId, short meta)
-//    {
-//        this.blockId = blockId;
-//        this.meta.add(meta);
-//    }
-//
-//
-//    public BlockType(int blockId, Collection<Short> meta)
-//    {
-//        this.blockId = blockId;
-//        this.meta.addAll(meta);
-//    }
-
-
-    public Material getBlockType()
+    public BlockType(int blockId, Short... meta)
     {
-        return material;
+        this.blockId = blockId;
+        Collections.addAll(this.meta, meta);
+    }
+
+
+    public BlockType(int blockId, short meta)
+    {
+        this.blockId = blockId;
+        this.meta.add(meta);
+    }
+
+
+    public BlockType(int blockId, Collection<Short> meta)
+    {
+        this.blockId = blockId;
+        this.meta.addAll(meta);
+    }
+
+
+    public int getBlockId()
+    {
+        return blockId;
     }
 
 
@@ -99,28 +95,27 @@ public final class BlockType
     }
 
 
-    public boolean matches(Material material)
+    public boolean matches(int blockId)
     {
-        return this.material == material;
+        return this.blockId == blockId;
     }
 
 
-    public boolean matches(Material material, short meta)
+    public boolean matches(int blockId, short meta)
     {
-        return matches(material) && matchesMeta(meta);
+        return matches(blockId) && matchesMeta(meta);
     }
 
 
     public boolean matches(Block block)
     {
-        return matches(block.getType());
+        return matches(block.getTypeId(), block.getData());
     }
 
-    @Deprecated
-    //Do we need to check durability here too? I'm guessing no...
+
     public boolean matches(ItemStack stack)
     {
-        return matches(stack.getType(), stack.getData().getData());
+        return matches(stack.getTypeId(), stack.getData().getData());
     }
 
 
@@ -132,7 +127,7 @@ public final class BlockType
         int blockId;
         Set<Short> meta = new HashSet<Short>();
         input = RegexHelper.trimWhitespace(input);
-        String[] splitted = separators.split(input);
+        String[] splitted = seperators.split(input);
         if (splitted.length == 0)
             return null;
         //BLOCK META
