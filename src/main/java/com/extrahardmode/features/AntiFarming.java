@@ -107,7 +107,7 @@ public class AntiFarming extends ListenerModule
             if (block.getType() == Material.RED_MUSHROOM || block.getType() == Material.BROWN_MUSHROOM)
             {
                 // what's the player holding?
-                Material materialInHand = player.getItemInHand().getType();
+                Material materialInHand = event.getItem().getType();
 
                 // if bonemeal, cancel the event
                 if (materialInHand == Material.BONE_MEAL)
@@ -137,7 +137,7 @@ public class AntiFarming extends ListenerModule
         // FEATURE: no nether wart farming (always drops exactly 1 nether wart when broken)
         if (!playerBypasses && noFarmingNetherWart)
         {
-            if (block.getType() == Material.NETHER_WART_BLOCK)
+            if (block.getType() == Material.NETHER_WART)
             {
                 block.getDrops().clear();
                 block.getDrops().add(new ItemStack(Material.NETHER_WART));
@@ -162,7 +162,7 @@ public class AntiFarming extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.ANTIFARMING);
 
         // FEATURE: no farming/placing nether wart
-        if (!playerBypasses && noFarmingNetherWart && block.getType() == Material.NETHER_WART_BLOCK)
+        if (!playerBypasses && noFarmingNetherWart && block.getType() == Material.NETHER_WART)
         {
             placeEvent.setCancelled(true);
             return;
@@ -412,7 +412,7 @@ public class AntiFarming extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.ANTIFARMING);
 
         // FEATURE: can't move water source blocks
-        if (!playerBypasses && dontMoveWaterEnabled && player.getItemInHand().getType().equals(Material.WATER_BUCKET))
+        if (!playerBypasses && dontMoveWaterEnabled && event.getBucket().equals(Material.WATER_BUCKET))
         {
             // plan to change this block into a non-source block on the next tick
             Block block = event.getBlockClicked().getRelative(event.getBlockFace());

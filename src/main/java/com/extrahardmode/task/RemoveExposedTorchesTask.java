@@ -110,6 +110,7 @@ public class RemoveExposedTorchesTask implements Runnable
                             case AIR: /* we continue down until we hit something which isn't AIR */
                                 continue loopDown;
                             case TORCH:
+                            case WALL_TORCH:
                             {
                                 if (rainBreaksTorches && temperature < 1.0) //excludes warmer biomes like mesa and desert in which no rain falls
                                 {
@@ -126,6 +127,7 @@ public class RemoveExposedTorchesTask implements Runnable
                             }
                             case WHEAT_SEEDS: //TODO: 1.13: need to confirm if = CROPS and below
                             case MELON_STEM:
+                            case MELON:
                             case CARROT:
                             case PUMPKIN_STEM:
                             case POTATO:
@@ -134,6 +136,7 @@ public class RemoveExposedTorchesTask implements Runnable
                             case GRASS: //I still can't recall if the replacement for LONG_GRASS is GRASS or TALL_GRASS...
                             case TALL_GRASS:
                             case BEETROOT_SEEDS: //BEETROOT_BLOCK
+                            case BEETROOTS:
                             {
                                 if (snowBreaksCrops && temperature <= 0.15) //cold biomes in which snow falls
                                 {

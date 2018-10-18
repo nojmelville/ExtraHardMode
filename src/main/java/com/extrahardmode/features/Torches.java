@@ -23,6 +23,7 @@ package com.extrahardmode.features;
 
 
 import com.extrahardmode.ExtraHardMode;
+import com.extrahardmode.LooseTags;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.config.messages.MessageNode;
@@ -105,6 +106,7 @@ public class Torches extends ListenerModule
                         if (block.getRelative(BlockFace.DOWN).getType() != Material.NETHERRACK)
                             break;
                     case TORCH:
+                    case WALL_TORCH:
                     case JACK_O_LANTERN:
                         messenger.send(player, MessageNode.NO_TORCHES_HERE, PermissionNode.SILENT_NO_TORCHES_HERE, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE , 20);
                         placeEvent.setCancelled(true);
@@ -119,15 +121,15 @@ public class Torches extends ListenerModule
             if (blockType == null)
                 blockType = block.getType();
 
-            if (blockType == Material.TORCH)
+            if (LooseTags.TORCH.isTagged(blockType))
             {
-                Torch torch = new Torch(Material.TORCH, block.getData());
+                Torch torch = new Torch(blockType);
                 Material attachmentMaterial = block.getRelative(torch.getAttachedFace()).getType();
                 switch (attachmentMaterial)
                 {
                     case DIRT:
                     case GRASS_BLOCK:
-                    case GRASS: //TODO: idk how one can attach a torch to LONG_GRASS...
+                    case GRASS: //TODO: 1.13: idk how one can attach a torch to LONG_GRASS...
                     case SAND:
                     case GRAVEL:
                         if (soundFizzEnabled)

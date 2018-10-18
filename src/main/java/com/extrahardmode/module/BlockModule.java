@@ -210,7 +210,9 @@ public class BlockModule extends EHMModule
         if (weakFoodCropsEnabled)
         {
             // not evaluated until the plant is nearly full grown
-            if (newDataValue.getData() >= 7)
+            //For some plants (netherwart, beetroot), this is at data value 3.
+            //TODO: 1.13
+            if (newDataValue.getData() >= 2)
             {
                 Material material = block.getType();
                 if (material == Material.WHEAT || material == Material.CARROTS || material == Material.POTATOES || material == Material.BEETROOTS)

@@ -27,6 +27,8 @@ import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.module.BlockModule;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Levelled;
+import org.bukkit.block.data.Waterlogged;
 
 /**
  * Changes a water source block to a non-source block, allowing it to spread and evaporate away.
@@ -62,7 +64,8 @@ public class EvaporateWaterTask implements Runnable
     {
         if (block.getType() == Material.WATER)
         {
-            //block.setData((byte) 1); //TODO: 1.13: how do you turn a water source block into a non source?
+            Levelled waterLevel = (Levelled)block.getBlockData();
+            waterLevel.setLevel(1);
             //Finished processing
             blockModule.removeMark(block);
         }
