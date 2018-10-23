@@ -129,9 +129,12 @@ public class Torches extends ListenerModule
                 {
                     case DIRT:
                     case GRASS_BLOCK:
-                    case GRASS: //TODO: 1.13: idk how one can attach a torch to LONG_GRASS...
                     case SAND:
                     case GRAVEL:
+                    case COARSE_DIRT:
+                    case MYCELIUM:
+                    case PODZOL:
+                    case SOUL_SAND:
                         if (soundFizzEnabled)
                             messenger.send(player, MessageNode.LIMITED_TORCH_PLACEMENTS, PermissionNode.SILENT_LIMITED_TORCH_PLACEMENT, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE , 20);
                         placeEvent.setCancelled(true);

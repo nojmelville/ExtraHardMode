@@ -20,7 +20,7 @@ public enum LooseTags
     {
         for (Material material : Material.values())
         {
-            if (material.name().contains(this.name()))
+            if (material.name().contains(this.name()) && !material.name().contains("LEGACY"))
                 materials.add(material);
         }
     }
