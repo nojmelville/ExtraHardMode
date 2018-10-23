@@ -66,6 +66,7 @@ public class EvaporateWaterTask implements Runnable
         {
             Levelled waterLevel = (Levelled)block.getBlockData();
             waterLevel.setLevel(1);
+            block.setBlockData(waterLevel, true);
             //Finished processing
             blockModule.removeMark(block);
         }
