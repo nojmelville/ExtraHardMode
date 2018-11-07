@@ -188,13 +188,14 @@ public enum RootNode implements ConfigNode
      */
     LIMITED_BLOCK_PLACEMENT("World Rules.Limited Block Placement", VarType.BOOLEAN, true,
             "Blocks jumping and placing a block directly beneath you and branching out with no blocks to support"),
-    /**
-     * whether tree logs respect gravity
-     */
-    BETTER_TREE_CHOPPING("World Rules.Better Tree Felling", VarType.BOOLEAN, true,
-            "The trunk and branches of a tree will fall and potentially injure you.",
-            "It makes it easier to chop trees, but you have to watch out a little for the falling logs.",
-            "Also by making logs of branches fall down most treetops should decay naturally."),
+    //Feaure replaced with GraviTree (another Big_Scary-created plugin) https://dev.bukkit.org/projects/gravitree
+//    /**
+//     * whether tree logs respect gravity
+//     */
+//    BETTER_TREE_CHOPPING("World Rules.Better Tree Felling", VarType.BOOLEAN, true,
+//            "The trunk and branches of a tree will fall and potentially injure you.",
+//            "It makes it easier to chop trees, but you have to watch out a little for the falling logs.",
+//            "Also by making logs of branches fall down most treetops should decay naturally."),
     /**
      * #################################
      * # ENHANCED ENVIRONMENTAL DAMAGE #

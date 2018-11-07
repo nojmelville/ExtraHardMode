@@ -96,7 +96,7 @@ public class RealisticChopping extends ListenerModule
         World world = block.getWorld();
         Player player = breakEvent.getPlayer();
 
-        final boolean betterTreeChoppingEnabled = CFG.getBoolean(RootNode.BETTER_TREE_CHOPPING, world.getName());
+        final boolean betterTreeChoppingEnabled = false; //CFG.getBoolean(RootNode.BETTER_TREE_CHOPPING, world.getName());
         final boolean playerHasBypass = playerModule.playerBypasses(player, Feature.REALISTIC_CHOPPING);
 
         // FEATURE: trees chop more naturally
@@ -126,7 +126,7 @@ public class RealisticChopping extends ListenerModule
                 for (int limit = 0; limit < 30; limit++)
                 {
                     Material aboveLogType = aboveLog.getType();//can air fall?
-//we reached something that is not part of a tree or leaves
+                    //we reached something that is not part of a tree or leaves
                     if (aboveLogType == Material.AIR)
                     {
                         List<Block> logs = new LinkedList<Block>(Arrays.asList(blockModule.getBlocksInArea(aboveLog.getLocation(), 3, 5, Tag.LOGS)));

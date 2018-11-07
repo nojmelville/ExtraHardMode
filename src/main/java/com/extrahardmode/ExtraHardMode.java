@@ -142,7 +142,7 @@ public class ExtraHardMode extends JavaPlugin
         }
         registerModule(MonsterRules.class, new MonsterRules(this));
         registerModule(PigMen.class, new PigMen(this));
-        registerModule(RealisticChopping.class, new RealisticChopping(this));
+        //registerModule(RealisticChopping.class, new RealisticChopping(this));
         registerModule(Silverfish.class, new Silverfish(this));
         registerModule(Skeletors.class, new Skeletors(this));
         registerModule(Spiders.class, new Spiders(this));
