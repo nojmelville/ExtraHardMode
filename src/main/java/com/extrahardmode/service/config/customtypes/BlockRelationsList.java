@@ -8,7 +8,12 @@ import java.util.Map;
 
 /**
  * Holds a relationship. BlockTypes can be retrieved by their key BlockType. F.e stone -> cobblestone
+ *
+ * @deprecated Uses deprecated BlockTypes
+ *
+ * Only used for the "soften surrounding stone" feature, turning one block (e.g. stone) into another (e.g. cobblestone)
  */
+@Deprecated
 public class BlockRelationsList
 {
     private Map<BlockType, BlockType> mBlockRelations = new HashMap<BlockType, BlockType>();

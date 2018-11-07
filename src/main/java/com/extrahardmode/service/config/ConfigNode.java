@@ -73,9 +73,9 @@ public interface ConfigNode
         LIST,
         COLOR,
         POTION_EFFECT,
-        BLOCKTYPE,
-        BLOCKTYPE_LIST,
-        BLOCK_RELATION_LIST,
+        @Deprecated BLOCKTYPE,
+        @Deprecated BLOCKTYPE_LIST,
+        @Deprecated BLOCK_RELATION_LIST,
         COMMENT
     }
 

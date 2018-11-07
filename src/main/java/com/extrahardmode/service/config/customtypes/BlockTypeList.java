@@ -5,6 +5,10 @@ import org.bukkit.block.Block;
 
 import java.util.*;
 
+/**
+ * @deprecated BlockType is deprecated
+ */
+@Deprecated
 public class BlockTypeList
 {
     private Map<Integer, BlockType> blockTypeMap = new HashMap<Integer, BlockType>();

@@ -3,7 +3,10 @@ package com.extrahardmode.service.config.customtypes;
 
 /**
  * Simple Pair
+ *
+ * @deprecated Unused, uses BlockType
  */
+@Deprecated
 public final class BlockRelation
 {
     private BlockType mBlock1 = null;
