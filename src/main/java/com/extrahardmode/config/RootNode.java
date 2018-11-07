@@ -874,11 +874,11 @@ public enum RootNode implements ConfigNode
      */
     MORE_FALLING_BLOCKS_CASCADE("Additional Falling Blocks.Landed Blocks Can Cause Blocks To Fall", VarType.BOOLEAN, true,
             "When a falling block lands it checks if the blocks around it should fall as well. Can cascade downwards infinitely."),
-    /**
-     * How much damage loose Falling Logs do to Players and Animals
-     */
-    MORE_FALLING_BLOCKS_DMG_AMOUNT("Additional Falling Blocks.Dmg Amount When Hitting Players", VarType.INTEGER, SubType.NATURAL_NUMBER, 2,
-            "Should a falling block damage players when it lands on them."),
+//    /**
+//     * How much damage loose Falling Logs do to Players and Animals
+//     */
+//    MORE_FALLING_BLOCKS_DMG_AMOUNT("Additional Falling Blocks.Dmg Amount When Hitting Players", VarType.INTEGER, SubType.NATURAL_NUMBER, 2,
+//            "Should a falling block damage players when it lands on them."),
     /**
      * wheter falling grass/mycel turns into dirt
      */

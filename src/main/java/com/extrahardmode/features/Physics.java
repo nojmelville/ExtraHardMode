@@ -152,25 +152,25 @@ public class Physics extends ListenerModule
         Entity entity = event.getEntity();
         World world = entity.getWorld();
 
-        final int damageAmount = CFG.getInt(RootNode.MORE_FALLING_BLOCKS_DMG_AMOUNT, world.getName());
-        final boolean environmentalDmg = CFG.getBoolean(RootNode.ENHANCED_ENVIRONMENTAL_DAMAGE, world.getName());
-
-        //Only when Block has been marked to deal damage
-        if (entity.getType().equals(EntityType.FALLING_BLOCK) && damageAmount > 0 && EntityHelper.isMarkedForProcessing(entity))
-        {
-            List<Entity> entities = entity.getNearbyEntities(0, 1, 0);
-            for (Entity ent : entities)
-            {
-                if (ent instanceof LivingEntity)
-                {
-                    LivingEntity entityWithDamagedHead = (LivingEntity) ent;
-                    //Frighten the player
-                    entityWithDamagedHead.damage(damageAmount, entity);
-                    if (environmentalDmg)
-                        entityWithDamagedHead.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 140, 10));
-                }
-            }
-        }
+//        final int damageAmount = CFG.getInt(RootNode.MORE_FALLING_BLOCKS_DMG_AMOUNT, world.getName());
+//        final boolean environmentalDmg = CFG.getBoolean(RootNode.ENHANCED_ENVIRONMENTAL_DAMAGE, world.getName());
+//
+//        //Only when Block has been marked to deal damage
+//        if (entity.getType().equals(EntityType.FALLING_BLOCK) && damageAmount > 0 && EntityHelper.isMarkedForProcessing(entity))
+//        {
+//            List<Entity> entities = entity.getNearbyEntities(0, 1, 0);
+//            for (Entity ent : entities)
+//            {
+//                if (ent instanceof LivingEntity)
+//                {
+//                    LivingEntity entityWithDamagedHead = (LivingEntity) ent;
+//                    //Frighten the player
+//                    entityWithDamagedHead.damage(damageAmount, entity);
+//                    if (environmentalDmg)
+//                        entityWithDamagedHead.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 140, 10));
+//                }
+//            }
+//        }
 
         if (event.getEntity() instanceof FallingBlock && EntityHelper.isMarkedAsOurs(event.getEntity()))
         {
