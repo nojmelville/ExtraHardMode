@@ -4,7 +4,10 @@ package com.extrahardmode.metrics;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.service.config.ConfigNode;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.Plugin;
+
+import java.util.concurrent.Callable;
 
 /**
  * Output all the choosen modules to mcstats in nice plots
@@ -35,42 +38,51 @@ public class ConfigPlotter
         {
             metrics = new Metrics(plugin);
 
-            final int percent = CFG.getEnabledWorlds().length > 0 ? (plugin.getServer().getWorlds().size() * 100 / CFG.getEnabledWorlds().length) : 0;
-            Metrics.Graph graph = metrics.createGraph("Enabled for % of worlds");
-            graph.addPlotter(
-                    new Metrics.Plotter("0-25%")
-                    {
-                        @Override
-                        public int getValue()
-                        {
-                            return percent < 26 ? 1 : 0;
-                        }
+            metrics.addCustomChart(new Metrics.SimplePie("bukkit_implementation", new Callable<String>()
+            {
+                @Override
+                public String call() throws Exception
+                {
+                    return plugin.getServer().getVersion().split("-")[1];
+                }
+            }));
 
-                    });
-            graph.addPlotter(new Metrics.Plotter("26-50%")
-            {
-                @Override
-                public int getValue()
-                {
-                    return percent > 25 && percent <= 50 ? 1 : 0;
-                }
-            });
-            graph.addPlotter(new Metrics.Plotter("51-75%")
-            {
-                @Override
-                public int getValue()
-                {
-                    return percent > 50 && percent <= 75 ? 1 : 0;
-                }
-            });
-            graph.addPlotter(new Metrics.Plotter("76-100%")
-            {
-                @Override
-                public int getValue()
-                {
-                    return percent > 75 ? 1 : 0;
-                }
-            });
+            final int percent = CFG.getEnabledWorlds().length > 0 ? (plugin.getServer().getWorlds().size() * 100 / CFG.getEnabledWorlds().length) : 0;
+//            Metrics.Graph graph = metrics.createGraph("Enabled for % of worlds");
+//            graph.addPlotter(
+//                    new Metrics.Plotter("0-25%")
+//                    {
+//                        @Override
+//                        public int getValue()
+//                        {
+//                            return percent < 26 ? 1 : 0;
+//                        }
+//
+//                    });
+//            graph.addPlotter(new Metrics.Plotter("26-50%")
+//            {
+//                @Override
+//                public int getValue()
+//                {
+//                    return percent > 25 && percent <= 50 ? 1 : 0;
+//                }
+//            });
+//            graph.addPlotter(new Metrics.Plotter("51-75%")
+//            {
+//                @Override
+//                public int getValue()
+//                {
+//                    return percent > 50 && percent <= 75 ? 1 : 0;
+//                }
+//            });
+//            graph.addPlotter(new Metrics.Plotter("76-100%")
+//            {
+//                @Override
+//                public int getValue()
+//                {
+//                    return percent > 75 ? 1 : 0;
+//                }
+//            });
 
 
             for (final RootNode node : RootNode.values())
@@ -112,47 +124,31 @@ public class ConfigPlotter
                     case WITCHES_ADDITIONAL_ATTACKS:
                     case ZOMBIES_DEBILITATE_PLAYERS:
                     {
-                        Metrics.Graph graph1 = metrics.createGraph(getLastPart(node));
                         final int metricsVal = getMetricsValue(node);
-                        graph1.addPlotter(
-                                new Metrics.Plotter("Completely disabled")
-                                {
-                                    @Override
-                                    public int getValue()
-                                    {
-                                        return metricsVal == 0 ? 1 : 0;
-                                    }
+                        String result;
+                        switch (metricsVal)
+                        {
+                            case 0:
+                                result = "Completely disabled";
+                                break;
+                            case 1:
+                                result = "Enabled in all worlds";
+                                break;
+                            case 2:
+                                result = "Enabled in some";
+                                break;
+                            default:
+                                result = "Unknown";
+                                break;
+                        }
 
-                                });
-                        graph1.addPlotter(
-                                new Metrics.Plotter("Enabled in all worlds")
-                                {
-                                    @Override
-                                    public int getValue()
-                                    {
-                                        return metricsVal == 1 ? 1 : 0;
-                                    }
-
-                                });
-                        graph1.addPlotter(
-                                new Metrics.Plotter("Enabled in some")
-                                {
-                                    @Override
-                                    public int getValue()
-                                    {
-                                        return metricsVal == 2 ? 1 : 0;
-                                    }
-
-                                });
+                        metrics.addCustomChart(new Metrics.SimplePie(node.toString(), () -> result));
                         break;
                     }
                 }
             }
-
-            metrics.start();
-        } catch (Exception e)
+        } catch (Exception ignored)
         {
-            e.printStackTrace();
         }
     }
 

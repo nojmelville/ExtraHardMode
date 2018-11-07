@@ -78,20 +78,6 @@ public class ExtraHardMode extends JavaPlugin
     @Override
     public void onEnable()
     {
-        try
-        {
-            Metrics metrics = new Metrics(this);
-            metrics.addCustomChart(new Metrics.SimplePie("bukkit_implementation", new Callable<String>()
-            {
-                @Override
-                public String call() throws Exception
-                {
-                    return getServer().getVersion().split("-")[1];
-                }
-            }));
-        }
-        catch (Throwable ignored){}
-
         // Register modules
         registerModule(RootConfig.class, new RootConfig(this));
         registerModule(MessageConfig.class, new MessageConfig(this));
