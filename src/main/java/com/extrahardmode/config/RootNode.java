@@ -1448,11 +1448,9 @@ public enum RootNode implements ConfigNode
             this.add(new BlockType(Material.GRASS));
             this.add(new BlockType(Material.COBBLESTONE));
             this.add(new BlockType(Material.MOSSY_COBBLESTONE));
-            //TODO: 1.13
-//            this.add(new BlockType(Material.DOUBLE_STEP, (short) 3)); //cobble double halfslabs
-//            this.add(new BlockType(Material.STEP, (short) 3)); //normal
-//            this.add(new BlockType(Material.STEP, (short) 11)); //upside
-//            this.add(new BlockType(Material.MYCEL));
+            this.add(new BlockType(Material.STONE_SLAB));
+            this.add(new BlockType(Material.COBBLESTONE_SLAB));
+            this.add(new BlockType(Material.MYCELIUM));
         }
     }
 
@@ -1480,7 +1478,7 @@ public enum RootNode implements ConfigNode
 
 
     /**
-     * Default list of falling blocks.
+     * Default list of tool durabilities
      */
     private static class DefaultToolDurabilities extends BlockTypeList
     {
@@ -1546,3 +1544,4 @@ public enum RootNode implements ConfigNode
         }
     }
 }
+

@@ -13,8 +13,11 @@ import java.util.regex.Pattern;
  * Holds one blocktype, but a range of metadata for that block.
  * F.e. this could have meta for spruce, oak and jungle wood, but exclude birch.
  *
+ * @deprecated No longer needed with "The Flattening" in 1.13
+ *
  * @author Diemex
  */
+@Deprecated
 public final class BlockType
 {
     private static Pattern separators = Pattern.compile("[^A-Za-z0-9_]");
