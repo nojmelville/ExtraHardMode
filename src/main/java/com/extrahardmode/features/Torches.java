@@ -94,9 +94,6 @@ public class Torches extends ListenerModule
         final int torchMinY = CFG.getInt(RootNode.STANDARD_TORCH_MIN_Y, world.getName());
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.TORCHES);
 
-        plugin.getLogger().info("torchcheck: y is " + block.getY() + ", blocktype is " + block.getType() +
-                ", torchminy is " + torchMinY + ", playerbypass is " + playerBypasses);
-
         // FEATURE: no standard torches, jack o lanterns, or fire on top of netherrack near diamond level
         if (torchMinY > 0 && !playerBypasses)
         {
