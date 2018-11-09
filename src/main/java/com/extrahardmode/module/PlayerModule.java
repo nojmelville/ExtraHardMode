@@ -61,7 +61,9 @@ public class PlayerModule extends EHMModule
 
     public boolean playerBypasses(Player player, Feature feature)
     {
-        Validate.notNull(player, "We can't check if a Player bypasses if there is no Player!");
+        //Validate.notNull(player, "We can't check if a Player bypasses if there is no Player!");
+        if (player == null)
+            return false;
 
         final boolean bypassPermsEnabled = CFG.getBoolean(RootNode.BYPASS_PERMISSION, player.getWorld().getName());
         final boolean opsBypass = CFG.getBoolean(RootNode.BYPASS_OPS, player.getWorld().getName());
