@@ -33,7 +33,11 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LightningStrike;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -153,12 +157,18 @@ public class PigMen extends ListenerModule
     public void onPlayerDamaged(EntityDamageByEntityEvent event)
     {
         double damagePercentage = CFG.getInt(RootNode.PIG_ZOMBIE_DMG_PERCENT, event.getEntity().getWorld().getName()) / 100.0;
-        if (damagePercentage <= 0.0)
-            return;
-        if (event.getEntity() instanceof Player && event.getDamager() instanceof PigZombie)
+        final boolean pigAlwaysAggro = CFG.getBoolean(RootNode.ALWAYS_ANGRY_PIG_ZOMBIES, event.getEntity().getWorld().getName());
+
+        if (damagePercentage > 0.0 && event.getEntity() instanceof Player && event.getDamager() instanceof PigZombie)
         {
             event.setDamage(event.getDamage() * damagePercentage);
         }
+        //TODO: test issue #11 first
+//        else if (pigAlwaysAggro && event.getEntity() instanceof PigZombie && event.getDamager() instanceof Player)
+//        {
+//            PigZombie pigZombie = (PigZombie)event.getEntity();
+//            pigZombie.setTarget((LivingEntity)event.getDamager());
+//        }
     }
 
 
