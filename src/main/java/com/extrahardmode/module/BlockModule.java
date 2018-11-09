@@ -36,7 +36,6 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.material.MaterialData;
@@ -211,12 +210,24 @@ public class BlockModule extends EHMModule
         {
             // not evaluated until the plant is nearly full grown
             //For some plants (netherwart, beetroot), this is at data value 3.
-            //TODO: 1.13
-            if (newDataValue.getData() >= 2)
+
+            int fullGrowthValue = 7;
+            switch (block.getType())
             {
-                Material material = block.getType();
-                if (material == Material.WHEAT || material == Material.CARROTS || material == Material.POTATOES || material == Material.BEETROOTS)
-                {
+                case BEETROOTS:
+                    fullGrowthValue = 3;
+                    break;
+                case WHEAT:
+                case CARROTS:
+                case POTATOES:
+                    break;
+                default:
+                    return false;
+            }
+
+            //TODO: 1.13
+            if (newDataValue.getData() >= fullGrowthValue)
+            {
                     int deathProbability = lossRate;
 
                     // plants in the dark always die
@@ -251,7 +262,6 @@ public class BlockModule extends EHMModule
                     {
                         return true;
                     }
-                }
             }
         }
 
