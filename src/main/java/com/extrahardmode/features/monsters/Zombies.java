@@ -137,6 +137,8 @@ public class Zombies extends ListenerModule
                             Location location = block.getLocation();
                             location.setY(location.getY()+1);
                             block = location.getBlock();
+                            if (block.getType() != Material.AIR)
+                                return;
                         }
                         block.setType(Material.ZOMBIE_HEAD);
                         //Random rotation
