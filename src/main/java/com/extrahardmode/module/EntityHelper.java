@@ -258,6 +258,10 @@ public class EntityHelper
                 case PIG_ZOMBIE:
                     entity.getEquipment().setItemInHand(new ItemStack(Material.GOLDEN_SWORD));
                     break;
+                case ENDER_DRAGON:
+                    entity.setAI(true);
+                    EnderDragon dragon = (EnderDragon)entity;
+                    dragon.setPhase(EnderDragon.Phase.CIRCLING);
             }
         if (entity != null && CompatHandler.canMonsterSpawn(loc))
             entity.remove();
