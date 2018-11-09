@@ -43,6 +43,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -137,13 +139,12 @@ public class Zombies extends ListenerModule
                             block = location.getBlock();
                         }
                         block.setType(Material.ZOMBIE_HEAD);
-                        Skull skull = (Skull) block.getState();
-                        skull.setSkullType(SkullType.ZOMBIE);
                         //Random rotation
                         BlockFace[] faces = BlockModule.getHorizontalAdjacentFaces();
+                        Rotatable skull = (Rotatable)block.getBlockData();
                         skull.setRotation(faces[OurRandom.nextInt(faces.length)]);
-                        skull.update();
-                        tempBlock = temporaryBlockHandler.addTemporaryBlock(skull.getLocation(), "respawn_skull");
+                        block.setBlockData(skull);
+                        tempBlock = temporaryBlockHandler.addTemporaryBlock(block.getLocation(), "respawn_skull");
                     }
                     RespawnZombieTask task = new RespawnZombieTask(plugin, entity.getLocation(), player, tempBlock);
                     int respawnSeconds = plugin.getRandom().nextInt(6) + 3; // 3-8 seconds
