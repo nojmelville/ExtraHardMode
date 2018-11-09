@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
@@ -35,13 +36,13 @@ public class TemporaryBlockHandler extends ListenerModule
      * onTempBlockBreakEvent
      * onZombieRespawnTask -> check if broken
      */
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockBreak(BlockBreakEvent event)
     {
         if (fireTemporaryBlockBreakEvent(event.getBlock()))
         {
             event.setCancelled(true);
-            event.getBlock().setType(Material.AIR);
+            event.getBlock().setType(Material.AIR, false);
         }
     }
 
@@ -52,7 +53,7 @@ public class TemporaryBlockHandler extends ListenerModule
         if (fireTemporaryBlockBreakEvent(event.getToBlock()))
         {
             event.setCancelled(true); //TODO: only way to prevent skull from dropping as item?
-            event.getToBlock().setType(Material.AIR);
+            event.getToBlock().setType(Material.AIR, false);
         }
     }
 
@@ -66,7 +67,7 @@ public class TemporaryBlockHandler extends ListenerModule
             if (fireTemporaryBlockBreakEvent(block))
             {
                 event.blockList().remove(block);
-                block.setType(Material.AIR);
+                block.setType(Material.AIR, false);
             }
         }
     }
@@ -81,7 +82,7 @@ public class TemporaryBlockHandler extends ListenerModule
             if (fireTemporaryBlockBreakEvent(block))
             {
                 event.blockList().remove(block);
-                block.setType(Material.AIR);
+                block.setType(Material.AIR, false);
             }
         }
     }
