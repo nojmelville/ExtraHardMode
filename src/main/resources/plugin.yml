@@ -1,6 +1,6 @@
 name: ExtraHardMode
 main: com.extrahardmode.ExtraHardMode
-version: ${project.version} commit ${git.commit.id.describe-short}
+version: ${project.version}-${git.commit.id.describe-short}
 description: Add new challenges to minecraft
 dev-url: http://dev.bukkit.org/bukkit-plugins/fun-hard-mode/
 #project lead
