@@ -157,18 +157,9 @@ public class PigMen extends ListenerModule
     public void onPlayerDamaged(EntityDamageByEntityEvent event)
     {
         double damagePercentage = CFG.getInt(RootNode.PIG_ZOMBIE_DMG_PERCENT, event.getEntity().getWorld().getName()) / 100.0;
-        final boolean pigAlwaysAggro = CFG.getBoolean(RootNode.ALWAYS_ANGRY_PIG_ZOMBIES, event.getEntity().getWorld().getName());
 
         if (damagePercentage > 0.0 && event.getEntity() instanceof Player && event.getDamager() instanceof PigZombie)
-        {
             event.setDamage(event.getDamage() * damagePercentage);
-        }
-        //TODO: test issue #11 first
-//        else if (pigAlwaysAggro && event.getEntity() instanceof PigZombie && event.getDamager() instanceof Player)
-//        {
-//            PigZombie pigZombie = (PigZombie)event.getEntity();
-//            pigZombie.setTarget((LivingEntity)event.getDamager());
-//        }
     }
 
 
