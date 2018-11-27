@@ -28,7 +28,6 @@ import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.events.fakeevents.FakeEntityExplodeEvent;
 import com.extrahardmode.module.BlockModule;
-import com.extrahardmode.module.ExplosionCompatStorage;
 import com.extrahardmode.module.UtilityModule;
 import com.extrahardmode.service.ListenerModule;
 import com.extrahardmode.task.CreateExplosionTask;
@@ -37,7 +36,12 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Ghast;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
@@ -287,8 +291,8 @@ public class Explosions extends ListenerModule
                     //If close place the block as if the player broke it first: stone -> cobble, gras -> dirt etc.
                     else
                     {
-                        Material type = BlockModule.getDroppedMaterial(fallBaby.getMaterial());
-                        if (type.isBlock() && type == fallBaby.getMaterial()) //preserve blockdata. See issue #69 //Alternatively could block#setType in second condition
+                        Material type = BlockModule.getDroppedMaterial(fallBaby.getBlockData().getMaterial());
+                        if (type.isBlock() && type == fallBaby.getBlockData().getMaterial()) //preserve blockdata. See issue #69 //Alternatively could block#setType in second condition
                             return;
                         else if (type.isBlock())
                             block.setType(type);
@@ -415,7 +419,7 @@ public class Explosions extends ListenerModule
                 //Only a few of the blocks fly as an effect
                 if (plugin.random(flyPercentage))
                 {
-                    FallingBlock fall = block.getLocation().getWorld().spawnFallingBlock(block.getLocation(), block.getType(), block.getData());
+                    FallingBlock fall = block.getLocation().getWorld().spawnFallingBlock(block.getLocation(), block.getBlockData());
                     fall.setMetadata(tag, new FixedMetadataValue(plugin, block.getLocation())); //decide on the distance if block should be placed
                     //fall.setMetadata("drops", new FixedMetadataValue(plugin, block.getDrops()));
                     fall.setDropItem(CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_DROP_ITEM, block.getWorld().getName()));

@@ -28,17 +28,50 @@ import com.extrahardmode.compatibility.CompatHandler;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.config.messages.MessageConfig;
-import com.extrahardmode.features.*;
-import com.extrahardmode.features.monsters.*;
+import com.extrahardmode.features.AnimalCrowdControl;
+import com.extrahardmode.features.AntiFarming;
+import com.extrahardmode.features.AntiGrinder;
+import com.extrahardmode.features.DebugMode;
+import com.extrahardmode.features.Explosions;
+import com.extrahardmode.features.HardenedStone;
+import com.extrahardmode.features.LimitedBuilding;
+import com.extrahardmode.features.MoreTnt;
+import com.extrahardmode.features.Physics;
+import com.extrahardmode.features.Players;
+import com.extrahardmode.features.Torches;
+import com.extrahardmode.features.Tutorial;
+import com.extrahardmode.features.Water;
+import com.extrahardmode.features.monsters.Blazes;
+import com.extrahardmode.features.monsters.BumBumBens;
+import com.extrahardmode.features.monsters.CaveSpider;
+import com.extrahardmode.features.monsters.Endermen;
+import com.extrahardmode.features.monsters.Ghasts;
+import com.extrahardmode.features.monsters.Glydia;
+import com.extrahardmode.features.monsters.Guardians;
+import com.extrahardmode.features.monsters.Horses;
+import com.extrahardmode.features.monsters.KillerBunny;
+import com.extrahardmode.features.monsters.MonsterRules;
+import com.extrahardmode.features.monsters.PigMen;
+import com.extrahardmode.features.monsters.Silverfish;
+import com.extrahardmode.features.monsters.Skeletors;
+import com.extrahardmode.features.monsters.Spiders;
+import com.extrahardmode.features.monsters.Vex;
+import com.extrahardmode.features.monsters.Vindicator;
+import com.extrahardmode.features.monsters.Witches;
+import com.extrahardmode.features.monsters.Zombies;
 import com.extrahardmode.metrics.ConfigPlotter;
-import com.extrahardmode.module.*;
+import com.extrahardmode.module.BlockModule;
+import com.extrahardmode.module.DataStoreModule;
+import com.extrahardmode.module.ExplosionCompatStorage;
+import com.extrahardmode.module.MsgModule;
+import com.extrahardmode.module.MsgPersistModule;
+import com.extrahardmode.module.PlayerModule;
+import com.extrahardmode.module.UtilityModule;
 import com.extrahardmode.module.temporaryblock.TemporaryBlockHandler;
 import com.extrahardmode.service.IModule;
 import com.extrahardmode.service.OurRandom;
-import com.extrahardmode.task.ArmorWeightTask;
 import com.extrahardmode.task.MoreMonstersTask;
 import com.extrahardmode.task.WeightCheckTask;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -47,7 +80,6 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 
 /**
@@ -174,10 +206,10 @@ public class ExtraHardMode extends JavaPlugin
         new ConfigPlotter(this, getModuleForClass(RootConfig.class));
     }
 
-    public void debug(World world, Object message)
+    public void debug(World world, String message)
     {
         if ((getModuleForClass(RootConfig.class)).getBoolean(RootNode.DEBUG, world.getName()))
-            System.out.println(message);
+            this.getLogger().info(message);
     }
 
 
