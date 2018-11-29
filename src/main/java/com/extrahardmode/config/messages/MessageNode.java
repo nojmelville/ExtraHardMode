@@ -295,7 +295,8 @@ public enum MessageNode implements ConfigNode
             ("NetherWarning.Mode", MsgCategory.TUTORIAL),
     NETHER_WARNING
             ("NetherWarning.Msg", MsgCategory.TUTORIAL, "nether_warn",
-                    "This is a dangerous place. Make sure you come prepared with arrows and good gear.");
+                    "This is a dangerous place. Make sure you come prepared with arrows and good gear."),
+    EHM_CHAT_PREFIX("ChatPrefix", VarType.STRING, "[EHM]");
 
     /**
      * Path in the Config

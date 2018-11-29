@@ -28,6 +28,7 @@ import com.extrahardmode.compatibility.CompatHandler;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.config.messages.MessageConfig;
+import com.extrahardmode.config.messages.MessageNode;
 import com.extrahardmode.features.AnimalCrowdControl;
 import com.extrahardmode.features.AntiFarming;
 import com.extrahardmode.features.AntiGrinder;
@@ -91,7 +92,7 @@ public class ExtraHardMode extends JavaPlugin
     /**
      * Plugin tag.
      */
-    public static final String TAG = "[EHM]";
+    public static String TAG = "[EHM]";
 
     /**
      * Registered modules.
@@ -112,7 +113,11 @@ public class ExtraHardMode extends JavaPlugin
     {
         // Register modules
         registerModule(RootConfig.class, new RootConfig(this));
-        registerModule(MessageConfig.class, new MessageConfig(this));
+        MessageConfig config = new MessageConfig(this);
+        registerModule(MessageConfig.class, config);
+        String prefix = config.getString(MessageNode.EHM_CHAT_PREFIX);
+        if (prefix != null)
+            TAG = prefix;
 
         File rootFolder = new File(getDataFolder().getPath() + File.separator + "persistence" + File.separator);
         rootFolder.mkdirs();
