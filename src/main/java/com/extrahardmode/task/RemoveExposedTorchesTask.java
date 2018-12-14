@@ -145,7 +145,7 @@ public class RemoveExposedTorchesTask implements Runnable
                                     //Snow can't be placed if its tilled soil
                                     if (block.getRelative(BlockFace.DOWN).getType() == Material.FARMLAND)
                                         block.getRelative(BlockFace.DOWN).setType(Material.DIRT);
-                                    block.setType(Material.SNOW_BLOCK);
+                                    block.setType(Material.SNOW);
                                     Snow snow = ((Snow)block.getBlockData());
                                     if (plugin.getRandom().nextBoolean())
                                     {
