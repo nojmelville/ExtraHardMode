@@ -109,7 +109,7 @@ public class BlockModule extends EHMModule
             return null;
 
         // grass and mycel become dirt when they fall
-        if ((block.getType() == Material.GRASS || block.getType() == Material.MYCELIUM) && CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_TURN_TO_DIRT, block.getWorld().getName()))
+        if ((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MYCELIUM) && CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_TURN_TO_DIRT, block.getWorld().getName()))
             block.setType(Material.DIRT);
 
         FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation().add(0.5D, 0.0D, 0.5D), block.getBlockData());
@@ -415,7 +415,7 @@ public class BlockModule extends EHMModule
     /** Consider this block a natural block for spawning? */
     public boolean isNaturalSpawnMaterial(Material material)
     {
-        return material == Material.GRASS
+        return material == Material.GRASS_BLOCK
                 || material == Material.DIRT
                 || material == Material.STONE
                 || material == Material.SAND
@@ -476,7 +476,7 @@ public class BlockModule extends EHMModule
 
         switch (mat)
         {
-            case GRASS:
+            case GRASS_BLOCK:
             case FARMLAND:
                 return Material.DIRT;
             case STONE:
