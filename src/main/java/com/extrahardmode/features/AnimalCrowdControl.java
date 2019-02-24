@@ -123,6 +123,7 @@ public class AnimalCrowdControl extends ListenerModule {
                         animal.removeMetadata("hasRunnable", plugin);
                         animal.removeMetadata("isClaustrophobic", plugin);
                         this.cancel();
+                        return;
                     } else if (dizziness >= maxDizziness) {
                         animal.damage(0.5, animal);
                         animal.setVelocity(new Vector()); //Triggers animal's "run away" AI
