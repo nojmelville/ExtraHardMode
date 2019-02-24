@@ -124,9 +124,15 @@ public class Endermen extends ListenerModule
                         && destinationBlock.getY() < destinationBlock.getWorld().getMaxHeight())
                     destinationBlock = destinationBlock.getRelative(BlockFace.UP);
 
-                //Limit the height difference so players arent teleported into caves or teleported out of caves etc.
+
                 int playerY = player.getLocation().getBlockY(), destY = destinationBlock.getLocation().getBlockY();
-                if (playerY > destY ? (playerY - destY) > 10 : (destY - playerY) > 10)
+
+                //Sometimes enderman will teleport at/below bedrock into the void? See issue #165
+                if (destY < 3)
+                    return;
+
+                //Limit the height difference so players arent teleported into caves or teleported out of caves etc.
+                if (Math.abs(playerY - destY) > 10)
                     return;
 
                 //Prevent Enderman from loosing aggro because player got ported into water
