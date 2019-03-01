@@ -456,6 +456,7 @@ public abstract class MultiWorldConfig extends EHMModule
     }
 
 
+    @Deprecated
     public BlockTypeList getBlocktypeList(final ConfigNode node, final String world)
     {
         BlockTypeList blockList;
@@ -480,7 +481,7 @@ public abstract class MultiWorldConfig extends EHMModule
         return blockList;
     }
 
-
+    @Deprecated
     public BlockRelationsList getBlockRelationList(final ConfigNode node, final String world)
     {
         BlockRelationsList blockList;
