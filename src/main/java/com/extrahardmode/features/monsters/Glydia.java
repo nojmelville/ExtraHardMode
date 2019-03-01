@@ -333,6 +333,10 @@ public class Glydia extends ListenerModule
     {
         World world = event.getFrom();
 
+        //Ignore if world is not EHM-enabled
+        if (!CFG.isEnabledIn(world.getName()))
+            return;
+
         final boolean respawnDragon = CFG.getBoolean(RootNode.RESPAWN_ENDER_DRAGON, world.getName());
 
         // FEATURE: respawn the ender dragon when the last player leaves the end
