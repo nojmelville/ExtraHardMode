@@ -173,7 +173,7 @@ public class Players extends ListenerModule
         final int deathLossPercent = CFG.getInt(RootNode.PLAYER_DEATH_ITEM_STACKS_FORFEIT_PERCENT, world.getName());
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.DEATH_INV_LOSS);
 
-        final int toolDmgPercent = CFG.getInt(RootNode.PLAYER_DEATH_ITEM_STACKS_FORFEIT_PERCENT, world.getName());
+        final int toolDmgPercent = CFG.getInt(RootNode.PLAYER_DEATH_TOOLS_DMG_PERCENTAGE, world.getName());
         final BlockTypeList blacklisted = CFG.getBlocktypeList(RootNode.PLAYER_DEATH_ITEMS_BLACKLIST, world.getName());
         final BlockTypeList toolIds = CFG.getBlocktypeList(RootNode.PLAYER_DEATH_TOOLS_LIST, world.getName());
         final boolean destroyTools = CFG.getBoolean(RootNode.PLAYER_DEATH_TOOLS_KEEP_DAMAGED, world.getName());
