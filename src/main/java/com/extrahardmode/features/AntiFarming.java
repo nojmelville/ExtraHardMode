@@ -235,27 +235,11 @@ public class AntiFarming extends ListenerModule
         // FEATURE: can't move water source blocks
         if (dontMoveWaterEnabled)
         {
-            plugin.debug(world, event.getItem().getType().name() + event.getVelocity());
             // only care about water
             if (event.getItem().getType() == Material.WATER_BUCKET)
             {
                 // plan to evaporate the water next tick
-                Block block;
-                Vector velocity = event.getVelocity();
-                if (velocity.getX() > 0.0)
-                {
-                    block = event.getBlock().getLocation().add(1.0, 0.0, 0.0).getBlock();
-                } else if (velocity.getX() < 0.0)
-                {
-                    block = event.getBlock().getLocation().add(-1.0, 0.0, 0.0).getBlock();
-                } else if (velocity.getZ() > 0.0)
-                {
-                    block = event.getBlock().getLocation().add(0.0, 0.0, 1.0).getBlock();
-                } else
-                {
-                    block = event.getBlock().getLocation().add(0.0, 0.0, -1.0).getBlock();
-                }
-
+                Block block = event.getVelocity().toLocation(world).getBlock();
                 EvaporateWaterTask task = new EvaporateWaterTask(block, block, plugin);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, task, 1L);
             }
