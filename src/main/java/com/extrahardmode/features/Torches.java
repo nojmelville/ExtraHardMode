@@ -156,6 +156,8 @@ public class Torches extends ListenerModule
     {
         World world = event.getWorld();
 
+        plugin.debug(world, "WeatherChangeEvent called");
+
         final boolean rainBreaksTorchesEnabled = CFG.getBoolean(RootNode.RAIN_BREAKS_TORCHES, world.getName());
         final boolean snowBreaksCrops = CFG.getBoolean(RootNode.SNOW_BREAKS_CROPS, world.getName());
 
@@ -163,6 +165,7 @@ public class Torches extends ListenerModule
         {
             if (rainBreaksTorchesEnabled || snowBreaksCrops)
             {
+                plugin.debug(world, "WeatherChangeEvent says the sky is now falling and will proceed to massacre torches (and exposed crops in snow biomes)");
                 // plan to remove torches chunk by chunk gradually throughout the rainperiod
                 Chunk[] chunks = world.getLoadedChunks();
                 if (chunks.length > 0)
@@ -173,7 +176,7 @@ public class Torches extends ListenerModule
                         Chunk chunk = chunks[(startOffset + i) % chunks.length];
 
                         RemoveExposedTorchesTask task = new RemoveExposedTorchesTask(plugin, chunk);
-                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, task, i * 15L);
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, task, i * 100L);
                     }
                 }
             }
