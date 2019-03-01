@@ -185,6 +185,8 @@ public class Players extends ListenerModule
             List<ItemStack> removedDrops = new ArrayList<ItemStack>();
 
             int numberOfStacksToRemove = (int) (drops.size() * (deathLossPercent / 100.0f));
+            if (numberOfStacksToRemove == 0 && deathLossPercent > 0)
+                numberOfStacksToRemove = 1;
             loop:
             for (int i = 0; i < numberOfStacksToRemove && drops.size() > 0; i++)
             {
