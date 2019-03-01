@@ -70,5 +70,12 @@ public class EvaporateWaterTask implements Runnable
             //Finished processing
             blockModule.removeMark(block);
         }
+        else if (block.getBlockData() instanceof Waterlogged)
+        {
+            Waterlogged wowWater = (Waterlogged)block.getBlockData();
+            wowWater.setWaterlogged(false);
+            block.setBlockData(wowWater, true);
+            blockModule.removeMark(block);
+        }
     }
 }
