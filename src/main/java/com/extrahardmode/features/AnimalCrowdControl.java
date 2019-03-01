@@ -125,7 +125,10 @@ public class AnimalCrowdControl extends ListenerModule {
                         this.cancel();
                         return;
                     } else if (dizziness >= maxDizziness) {
+                        double health = animal.getHealth();
                         animal.damage(0.5, animal);
+                        if (animal.getHealth() == health)
+                            animal.damage(0.5); //Attempt to override protection plugins like Worldguard
                         animal.setVelocity(new Vector()); //Triggers animal's "run away" AI
                         dizziness = 0;
                     }
