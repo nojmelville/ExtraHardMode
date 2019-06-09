@@ -33,6 +33,8 @@ public final class BlockType
 
     public BlockType(Material mat, Short... meta)
     {
+        if (!mat.isLegacy())
+            return;
         this.blockId = mat.getId();
         Collections.addAll(this.meta, meta);
     }
