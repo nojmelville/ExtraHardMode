@@ -131,7 +131,7 @@ public class RemoveExposedTorchesTask implements Runnable
                             case CARROT:
                             case PUMPKIN_STEM:
                             case POTATO:
-                            case ROSE_RED: //RED_ROSE
+                            case ROSE_BUSH: //RED_ROSE //ROSE_RED
                             case DANDELION: //YELLOW FLOWER
                             case GRASS: //I still can't recall if the replacement for LONG_GRASS is GRASS or TALL_GRASS...
                             case TALL_GRASS:

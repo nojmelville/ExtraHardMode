@@ -350,8 +350,8 @@ public class BlockModule extends EHMModule
                 mat == Material.COBWEB ||
                 mat == Material.DAYLIGHT_DETECTOR ||
                 Tag.TRAPDOORS.isTagged(mat) ||
-                mat == Material.SIGN ||
-                mat == Material.WALL_SIGN ||
+                Tag.SIGNS.isTagged(mat) ||
+                Tag.WALL_SIGNS.isTagged(mat) ||
                 //Match all slabs besides double slab
                 slabPattern.matcher(mat.name()).matches();
     }
