@@ -73,8 +73,8 @@ public interface ConfigNode
         LIST,
         COLOR,
         POTION_EFFECT,
-        @Deprecated BLOCKTYPE,
-        @Deprecated BLOCKTYPE_LIST,
+        MATERIAL,
+        MATERIAL_LIST,
         @Deprecated BLOCK_RELATION_LIST,
         COMMENT
     }

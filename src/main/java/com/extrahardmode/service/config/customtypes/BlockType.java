@@ -152,7 +152,7 @@ public final class BlockType
             if (material == null)
                 material = Material.matchMaterial(RegexHelper.stripEnum(blockIdString));
         }
-        if (material != null)
+        if (material != null && material.isLegacy())
             blockId = material.getId();
         else //mod item or -1 if not valid
             blockId = RegexHelper.parseNumber(blockIdString, -1);

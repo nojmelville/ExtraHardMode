@@ -29,6 +29,7 @@ import com.extrahardmode.service.config.customtypes.BlockType;
 import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -474,27 +475,27 @@ public class EHMConfig
                     obj = PotionEffectHolder.loadFromConfig(section);
                     break;
                 }
-                case BLOCKTYPE:
+                case MATERIAL:
                 {
                     if (mConfig.getString(node.getPath()) != null)
-                        obj = BlockType.loadFromConfig(mConfig.getString(node.getPath()));
+                        obj = Material.matchMaterial(mConfig.getString(node.getPath()));
                     break;
                 }
-                case BLOCKTYPE_LIST:
+                case MATERIAL_LIST:
                 {
+                    List<Material> materialList = new ArrayList<>();
                     if (mConfig.get(node.getPath()) instanceof List)
                     {
                         List<String> list = mConfig.getStringList(node.getPath());
-                        BlockTypeList blocks = new BlockTypeList();
                         for (String str : list)
                         {
-                            BlockType block = BlockType.loadFromConfig(str);
-                            if (block != null)
-                                blocks.add(block);
+                            Material material = Material.matchMaterial(str);
+                            if (material != null)
+                                materialList.add(material);
                         }
-                        obj = blocks;
+                        obj = materialList;
                     } else if (mConfig.isSet(node.getPath()))
-                        obj = BlockTypeList.EMPTY_LIST;
+                        obj = materialList; //obj = BlockTypeList.EMPTY_LIST; //No idea why this is empty but ok?
                     break;
                 }
                 case BLOCK_RELATION_LIST:
@@ -568,22 +569,22 @@ public class EHMConfig
             //Custom writing code for our custom objects
             switch (node.getVarType())
             {
-                case BLOCKTYPE:
+                case MATERIAL:
                 {
-                    if (value instanceof BlockType)
+                    if (value instanceof Material)
                     {
-                        outConfig.set(node.getPath(), ((BlockType) value).saveToString());
+                        outConfig.set(node.getPath(), ((Material)value).name());
                         break;
                     }
                 }
-                case BLOCKTYPE_LIST:
+                case MATERIAL_LIST:
                 {
-                    if (value instanceof BlockTypeList)
+                    if (value instanceof ArrayList)
                     {
-                        List<String> blockStrings = new ArrayList<String>();
-                        for (BlockType blockType : ((BlockTypeList) value).toArray())
-                            blockStrings.add(blockType.saveToString());
-                        outConfig.set(node.getPath(), blockStrings);
+                        List<String> materialStrings = new ArrayList<>();
+                        for (Material material : (ArrayList<Material>)value)
+                            materialStrings.add(material.name());
+                        outConfig.set(node.getPath(), materialStrings);
                         break;
                     }
                 }

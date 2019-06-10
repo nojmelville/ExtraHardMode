@@ -146,7 +146,7 @@ public abstract class MultiWorldConfig extends EHMModule
                     break;
                 }
             }
-            case BLOCKTYPE:
+            case MATERIAL:
             {
                 if (value instanceof BlockType)
                 {
@@ -154,7 +154,7 @@ public abstract class MultiWorldConfig extends EHMModule
                     break;
                 }
             }
-            case BLOCKTYPE_LIST:
+            case MATERIAL_LIST:
             {
                 if (value instanceof BlockTypeList)
                 {
@@ -240,8 +240,8 @@ public abstract class MultiWorldConfig extends EHMModule
     {
         varTypeClassMap.put(ConfigNode.VarType.INTEGER, Integer.class);
         varTypeClassMap.put(ConfigNode.VarType.BOOLEAN, Boolean.class);
-        varTypeClassMap.put(ConfigNode.VarType.BLOCKTYPE, BlockType.class);
-        varTypeClassMap.put(ConfigNode.VarType.BLOCKTYPE_LIST, BlockTypeList.class);
+        varTypeClassMap.put(ConfigNode.VarType.MATERIAL, BlockType.class);
+        varTypeClassMap.put(ConfigNode.VarType.MATERIAL_LIST, BlockTypeList.class);
         varTypeClassMap.put(ConfigNode.VarType.BLOCK_RELATION_LIST, BlockRelationsList.class);
         varTypeClassMap.put(ConfigNode.VarType.DOUBLE, Double.class);
         varTypeClassMap.put(ConfigNode.VarType.LIST, List.class);
@@ -463,7 +463,7 @@ public abstract class MultiWorldConfig extends EHMModule
 
         switch (node.getVarType())
         {
-            case BLOCKTYPE_LIST:
+            case MATERIAL_LIST:
             {
                 Object obj = null;
                 if (OPTIONS.contains(world, node))

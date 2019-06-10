@@ -1,6 +1,7 @@
 package com.extrahardmode.service.config.customtypes;
 
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.*;
 public class BlockTypeList
 {
     private Map<Integer, BlockType> blockTypeMap = new HashMap<Integer, BlockType>();
+    private Set<Material> materials = new HashSet<>();
     /**
      * Empty List with no values
      */
