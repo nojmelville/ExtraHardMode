@@ -1,6 +1,7 @@
 package com.extrahardmode.service.config.customtypes;
 
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Deprecated
 public class BlockRelationsList
 {
-    private Map<BlockType, BlockType> mBlockRelations = new HashMap<BlockType, BlockType>();
+    private Map<Material, Material> mBlockRelations = new HashMap<>();
     /**
      * An empty list
      */
@@ -55,7 +56,7 @@ public class BlockRelationsList
             return new String[]{""};
         String[] configStrings = new String[mBlockRelations.size()];
         int i = 0;
-        for (Map.Entry<BlockType, BlockType> relation : mBlockRelations.entrySet())
+        for (Map.Entry<Material, Material> relation : mBlockRelations.entrySet())
         {
             configStrings[i] = relation.getKey().toString() + "-" + relation.getValue().toString();
             i++;
@@ -64,25 +65,17 @@ public class BlockRelationsList
     }
 
 
-    public void add(BlockType block1, BlockType block2)
+    public void add(Material block1, Material block2)
     {
         mBlockRelations.put(block1, block2);
     }
 
 
-    public BlockType get(BlockType blockType)
+    public Material get(Block block)
     {
-        for (Map.Entry<BlockType, BlockType> entry : mBlockRelations.entrySet())
-            if (entry.getKey().equals(blockType))
-                return entry.getValue();
-        return null;
-    }
-
-
-    public BlockType get(Block block)
-    {
-        for (Map.Entry<BlockType, BlockType> entry : mBlockRelations.entrySet())
-            if (entry.getKey().matches(block.getType().getId(), block.getData()))
+        Material material = block.getType();
+        for (Map.Entry<Material, Material> entry : mBlockRelations.entrySet())
+            if (entry.getKey() == material)
                 return entry.getValue();
         return null;
     }
