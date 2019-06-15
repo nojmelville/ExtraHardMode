@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Holds one blocktype, but a range of metadata for that block.
- * F.e. this could have meta for spruce, oak and jungle wood, but exclude birch.
+ * F.e. this could have durability for spruce, oak and jungle wood, but exclude birch.
  *
  * @deprecated No longer needed with "The Flattening" in 1.13
  *
@@ -21,80 +21,46 @@ import java.util.regex.Pattern;
 public final class BlockType
 {
     private static Pattern separators = Pattern.compile("[^A-Za-z0-9_]");
-    private int blockId = -1;
-    private Set<Short> meta = new LinkedHashSet<Short>();
+    private Material material;
+    private short durability;
 
-
-    public BlockType(int blockId)
+    public BlockType(Material mat)
     {
-        this.blockId = blockId;
+        this.material = mat;
     }
 
-
-    public BlockType(Material mat, Short... meta)
+    public BlockType(Material mat, Short durability)
     {
-        if (!mat.isLegacy())
-            return;
-        this.blockId = mat.getId();
-        Collections.addAll(this.meta, meta);
+        this(mat);
+        this.durability = durability;
     }
 
-
-    public BlockType(int blockId, Short... meta)
+    public int getMaterial()
     {
-        this.blockId = blockId;
-        Collections.addAll(this.meta, meta);
+        return material;
     }
-
-
-    public BlockType(int blockId, short meta)
-    {
-        this.blockId = blockId;
-        this.meta.add(meta);
-    }
-
-
-    public BlockType(int blockId, Collection<Short> meta)
-    {
-        this.blockId = blockId;
-        this.meta.addAll(meta);
-    }
-
-
-    public int getBlockId()
-    {
-        return blockId;
-    }
-
 
     public Set<Short> getAllMeta()
     {
-        return new HashSet<Short>(meta);
+        return new HashSet<Short>(durability);
     }
 
-
-    public byte getByteMeta()
+    public short getDurability()
     {
-        return meta.size() > 0 ? (byte) RegexHelper.safeCast(meta.iterator().next(), Byte.MIN_VALUE, Byte.MAX_VALUE) : 0;
-    }
-
-
-    public short getMeta()
-    {
-        return meta.size() > 0 ? meta.iterator().next() : 0;
+        return durability.size() > 0 ? durability.iterator().next() : 0;
     }
 
 
     private boolean matchesMeta(short meta)
     {
-        if (this.meta.size() > 0)
+        if (this.durability.size() > 0)
         {
-            for (Short aMeta : this.meta)
+            for (Short aMeta : this.durability)
             {
                 if (aMeta == meta)
                     return true;
             }
-        } else //no meta specified -> all blocks match
+        } else //no durability specified -> all blocks match
             return true;
         return false;
     }
@@ -102,7 +68,7 @@ public final class BlockType
 
     public boolean matches(int blockId)
     {
-        return this.blockId == blockId;
+        return this.material == blockId;
     }
 
 
@@ -136,7 +102,7 @@ public final class BlockType
         if (splitted.length == 0)
             return null;
         //BLOCK META
-        for (int i = 1; i < splitted.length; i++) //first value is blockId
+        for (int i = 1; i < splitted.length; i++) //first value is material
             meta.add(RegexHelper.parseShort(splitted[i]));
 
         //BLOCK ID
@@ -144,7 +110,7 @@ public final class BlockType
         Material material = Material.matchMaterial(blockIdString);
         if (material == null) //Not found in material enum
         {
-            // try as a number (blockId)
+            // try as a number (material)
             String tempId = RegexHelper.stripNumber(blockIdString);
             if (!tempId.isEmpty())
                 material = Material.getMaterial(tempId);
@@ -163,11 +129,11 @@ public final class BlockType
     public String saveToString()
     {
         StringBuilder builder = new StringBuilder();
-        Material material = getMaterial(blockId);
-        builder.append(material != null ? material.name() : blockId);
+        Material material = getMaterial(this.material);
+        builder.append(material != null ? material.name() : this.material);
 
         boolean first = true;
-        for (Short metaBit : meta)
+        for (Short metaBit : durability)
         {
             if (first) builder.append('@');
             else builder.append(',');
@@ -189,13 +155,13 @@ public final class BlockType
     }
     public Material getType()
     {
-        return getMaterial(blockId);
+        return getMaterial(material);
     }
 
 
     public boolean isValid()
     {
-        return blockId >= 0;
+        return material >= 0;
     }
 
 
@@ -215,16 +181,16 @@ public final class BlockType
             return true;
         else if (!(obj instanceof BlockType))
             return false;
-        return blockId == ((BlockType) obj).blockId &&
-                meta.equals(((BlockType) obj).meta);
+        return material == ((BlockType) obj).material &&
+                durability.equals(((BlockType) obj).durability);
     }
 
 
     @Override
     public int hashCode()
     {
-        int hash = blockId;
-        for (short data : meta)
+        int hash = material;
+        for (short data : durability)
             hash += data;
         return hash;
     }

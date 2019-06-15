@@ -46,13 +46,13 @@ public class BlockTypeList
     public void add(BlockType blockType)
     {
         //merge meta if exists
-        if (blockTypeMap.containsKey(blockType.getBlockId()))
+        if (blockTypeMap.containsKey(blockType.getMaterial()))
         {
-            Set<Short> merged = blockTypeMap.get(blockType.getBlockId()).getAllMeta();
+            Set<Short> merged = blockTypeMap.get(blockType.getMaterial()).getAllMeta();
             merged.addAll(blockType.getAllMeta());
-            blockType = new BlockType(blockType.getBlockId(), merged);
+            blockType = new BlockType(blockType.getMaterial(), merged);
         }
-        blockTypeMap.put(blockType.getBlockId(), blockType);
+        blockTypeMap.put(blockType.getMaterial(), blockType);
     }
 
 
