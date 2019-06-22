@@ -38,9 +38,9 @@ public class BlockRelationsList
         if (splitted.length < 2)
             return;
 
-        BlockType block1 = BlockType.loadFromConfig(splitted[0]);
-        BlockType block2 = BlockType.loadFromConfig(splitted[1]);
-        if (block1.isValid() && block2.isValid())
+        Material block1 = Material.matchMaterial(splitted[0]);
+        Material block2 = Material.matchMaterial(splitted[1]);
+        if (block1 != null && block2 != null)
             add(block1, block2);
     }
 
