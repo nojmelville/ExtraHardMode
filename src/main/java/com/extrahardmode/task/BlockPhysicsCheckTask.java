@@ -26,10 +26,11 @@ import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.module.BlockModule;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+
+import java.util.List;
 
 /**
  * Called to apply physics to a block and its neighbors if necessary.
@@ -89,13 +90,13 @@ public class BlockPhysicsCheckTask implements Runnable
         boolean fall = false;
 
         final boolean fallingBlocksEnabled = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_ENABLE, block.getWorld().getName());
-        final BlockTypeList fallingBlocks = CFG.getBlocktypeList(RootNode.MORE_FALLING_BLOCKS, block.getWorld().getName());
+        final List<Material> fallingBlocks = CFG.getMaterialList(RootNode.MORE_FALLING_BLOCKS, block.getWorld().getName());
 
         Material material = block.getType();
         Block underBlock = block.getRelative(BlockFace.DOWN);
 
         if ((underBlock.getType() == Material.AIR || underBlock.isLiquid() || underBlock.getType() == Material.TORCH)
-                && (material == Material.SAND || material == Material.GRAVEL || fallingBlocks.contains(block)
+                && (material == Material.SAND || material == Material.GRAVEL || fallingBlocks.contains(block.getType())
                 && fallingBlocksEnabled && material != Material.AIR))
         {
             module.applyPhysics(block, true);

@@ -32,8 +32,6 @@ import com.extrahardmode.module.PlayerData;
 import com.extrahardmode.module.PlayerModule;
 import com.extrahardmode.service.Feature;
 import com.extrahardmode.service.ListenerModule;
-import com.extrahardmode.service.config.customtypes.BlockType;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import com.extrahardmode.task.ArmorWeightTask;
 import com.extrahardmode.task.SetPlayerHealthAndFoodTask;
@@ -174,8 +172,8 @@ public class Players extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.DEATH_INV_LOSS);
 
         final int toolDmgPercent = CFG.getInt(RootNode.PLAYER_DEATH_TOOLS_DMG_PERCENTAGE, world.getName());
-        final BlockTypeList blacklisted = CFG.getBlocktypeList(RootNode.PLAYER_DEATH_ITEMS_BLACKLIST, world.getName());
-        final BlockTypeList toolIds = CFG.getBlocktypeList(RootNode.PLAYER_DEATH_TOOLS_LIST, world.getName());
+        final List<Material> blacklisted = CFG.getMaterialList(RootNode.PLAYER_DEATH_ITEMS_BLACKLIST, world.getName());
+        final List<Material> toolIds = CFG.getMaterialList(RootNode.PLAYER_DEATH_TOOLS_LIST, world.getName());
         final boolean destroyTools = CFG.getBoolean(RootNode.PLAYER_DEATH_TOOLS_KEEP_DAMAGED, world.getName());
 
         // FEATURE: some portion of player inventory is permanently lost on death
@@ -191,8 +189,8 @@ public class Players extends ListenerModule
             for (int i = 0; i < numberOfStacksToRemove && drops.size() > 0; i++)
             {
                 ItemStack toRemove = drops.get(plugin.getRandom().nextInt(drops.size()));
-                for (BlockType block : blacklisted.toArray())
-                    if (block.matches(toRemove))
+                for (Material material : blacklisted)
+                    if (material == toRemove.getType())
                         continue loop; //don't remove blacklisted items
                 removedDrops.add(toRemove);
             }
@@ -206,10 +204,10 @@ public class Players extends ListenerModule
                 outer:
                 for (ItemStack item : evntDropsRemove)
                 {
-                    for (BlockType tool : toolIds.toArray())
+                    for (Material tool : toolIds)
                     {
                         //Damage valuable tools instead of completely destroying them
-                        if (tool.matches(item))
+                        if (tool == item.getType())
                         {
                             short dur = item.getDurability();
                             short maxDurability = item.getType().getMaxDurability();

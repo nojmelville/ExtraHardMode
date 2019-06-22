@@ -25,8 +25,6 @@ package com.extrahardmode.config;
 import com.extrahardmode.service.config.ConfigNode;
 import com.extrahardmode.service.config.MultiWorldConfig;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
-import com.extrahardmode.service.config.customtypes.BlockType;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffectType;
@@ -96,7 +94,7 @@ public enum RootNode implements ConfigNode
      */
     SUPER_HARD_STONE("World Rules.Mining.Inhibit Tunneling.Enable", VarType.BOOLEAN, true,
             "If hardened blocks can only be broken by specific tools"),
-    SUPER_HARD_BLOCKS("World Rules.Mining.Inhibit Tunneling.Hardened Blocks", VarType.BLOCKTYPE_LIST, new DefaultHardBlocks(),
+    SUPER_HARD_BLOCKS("World Rules.Mining.Inhibit Tunneling.Hardened Blocks", VarType.MATERIAL_LIST, new DefaultHardBlocks(),
             "These blocks will be treated as hardened"),
     /**
      * If ore placement next to stone blocks should be blocked to prevent tunneling
@@ -111,7 +109,7 @@ public enum RootNode implements ConfigNode
     /**
      * whether stone is hardened to encourage cave exploration over tunneling
      */
-    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine (Tool@Blocks)", VarType.BLOCKTYPE_LIST, new DefaultToolDurabilities(),
+    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine (Tool@Blocks)", VarType.MATERIAL_LIST, new DefaultToolDurabilities(),
             "List of tools that can mine stone. If a tool isn't in the list it can't mine stone.",
             "F.e. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken"),
     /**
@@ -128,7 +126,7 @@ public enum RootNode implements ConfigNode
     /**
      * These Blocks will turn surrounding stone into cobblestone
      */
-    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks (Block@id,id2)", VarType.BLOCKTYPE_LIST, new DefaultPhysicsBlocks(),
+    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks (Block@id,id2)", VarType.MATERIAL_LIST, new DefaultPhysicsBlocks(),
             "Ore blocks that will soften surrounding stone blocks."),
     /**
      * Stone Blocks and their counter respective cobblestone blocks
@@ -276,9 +274,9 @@ public enum RootNode implements ConfigNode
     /**
      * List of items that count as tools
      */
-    PLAYER_DEATH_TOOLS_LIST("Player.Death.Loose Items On Death.Tools", VarType.BLOCKTYPE_LIST, new DefaultValuableTools(),
+    PLAYER_DEATH_TOOLS_LIST("Player.Death.Loose Items On Death.Tools", VarType.MATERIAL_LIST, new DefaultValuableTools(),
             "Tool settings apply only to these tools"),
-    PLAYER_DEATH_ITEMS_BLACKLIST("Player.Death.Loose Items On Death.Blacklisted Items", VarType.BLOCKTYPE_LIST, BlockTypeList.EMPTY_LIST,
+    PLAYER_DEATH_ITEMS_BLACKLIST("Player.Death.Loose Items On Death.Blacklisted Items", VarType.MATERIAL_LIST, new ArrayList<Material>(),
             "These items will never be removed on death."),
     /**
      * Enable custom Health
@@ -887,7 +885,7 @@ public enum RootNode implements ConfigNode
     /**
      * which materials beyond sand and gravel should be subject to gravity
      */
-    MORE_FALLING_BLOCKS("Additional Falling Blocks.Enabled Blocks", VarType.BLOCKTYPE_LIST, new DefaultFallingBlocks()),
+    MORE_FALLING_BLOCKS("Additional Falling Blocks.Enabled Blocks", VarType.MATERIAL_LIST, new DefaultFallingBlocks()),
 
     /**
      * ##############################
@@ -1376,9 +1374,9 @@ public enum RootNode implements ConfigNode
                 obj = Collections.emptyList();
                 break;
             }
-            case BLOCKTYPE_LIST:
+            case MATERIAL_LIST:
             {
-                obj = BlockTypeList.EMPTY_LIST;
+                obj = new ArrayList<Material>();
                 break;
             }
             case BLOCK_RELATION_LIST:
@@ -1437,7 +1435,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of falling blocks.
      */
-    private static class DefaultFallingBlocks extends BlockTypeList
+    private static class DefaultFallingBlocks extends ArrayList<Material>
     {
         /**
          * Constructor.
@@ -1445,13 +1443,13 @@ public enum RootNode implements ConfigNode
         public DefaultFallingBlocks()
         {
             super();
-            this.add(new BlockType(Material.DIRT));
-            this.add(new BlockType(Material.GRASS));
-            this.add(new BlockType(Material.COBBLESTONE));
-            this.add(new BlockType(Material.MOSSY_COBBLESTONE));
-            this.add(new BlockType(Material.STONE_SLAB));
-            this.add(new BlockType(Material.COBBLESTONE_SLAB));
-            this.add(new BlockType(Material.MYCELIUM));
+            this.add(Material.DIRT);
+            this.add(Material.GRASS);
+            this.add(Material.COBBLESTONE);
+            this.add(Material.MOSSY_COBBLESTONE);
+            this.add(Material.STONE_SLAB);
+            this.add(Material.COBBLESTONE_SLAB);
+            this.add(Material.MYCELIUM);
         }
     }
 
@@ -1459,7 +1457,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of falling blocks.
      */
-    private static class DefaultPhysicsBlocks extends BlockTypeList
+    private static class DefaultPhysicsBlocks extends ArrayList<Material>
     {
         /**
          * Constructor.
@@ -1467,21 +1465,22 @@ public enum RootNode implements ConfigNode
         public DefaultPhysicsBlocks()
         {
             super();
-            this.add(new BlockType(Material.COAL_ORE));
-            this.add(new BlockType(Material.IRON_ORE));
-            this.add(new BlockType(Material.GOLD_ORE));
-            this.add(new BlockType(Material.LAPIS_ORE));
-            this.add(new BlockType(Material.REDSTONE_ORE));
-            this.add(new BlockType(Material.EMERALD_ORE));
-            this.add(new BlockType(Material.DIAMOND_ORE));
+            this.add(Material.COAL_ORE);
+            this.add(Material.IRON_ORE);
+            this.add(Material.GOLD_ORE);
+            this.add(Material.LAPIS_ORE);
+            this.add(Material.REDSTONE_ORE);
+            this.add(Material.EMERALD_ORE);
+            this.add(Material.DIAMOND_ORE);
         }
     }
 
 
+    //TODO: fix, somehow
     /**
      * Default list of tool durabilities
      */
-    private static class DefaultToolDurabilities extends BlockTypeList
+    private static class DefaultToolDurabilities extends ArrayList<Material>
     {
         /**
          * Constructor.
@@ -1489,8 +1488,10 @@ public enum RootNode implements ConfigNode
         public DefaultToolDurabilities()
         {
             super();
-            this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
-            this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
+            //this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
+            //this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
+            this.add(Material.IRON_PICKAXE);
+            this.add(Material.DIAMOND_PICKAXE);
         }
     }
 
@@ -1506,31 +1507,31 @@ public enum RootNode implements ConfigNode
         public DefaultStoneBlocks()
         {
             super();
-            this.add(new BlockType(Material.STONE), new BlockType(Material.COBBLESTONE));
+            this.add(Material.STONE, Material.COBBLESTONE);
         }
     }
 
 
-    private static class DefaultValuableTools extends BlockTypeList
+    private static class DefaultValuableTools extends ArrayList<Material>
     {
         public DefaultValuableTools()
         {
             super();
-            this.add(new BlockType(Material.DIAMOND_AXE));
-            this.add(new BlockType(Material.DIAMOND_SWORD));
-            this.add(new BlockType(Material.DIAMOND_PICKAXE));
-            this.add(new BlockType(Material.DIAMOND_SHOVEL));
+            this.add(Material.DIAMOND_AXE);
+            this.add(Material.DIAMOND_SWORD);
+            this.add(Material.DIAMOND_PICKAXE);
+            this.add(Material.DIAMOND_SHOVEL);
 
         }
     }
 
 
-    private static class DefaultHardBlocks extends BlockTypeList
+    private static class DefaultHardBlocks extends ArrayList<Material>
     {
         public DefaultHardBlocks()
         {
             super();
-            this.add(new BlockType(Material.STONE));
+            this.add(Material.STONE);
 
         }
     }
