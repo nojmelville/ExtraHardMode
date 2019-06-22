@@ -26,13 +26,13 @@ import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.service.EHMModule;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
 import com.extrahardmode.service.config.customtypes.BlockType;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Table;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,14 +154,6 @@ public abstract class MultiWorldConfig extends EHMModule
                     break;
                 }
             }
-            case MATERIAL_LIST:
-            {
-                if (value instanceof BlockTypeList)
-                {
-                    OPTIONS.put(world, node, value);
-                    break;
-                }
-            }
             case BLOCK_RELATION_LIST:
             {
                 if (value instanceof BlockRelationsList)
@@ -241,7 +233,6 @@ public abstract class MultiWorldConfig extends EHMModule
         varTypeClassMap.put(ConfigNode.VarType.INTEGER, Integer.class);
         varTypeClassMap.put(ConfigNode.VarType.BOOLEAN, Boolean.class);
         varTypeClassMap.put(ConfigNode.VarType.MATERIAL, BlockType.class);
-        varTypeClassMap.put(ConfigNode.VarType.MATERIAL_LIST, BlockTypeList.class);
         varTypeClassMap.put(ConfigNode.VarType.BLOCK_RELATION_LIST, BlockRelationsList.class);
         varTypeClassMap.put(ConfigNode.VarType.DOUBLE, Double.class);
         varTypeClassMap.put(ConfigNode.VarType.LIST, List.class);
@@ -457,9 +448,9 @@ public abstract class MultiWorldConfig extends EHMModule
 
 
     @Deprecated
-    public BlockTypeList getBlocktypeList(final ConfigNode node, final String world)
+    public List<Material> getMaterialList(final ConfigNode node, final String world)
     {
-        BlockTypeList blockList;
+        List<Material> blockList;
 
         switch (node.getVarType())
         {
@@ -470,12 +461,12 @@ public abstract class MultiWorldConfig extends EHMModule
                     obj = OPTIONS.get(world, node);
                 else if (enabledForAll)
                     obj = OPTIONS.get(ALL_WORLDS, node);
-                blockList = obj instanceof BlockTypeList ? (BlockTypeList) obj : (BlockTypeList) node.getValueToDisable();
+                blockList = obj instanceof List? (List<Material>) obj : (List<Material>) node.getValueToDisable();
                 break;
             }
             default:
             {
-                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " as a BlockTypeList.");
+                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " as a List<Material>.");
             }
         }
         return blockList;

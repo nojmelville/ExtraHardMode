@@ -41,40 +41,40 @@ public class BlockTypeTest
     }
 
 
-    @Test
-    public void loadFromConfig_simple()
-    {
-        String input = "STONE";
-        BlockType expected = new BlockType(Material.STONE);
-        assertEquals(expected, BlockType.loadFromConfig(input));
-    }
-
-
-    @Test
-    public void loadFromConfig_fail()
-    {
-        String input = "Srtone";
-        BlockType expected = new BlockType(-1);
-        assertEquals(expected, BlockType.loadFromConfig(input));
-    }
-
-
-    @Test
-    public void loadFromConfig_meta_simple()
-    {
-        String input = "Stone,2";
-        BlockType expected = new BlockType(Material.STONE, (short) 2);
-        assertEquals(expected, BlockType.loadFromConfig(input));
-    }
-
-
-    @Test
-    public void loadFromConfig_meta_advanced()
-    {
-        String input = "Stone,2,3,4";
-        BlockType expected = new BlockType(Material.STONE, (short) 2, (short) 3, (short) 4);
-        assertEquals(expected, BlockType.loadFromConfig(input));
-    }
+//    @Test
+//    public void loadFromConfig_simple()
+//    {
+//        String input = "STONE";
+//        BlockType expected = new BlockType(Material.STONE);
+//        assertEquals(expected, BlockType.loadFromConfig(input));
+//    }
+//
+//
+//    @Test
+//    public void loadFromConfig_fail()
+//    {
+//        String input = "Srtone";
+//        BlockType expected = new BlockType(-1);
+//        assertEquals(expected, BlockType.loadFromConfig(input));
+//    }
+//
+//
+//    @Test
+//    public void loadFromConfig_meta_simple()
+//    {
+//        String input = "Stone,2";
+//        BlockType expected = new BlockType(Material.STONE, (short) 2);
+//        assertEquals(expected, BlockType.loadFromConfig(input));
+//    }
+//
+//
+//    @Test
+//    public void loadFromConfig_meta_advanced()
+//    {
+//        String input = "Stone,2,3,4";
+//        BlockType expected = new BlockType(Material.STONE, (short) 2, (short) 3, (short) 4);
+//        assertEquals(expected, BlockType.loadFromConfig(input));
+//    }
 
 
     @Test

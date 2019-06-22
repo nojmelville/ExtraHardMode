@@ -25,8 +25,6 @@ package com.extrahardmode.config;
 import com.extrahardmode.service.config.ConfigNode;
 import com.extrahardmode.service.config.MultiWorldConfig;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
-import com.extrahardmode.service.config.customtypes.BlockType;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffectType;
@@ -1482,7 +1480,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of tool durabilities
      */
-    private static class DefaultToolDurabilities extends BlockTypeList
+    private static class DefaultToolDurabilities extends ArrayList<Material>
     {
         /**
          * Constructor.
@@ -1490,8 +1488,10 @@ public enum RootNode implements ConfigNode
         public DefaultToolDurabilities()
         {
             super();
-            this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
-            this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
+            //this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
+            //this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
+            this.add(Material.IRON_PICKAXE);
+            this.add(Material.DIAMOND_PICKAXE);
         }
     }
 
@@ -1507,7 +1507,7 @@ public enum RootNode implements ConfigNode
         public DefaultStoneBlocks()
         {
             super();
-            this.add(new BlockType(Material.STONE), new BlockType(Material.COBBLESTONE));
+            this.add(Material.STONE, Material.COBBLESTONE);
         }
     }
 

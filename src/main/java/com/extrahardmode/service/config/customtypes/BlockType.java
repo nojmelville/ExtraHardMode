@@ -124,42 +124,6 @@ public final class BlockType
     }
 
 
-    public static BlockType loadFromConfig(String input)
-    {
-        if (input == null)
-            return null;
-        //PREPARATION
-        int blockId;
-        Set<Short> meta = new HashSet<Short>();
-        input = RegexHelper.trimWhitespace(input);
-        String[] splitted = separators.split(input);
-        if (splitted.length == 0)
-            return null;
-        //BLOCK META
-        for (int i = 1; i < splitted.length; i++) //first value is blockId
-            meta.add(RegexHelper.parseShort(splitted[i]));
-
-        //BLOCK ID
-        String blockIdString = splitted[0];
-        Material material = Material.matchMaterial(blockIdString);
-        if (material == null) //Not found in material enum
-        {
-            // try as a number (blockId)
-            String tempId = RegexHelper.stripNumber(blockIdString);
-            if (!tempId.isEmpty())
-                material = Material.getMaterial(tempId);
-            // still fail -> try as enum again but strip numbers
-            if (material == null)
-                material = Material.matchMaterial(RegexHelper.stripEnum(blockIdString));
-        }
-        if (material != null && material.isLegacy())
-            blockId = material.getId();
-        else //mod item or -1 if not valid
-            blockId = RegexHelper.parseNumber(blockIdString, -1);
-        return new BlockType(blockId, meta);
-    }
-
-
     public String saveToString()
     {
         StringBuilder builder = new StringBuilder();

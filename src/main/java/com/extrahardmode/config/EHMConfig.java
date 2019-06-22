@@ -25,8 +25,6 @@ package com.extrahardmode.config;
 import com.extrahardmode.service.IoHelper;
 import com.extrahardmode.service.config.*;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
-import com.extrahardmode.service.config.customtypes.BlockType;
-import com.extrahardmode.service.config.customtypes.BlockTypeList;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
