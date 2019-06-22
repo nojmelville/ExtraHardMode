@@ -25,7 +25,6 @@ package com.extrahardmode.service.config;
 import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.service.EHMModule;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
-import com.extrahardmode.service.config.customtypes.BlockType;
 import com.extrahardmode.service.config.customtypes.PotionEffectHolder;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBasedTable;
@@ -148,7 +147,7 @@ public abstract class MultiWorldConfig extends EHMModule
             }
             case MATERIAL:
             {
-                if (value instanceof BlockType)
+                if (value instanceof Material)
                 {
                     OPTIONS.put(world, node, value);
                     break;
@@ -232,7 +231,7 @@ public abstract class MultiWorldConfig extends EHMModule
     {
         varTypeClassMap.put(ConfigNode.VarType.INTEGER, Integer.class);
         varTypeClassMap.put(ConfigNode.VarType.BOOLEAN, Boolean.class);
-        varTypeClassMap.put(ConfigNode.VarType.MATERIAL, BlockType.class);
+        varTypeClassMap.put(ConfigNode.VarType.MATERIAL, Material.class);
         varTypeClassMap.put(ConfigNode.VarType.BLOCK_RELATION_LIST, BlockRelationsList.class);
         varTypeClassMap.put(ConfigNode.VarType.DOUBLE, Double.class);
         varTypeClassMap.put(ConfigNode.VarType.LIST, List.class);
