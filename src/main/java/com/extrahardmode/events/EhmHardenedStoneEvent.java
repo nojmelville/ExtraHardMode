@@ -92,13 +92,13 @@ public class EhmHardenedStoneEvent extends Event
 
 
     /**
-     * Get the id
+     * Get the material
      *
-     * @return id of the Tool which broke the Stone
+     * @return material of the Tool which broke the Stone
      */
-    public int getToolId()
+    public Material getToolId()
     {
-        return tool.getType().getId();
+        return tool.getType();
     }
 
 

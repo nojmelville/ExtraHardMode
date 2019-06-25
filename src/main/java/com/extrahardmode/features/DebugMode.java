@@ -25,19 +25,12 @@ public class DebugMode extends ListenerModule
 
     private final String key_blockdata_msg = "key_blockdata_msg_";
 
-    private final HashSet<Byte> transparentBlocksIds;
-
 
     public DebugMode(ExtraHardMode plugin)
     {
         super(plugin);
         dataStoreModule = plugin.getModuleForClass(DataStoreModule.class);
         msgModule = plugin.getModuleForClass(MsgModule.class);
-        transparentBlocksIds = new HashSet<Byte>();
-        for (Material material : Material.values())
-            if (material.isTransparent() && material.getId() < Byte.MAX_VALUE) //They might add more blocks currently they are at 175 of 255 available slots
-                transparentBlocksIds.add((byte) material.getId());
-
     }
 
 

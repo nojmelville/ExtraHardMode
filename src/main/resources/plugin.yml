@@ -3,7 +3,6 @@ main: com.extrahardmode.ExtraHardMode
 version: '${project.version}-${git.commit.id.abbrev}'
 description: Add new challenges to minecraft
 dev-url: http://dev.bukkit.org/bukkit-plugins/fun-hard-mode/
-#project lead
 author: RoboMWM
 authors: [Diemex, Big_Scary]
 #ensure that we are loaded after multiworld plugins
