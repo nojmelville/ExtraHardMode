@@ -94,7 +94,7 @@ public enum RootNode implements ConfigNode
      */
     SUPER_HARD_STONE("World Rules.Mining.Inhibit Tunneling.Enable", VarType.BOOLEAN, true,
             "If hardened blocks can only be broken by specific tools"),
-    SUPER_HARD_BLOCKS("World Rules.Mining.Inhibit Tunneling.Hardened Blocks", VarType.MATERIAL_LIST, new DefaultHardBlocks(),
+    SUPER_HARD_BLOCKS("World Rules.Mining.Inhibit Tunneling.Hardened Blocks", VarType.LIST, new DefaultHardBlocks(),
             "These blocks will be treated as hardened"),
     /**
      * If ore placement next to stone blocks should be blocked to prevent tunneling
@@ -109,7 +109,7 @@ public enum RootNode implements ConfigNode
     /**
      * whether stone is hardened to encourage cave exploration over tunneling
      */
-    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine (Tool@Blocks)", VarType.MATERIAL_LIST, new DefaultToolDurabilities(),
+    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine (Tool@Blocks)", VarType.LIST, new DefaultToolDurabilities(),
             "List of tools that can mine stone. If a tool isn't in the list it can't mine stone.",
             "F.e. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken"),
     /**
@@ -126,7 +126,7 @@ public enum RootNode implements ConfigNode
     /**
      * These Blocks will turn surrounding stone into cobblestone
      */
-    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks (Block@id,id2)", VarType.MATERIAL_LIST, new DefaultPhysicsBlocks(),
+    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks (Block@id,id2)", VarType.LIST, new DefaultPhysicsBlocks(),
             "Ore blocks that will soften surrounding stone blocks."),
     /**
      * Stone Blocks and their counter respective cobblestone blocks
@@ -274,9 +274,9 @@ public enum RootNode implements ConfigNode
     /**
      * List of items that count as tools
      */
-    PLAYER_DEATH_TOOLS_LIST("Player.Death.Loose Items On Death.Tools", VarType.MATERIAL_LIST, new DefaultValuableTools(),
+    PLAYER_DEATH_TOOLS_LIST("Player.Death.Loose Items On Death.Tools", VarType.LIST, new DefaultValuableTools(),
             "Tool settings apply only to these tools"),
-    PLAYER_DEATH_ITEMS_BLACKLIST("Player.Death.Loose Items On Death.Blacklisted Items", VarType.MATERIAL_LIST, new ArrayList<Material>(),
+    PLAYER_DEATH_ITEMS_BLACKLIST("Player.Death.Loose Items On Death.Blacklisted Items", VarType.LIST, new ArrayList<Material>(),
             "These items will never be removed on death."),
     /**
      * Enable custom Health
@@ -885,7 +885,7 @@ public enum RootNode implements ConfigNode
     /**
      * which materials beyond sand and gravel should be subject to gravity
      */
-    MORE_FALLING_BLOCKS("Additional Falling Blocks.Enabled Blocks", VarType.MATERIAL_LIST, new DefaultFallingBlocks()),
+    MORE_FALLING_BLOCKS("Additional Falling Blocks.Enabled Blocks", VarType.LIST, new DefaultFallingBlocks()),
 
     /**
      * ##############################
