@@ -454,6 +454,7 @@ public abstract class MultiWorldConfig extends EHMModule
         switch (node.getVarType())
         {
             case MATERIAL_LIST:
+            case LIST:
             {
                 Object obj = null;
                 if (OPTIONS.contains(world, node))
