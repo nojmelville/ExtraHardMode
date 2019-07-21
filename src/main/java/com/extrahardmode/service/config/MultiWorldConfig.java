@@ -447,13 +447,12 @@ public abstract class MultiWorldConfig extends EHMModule
 
 
     @Deprecated
-    public List<Material> getMaterialList(final ConfigNode node, final String world)
+    public List<Material> getStringListAsMaterialList(final ConfigNode node, final String world)
     {
-        List<Material> blockList;
+        List<Material> blockList = new ArrayList<>();
 
         switch (node.getVarType())
         {
-            case MATERIAL_LIST:
             case LIST:
             {
                 Object obj = null;
@@ -461,12 +460,24 @@ public abstract class MultiWorldConfig extends EHMModule
                     obj = OPTIONS.get(world, node);
                 else if (enabledForAll)
                     obj = OPTIONS.get(ALL_WORLDS, node);
-                blockList = obj instanceof List? (List<Material>) obj : (List<Material>) node.getValueToDisable();
+                if (!(obj instanceof List))
+                    break;
+                for (String materialName : (List<String>) obj)
+                {
+                    Material material = Material.matchMaterial(materialName);
+                    if (material == null)
+                    {
+                        plugin.getLogger().warning(materialName + " is not a valid material. Please fix or remove from config.yml " + node.getPath());
+                        continue;
+                    }
+                    blockList.add(material);
+                }
+
                 break;
             }
             default:
             {
-                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " as a List<Material>.");
+                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " converted to a List<Material>.");
             }
         }
         return blockList;

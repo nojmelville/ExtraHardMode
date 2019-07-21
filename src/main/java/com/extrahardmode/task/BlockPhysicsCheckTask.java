@@ -90,7 +90,7 @@ public class BlockPhysicsCheckTask implements Runnable
         boolean fall = false;
 
         final boolean fallingBlocksEnabled = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_ENABLE, block.getWorld().getName());
-        final List<Material> fallingBlocks = CFG.getMaterialList(RootNode.MORE_FALLING_BLOCKS, block.getWorld().getName());
+        final List<Material> fallingBlocks = CFG.getStringListAsMaterialList(RootNode.MORE_FALLING_BLOCKS, block.getWorld().getName());
 
         Material material = block.getType();
         Block underBlock = block.getRelative(BlockFace.DOWN);

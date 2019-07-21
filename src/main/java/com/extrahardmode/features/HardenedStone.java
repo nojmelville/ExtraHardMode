@@ -97,7 +97,7 @@ public class HardenedStone extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.HARDENEDSTONE);
 
 //        final BlockTypeList tools = CFG.getBlocktypeList(RootNode.SUPER_HARD_STONE_TOOLS, world.getName());
-        final List<Material> physicsBlocks = CFG.getMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
+        final List<Material> physicsBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
 //        final BlockTypeList hardBlocks = CFG.getBlocktypeList(RootNode.SUPER_HARD_BLOCKS, world.getName());
 
@@ -165,7 +165,7 @@ public class HardenedStone extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.HARDENEDSTONE);
         final boolean hardstoneEnabled = CFG.getBoolean(RootNode.SUPER_HARD_STONE, world.getName());
         final boolean blockOrePlacement = CFG.getBoolean(RootNode.SUPER_HARD_STONE_BLOCK_ORE_PLACEMENT, world.getName());
-        final List<Material> oreBlocks = CFG.getMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
+        final List<Material> oreBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
 
         if (hardstoneEnabled && blockOrePlacement && !playerBypasses && oreBlocks.contains(block.getType()))
@@ -201,7 +201,7 @@ public class HardenedStone extends ListenerModule
 
         final boolean superHardStone = CFG.getBoolean(RootNode.SUPER_HARD_STONE, world.getName());
         final boolean blockPistons = CFG.getBoolean(RootNode.SUPER_HARD_STONE_BLOCK_PISTONS, world.getName());
-        final List<Material> oreBlocks = CFG.getMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
+        final List<Material> oreBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
 
         if (superHardStone && blockPistons)
@@ -234,7 +234,7 @@ public class HardenedStone extends ListenerModule
 
         final boolean superHardStone = CFG.getBoolean(RootNode.SUPER_HARD_STONE, world.getName());
         final boolean blockPistons = CFG.getBoolean(RootNode.SUPER_HARD_STONE_BLOCK_PISTONS, world.getName());
-        final List<Material> oreBlocks = CFG.getMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
+        final List<Material> oreBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
 
         // only sticky pistons can pull back blocks

@@ -172,8 +172,8 @@ public class Players extends ListenerModule
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.DEATH_INV_LOSS);
 
         final int toolDmgPercent = CFG.getInt(RootNode.PLAYER_DEATH_TOOLS_DMG_PERCENTAGE, world.getName());
-        final List<Material> blacklisted = CFG.getMaterialList(RootNode.PLAYER_DEATH_ITEMS_BLACKLIST, world.getName());
-        final List<Material> toolIds = CFG.getMaterialList(RootNode.PLAYER_DEATH_TOOLS_LIST, world.getName());
+        final List<Material> blacklisted = CFG.getStringListAsMaterialList(RootNode.PLAYER_DEATH_ITEMS_BLACKLIST, world.getName());
+        final List<Material> toolIds = CFG.getStringListAsMaterialList(RootNode.PLAYER_DEATH_TOOLS_LIST, world.getName());
         final boolean destroyTools = CFG.getBoolean(RootNode.PLAYER_DEATH_TOOLS_KEEP_DAMAGED, world.getName());
 
         // FEATURE: some portion of player inventory is permanently lost on death
