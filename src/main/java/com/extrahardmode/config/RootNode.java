@@ -163,7 +163,7 @@ public enum RootNode implements ConfigNode
     /**
      * whether rain should extinguish campfires
      */
-    RAIN_EXTINGUISHES_CAMPFIRES("World Rules.Campfires.Rain Extinguishes Campfires", VarType.BOOLEAN, true,
+    RAIN_EXTINGUISHES_CAMPFIRES("World Rules.Campfires.Rain Extinguishes Campfires", VarType.BOOLEAN, false,
             "When it rains there is a chance that campfires will be extinguished in a chunk.",
             "Any kind of block above the campfire is enough to protect the campfire"),
 
