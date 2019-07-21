@@ -479,23 +479,6 @@ public class EHMConfig
                         obj = Material.matchMaterial(mConfig.getString(node.getPath()));
                     break;
                 }
-                case MATERIAL_LIST:
-                {
-                    List<Material> materialList = new ArrayList<>();
-                    if (mConfig.get(node.getPath()) instanceof List)
-                    {
-                        List<String> list = mConfig.getStringList(node.getPath());
-                        for (String str : list)
-                        {
-                            Material material = Material.matchMaterial(str);
-                            if (material != null)
-                                materialList.add(material);
-                        }
-                        obj = materialList;
-                    } else if (mConfig.isSet(node.getPath()))
-                        obj = materialList; //obj = BlockTypeList.EMPTY_LIST; //No idea why this is empty but ok?
-                    break;
-                }
                 case BLOCK_RELATION_LIST:
                 {
                     if (mConfig.get(node.getPath()) instanceof List)
