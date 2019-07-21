@@ -1386,11 +1386,6 @@ public enum RootNode implements ConfigNode
                 obj = Collections.emptyList();
                 break;
             }
-            case MATERIAL_LIST:
-            {
-                obj = new ArrayList<Material>();
-                break;
-            }
             case BLOCK_RELATION_LIST:
             {
                 obj = BlockRelationsList.EMPTY_LIST;
@@ -1447,7 +1442,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of falling blocks.
      */
-    private static class DefaultFallingBlocks extends ArrayList<Material>
+    private static class DefaultFallingBlocks extends ArrayList<String>
     {
         /**
          * Constructor.
@@ -1455,13 +1450,13 @@ public enum RootNode implements ConfigNode
         public DefaultFallingBlocks()
         {
             super();
-            this.add(Material.DIRT);
-            this.add(Material.GRASS);
-            this.add(Material.COBBLESTONE);
-            this.add(Material.MOSSY_COBBLESTONE);
-            this.add(Material.STONE_SLAB);
-            this.add(Material.COBBLESTONE_SLAB);
-            this.add(Material.MYCELIUM);
+            this.add(Material.DIRT.name());
+            this.add(Material.GRASS.name());
+            this.add(Material.COBBLESTONE.name());
+            this.add(Material.MOSSY_COBBLESTONE.name());
+            this.add(Material.STONE_SLAB.name());
+            this.add(Material.COBBLESTONE_SLAB.name());
+            this.add(Material.MYCELIUM.name());
         }
     }
 
@@ -1469,7 +1464,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of falling blocks.
      */
-    private static class DefaultPhysicsBlocks extends ArrayList<Material>
+    private static class DefaultPhysicsBlocks extends ArrayList<String>
     {
         /**
          * Constructor.
@@ -1477,13 +1472,13 @@ public enum RootNode implements ConfigNode
         public DefaultPhysicsBlocks()
         {
             super();
-            this.add(Material.COAL_ORE);
-            this.add(Material.IRON_ORE);
-            this.add(Material.GOLD_ORE);
-            this.add(Material.LAPIS_ORE);
-            this.add(Material.REDSTONE_ORE);
-            this.add(Material.EMERALD_ORE);
-            this.add(Material.DIAMOND_ORE);
+            this.add(Material.COAL_ORE.name());
+            this.add(Material.IRON_ORE.name());
+            this.add(Material.GOLD_ORE.name());
+            this.add(Material.LAPIS_ORE.name());
+            this.add(Material.REDSTONE_ORE.name());
+            this.add(Material.EMERALD_ORE.name());
+            this.add(Material.DIAMOND_ORE.name());
         }
     }
 
@@ -1492,7 +1487,7 @@ public enum RootNode implements ConfigNode
     /**
      * Default list of tool durabilities
      */
-    private static class DefaultToolDurabilities extends ArrayList<Material>
+    private static class DefaultToolDurabilities extends ArrayList<String>
     {
         /**
          * Constructor.
@@ -1502,8 +1497,8 @@ public enum RootNode implements ConfigNode
             super();
             //this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
             //this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
-            this.add(Material.IRON_PICKAXE);
-            this.add(Material.DIAMOND_PICKAXE);
+            this.add(Material.IRON_PICKAXE.name());
+            this.add(Material.DIAMOND_PICKAXE.name());
         }
     }
 
@@ -1524,26 +1519,26 @@ public enum RootNode implements ConfigNode
     }
 
 
-    private static class DefaultValuableTools extends ArrayList<Material>
+    private static class DefaultValuableTools extends ArrayList<String>
     {
         public DefaultValuableTools()
         {
             super();
-            this.add(Material.DIAMOND_AXE);
-            this.add(Material.DIAMOND_SWORD);
-            this.add(Material.DIAMOND_PICKAXE);
-            this.add(Material.DIAMOND_SHOVEL);
+            this.add(Material.DIAMOND_AXE.name());
+            this.add(Material.DIAMOND_SWORD.name());
+            this.add(Material.DIAMOND_PICKAXE.name());
+            this.add(Material.DIAMOND_SHOVEL.name());
 
         }
     }
 
 
-    private static class DefaultHardBlocks extends ArrayList<Material>
+    private static class DefaultHardBlocks extends ArrayList<String>
     {
         public DefaultHardBlocks()
         {
             super();
-            this.add(Material.STONE);
+            this.add(Material.STONE.name());
 
         }
     }
