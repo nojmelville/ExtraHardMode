@@ -558,17 +558,6 @@ public class EHMConfig
                         break;
                     }
                 }
-                case MATERIAL_LIST:
-                {
-                    if (value instanceof ArrayList)
-                    {
-                        List<String> materialStrings = new ArrayList<>();
-                        for (Material material : (ArrayList<Material>)value)
-                            materialStrings.add(material.name());
-                        outConfig.set(node.getPath(), materialStrings);
-                        break;
-                    }
-                }
                 case BLOCK_RELATION_LIST:
                 {
                     if (value instanceof BlockRelationsList)
