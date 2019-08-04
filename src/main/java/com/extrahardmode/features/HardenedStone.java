@@ -89,7 +89,7 @@ public class HardenedStone extends ListenerModule
     /**
      * When a player breaks stone
      */
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event)
     {
         Block block = event.getBlock();
@@ -130,7 +130,7 @@ public class HardenedStone extends ListenerModule
         }
 
         // FEATURE: stone breaks tools much quicker
-        if (hardStoneEnabled && hardBlocks.contains(block) && !playerBypasses)
+        if (hardStoneEnabled && hardBlocks.contains(block.getType()) && !playerBypasses)
         {
             ItemStack inHandStack = player.getInventory().getItemInMainHand();
 
