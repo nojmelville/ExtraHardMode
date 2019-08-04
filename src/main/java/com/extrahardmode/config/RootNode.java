@@ -1483,7 +1483,6 @@ public enum RootNode implements ConfigNode
     }
 
 
-    //TODO: fix, somehow
     /**
      * Default list of tool durabilities
      */
@@ -1497,8 +1496,8 @@ public enum RootNode implements ConfigNode
             super();
             //this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
             //this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
-            this.add(Material.IRON_PICKAXE.name());
-            this.add(Material.DIAMOND_PICKAXE.name());
+            this.add(Material.IRON_PICKAXE.name() + "@32");
+            this.add(Material.DIAMOND_PICKAXE.name() + "@64");
         }
     }
 

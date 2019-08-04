@@ -91,7 +91,7 @@ public class UtilityModule extends EHMModule
      *
      * @return the damaged Item, can be completely broken
      */
-    public static ItemStack damage(ItemStack item, short blocks)
+    public static ItemStack damage(ItemStack item, int blocks)
     {
         short maxDurability = item.getType().getMaxDurability();
         Validate.isTrue(maxDurability > 1, "This item is not damageable");

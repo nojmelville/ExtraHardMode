@@ -26,11 +26,14 @@ import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.config.messages.MessageNode;
+import com.extrahardmode.events.EhmHardenedStoneEvent;
 import com.extrahardmode.module.BlockModule;
 import com.extrahardmode.module.MsgModule;
 import com.extrahardmode.module.PlayerModule;
+import com.extrahardmode.module.UtilityModule;
 import com.extrahardmode.service.Feature;
 import com.extrahardmode.service.ListenerModule;
+import com.extrahardmode.service.PermissionNode;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -43,13 +46,15 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Hardened Stone is there to make branchmining harder/impossible
- * <p/>
  * Only Iron/Diamond Picks can break stone , Tools break faster when breaking stone , Breaking ore causes surounding
  * stone to fall , Various Fixes to prevent working around the hardened stone
  */
@@ -96,44 +101,67 @@ public class HardenedStone extends ListenerModule
         final boolean applyPhysics = CFG.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS_APPLY, world.getName());
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.HARDENEDSTONE);
 
-//        final BlockTypeList tools = CFG.getBlocktypeList(RootNode.SUPER_HARD_STONE_TOOLS, world.getName());
+        final List<String> tools = CFG.getStringList(RootNode.SUPER_HARD_STONE_TOOLS, world.getName());
         final List<Material> physicsBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
-//        final BlockTypeList hardBlocks = CFG.getBlocktypeList(RootNode.SUPER_HARD_BLOCKS, world.getName());
+        final List<Material> hardBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_BLOCKS, world.getName());
+
+        final Map<Material, Integer> toolDurabilityMap = new HashMap<>();
+
+        try
+        {
+            for (String tool : tools)
+            {
+                String[] parsedTool = tool.split("@");
+                Material material = Material.matchMaterial(parsedTool[0]);
+                if (material == null)
+                {
+                    plugin.getLogger().warning("Material " + material + " does not exist. Please remove this entry from Mining.Inhibit Tunneling.");
+                    continue;
+                }
+                int durability = Integer.parseInt(parsedTool[1]);
+                toolDurabilityMap.put(material, durability);
+            }
+        }
+        catch (Throwable rock)
+        {
+            plugin.getLogger().severe("Mining.Inhibit Tunneling config node is not properly formatted. Should be MATERIAL@durability in blocks e.g. IRON_PICKAXE@32 for each entry.");
+            return;
+        }
 
         // FEATURE: stone breaks tools much quicker
-//        if (hardStoneEnabled && hardBlocks.contains(block) && !playerBypasses)
-//        {
-//            ItemStack inHandStack = player.getItemInHand();
-//
-//            if (inHandStack != null)
-//            {
-//                int toolId = inHandStack.getType().getId();
-//                short blocks = 0;
-//                BlockType toolSettings = tools.get(toolId);
-//                if (toolSettings != null && toolSettings.getAllMeta().size() > 0)
-//                    blocks = toolSettings.getMeta();
-//                EhmHardenedStoneEvent hardEvent = new EhmHardenedStoneEvent(player, inHandStack, blocks);
-//
-//                if (toolSettings != null)
-//                {
-//                    /* Broadcast an Event for other Plugins to change if the tool can break stone and the amount of blocks */
-//                    plugin.getServer().getPluginManager().callEvent(hardEvent);
-//
-//                    // otherwise, drastically reduce tool durability when breaking stone
-//                    if (hardEvent.getNumOfBlocks() > 0)
-//                    {
-//                        player.setItemInHand(UtilityModule.damage(hardEvent.getTool(), hardEvent.getNumOfBlocks()));
-//                    }
-//                }
-//                if (hardEvent.getNumOfBlocks() == 0)
-//                {
-//                    messenger.send(player, MessageNode.STONE_MINING_HELP, PermissionNode.SILENT_STONE_MINING_HELP);
-//                    event.setCancelled(true);
-//                    return;
-//                }
-//            }
-//        }
+        if (hardStoneEnabled && hardBlocks.contains(block) && !playerBypasses)
+        {
+            ItemStack inHandStack = player.getInventory().getItemInMainHand();
+
+            if (inHandStack.getType() != Material.AIR)
+            {
+                Material tool = inHandStack.getType();
+                int blocks = 0;
+                Integer toolSettings = toolDurabilityMap.get(tool);
+                if (toolSettings != null)
+                    blocks = toolSettings;
+                EhmHardenedStoneEvent hardEvent = new EhmHardenedStoneEvent(player, inHandStack, blocks);
+
+                if (toolSettings != null)
+                {
+                    /* Broadcast an Event for other Plugins to change if the tool can break stone and the amount of blocks */
+                    plugin.getServer().getPluginManager().callEvent(hardEvent);
+
+                    // otherwise, drastically reduce tool durability when breaking stone
+                    if (hardEvent.getNumOfBlocks() > 0)
+                    {
+                        player.setItemInHand(UtilityModule.damage(hardEvent.getTool(), hardEvent.getNumOfBlocks()));
+                    }
+                }
+                if (hardEvent.getNumOfBlocks() == 0)
+                {
+                    messenger.send(player, MessageNode.STONE_MINING_HELP, PermissionNode.SILENT_STONE_MINING_HELP);
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+        }
 
         // when ore is broken, it softens adjacent stone important to ensure players can reach the ore they break
         if (hardStonePhysix && physicsBlocks.contains(block.getType()))

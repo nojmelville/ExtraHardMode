@@ -397,9 +397,9 @@ public abstract class MultiWorldConfig extends EHMModule
      *
      * @return Value of the node. Returns an empty list if unknown.
      */
-    public List getStringList(final ConfigNode node, final String world)
+    public List<String> getStringList(final ConfigNode node, final String world)
     {
-        List list = new ArrayList<String>();
+        List<String> list;
         switch (node.getVarType())
         {
             case LIST:
@@ -409,12 +409,12 @@ public abstract class MultiWorldConfig extends EHMModule
                     obj = OPTIONS.get(world, node);
                 else if (enabledForAll)
                     obj = OPTIONS.get(ALL_WORLDS, node);
-                list = obj instanceof List ? (List) obj : (List) node.getValueToDisable();
+                list = obj instanceof List ? (List<String>) obj : (List) node.getValueToDisable();
                 break;
             }
             default:
             {
-                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " as a List<String>.");
+                throw new IllegalArgumentException("Attempted to get " + node.toString() + " of type " + node.getVarType() + " as a List.");
             }
         }
         return list;
@@ -446,7 +446,7 @@ public abstract class MultiWorldConfig extends EHMModule
     }
 
 
-    @Deprecated
+    @Deprecated //Should encourage use of getStringList, since this is performing an unchecked cast?
     public List<Material> getStringListAsMaterialList(final ConfigNode node, final String world)
     {
         List<Material> blockList = new ArrayList<>();

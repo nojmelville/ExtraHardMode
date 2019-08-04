@@ -37,7 +37,7 @@
         <project.mainclass>com.extrahardmode.ExtraHardMode</project.mainclass>
         <!--Use a profile to overwrite this-->
         <outputdir>${project.build.outputDirectory}</outputdir>
-        <mc-version>1.14.2</mc-version>
+        <mc-version>1.14.4</mc-version>
         <bukkit-ver>R0.1-SNAPSHOT</bukkit-ver>
         <testDir>${basedir}/src/test/</testDir>
         <srcDir>${basedir}/src/main/java/</srcDir>
@@ -316,14 +316,19 @@
         <!-- Former Author -->
         <developer>
             <id>bigscary</id>
-            <url>https://github.com/ryanhamshire</url>
+            <url>https://github.com/bigscary</url>
         </developer>
-        <!-- Current Author -->
+        <!-- Former Author -->
         <developer>
             <id>Diemex</id>
             <email>di.em.ex@gmx.de</email>
             <url>https://github.com/Di3mex</url>
             <timezone>GMT</timezone>
+        </developer>
+        <!-- Current Maintainer -->
+        <developer>
+            <id>RoboMWM</id>
+            <url>https://github.com/RoboMWM</url>
         </developer>
         <!-- Contributor -->
         <developer>
