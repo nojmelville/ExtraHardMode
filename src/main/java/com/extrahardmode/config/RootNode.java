@@ -54,7 +54,7 @@ public enum RootNode implements ConfigNode
      * list of worlds where extra hard mode rules apply
      */
     WORLDS("Enabled Worlds", VarType.LIST, new DefaultWorlds(),
-            "Set the worlds you want ehm active here. F.e. [world, world_nether]. \"@all\" enables ehm for all worlds"),
+            "Set the worlds you want ehm active here. E.g. [world, world_nether]. \"@all\" enables ehm for all worlds"),
     /**
      * Whether debug messages should be printed to console
      */
@@ -109,9 +109,9 @@ public enum RootNode implements ConfigNode
     /**
      * whether stone is hardened to encourage cave exploration over tunneling
      */
-    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine (Tool@Blocks)", VarType.LIST, new DefaultToolDurabilities(),
+    SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine", VarType.LIST, new DefaultToolDurabilities(),
             "List of tools that can mine stone. If a tool isn't in the list it can't mine stone.",
-            "F.e. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken"),
+            "E.g. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken"),
     /**
      * Breaking an ore will cause surrounding stone to turn to cobble and fall
      */
@@ -126,13 +126,13 @@ public enum RootNode implements ConfigNode
     /**
      * These Blocks will turn surrounding stone into cobblestone
      */
-    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks (Block@id,id2)", VarType.LIST, new DefaultPhysicsBlocks(),
+    SUPER_HARD_STONE_ORE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Blocks", VarType.LIST, new DefaultPhysicsBlocks(),
             "Ore blocks that will soften surrounding stone blocks."),
     /**
      * Stone Blocks and their counter respective cobblestone blocks
      */
-    SUPER_HARD_STONE_STONE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Stone Blocks (Stone@data-Cobble@data)", VarType.BLOCK_RELATION_LIST, new DefaultStoneBlocks(),
-            "Here you can specify custom stone blocks or change what stone softens into."),
+    SUPER_HARD_STONE_STONE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Stone Blocks", VarType.BLOCK_RELATION_LIST, new DefaultStoneBlocks(),
+            "Here you can specify custom stone blocks or change what stone softens into. (Stone@data-Cobble@data)"),
     /**
      * ###########
      * # TORCHES #
@@ -393,7 +393,7 @@ public enum RootNode implements ConfigNode
     INHIBIT_MONSTER_GRINDERS("General Monster Rules.Inhibit Monster Grinders", VarType.BOOLEAN, true,
             "This is an advanced anti monster grinder module. It will block drops if the monster",
             "spawned on an unnatural block, took too much damage from natural causes (falldmg etc.)",
-            "cant reach a player or can not easily reach a player f.e. monster is in water."),
+            "cant reach a player or can not easily reach a player e.g. monster is in water."),
     /**
      * max y value for extra monster spawns
      */
@@ -463,7 +463,7 @@ public enum RootNode implements ConfigNode
             "What percentage of the placed skulls should drop as an item, when broken before the zombie respawns."),
     ZOMBIES_REANIMATE_PERCENT("Zombies.Reanimate.Percent", VarType.INTEGER, SubType.PERCENTAGE, 50,
             "Percentage for the 1st respawn to occur. To reduce the amount of consecutive respawns the percentage reduced by 1/n respawns.",
-            "F.e 1: 50%, 2: 1/2 of 50% = 25%, 3: 1/3 of 25% = 7.5% and so on"),
+            "E.g. 1: 50%, 2: 1/2 of 50% = 25%, 3: 1/3 of 25% = 7.5% and so on"),
 
     /**
      * #############
