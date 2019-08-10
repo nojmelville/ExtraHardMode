@@ -156,7 +156,7 @@ public class Torches extends ListenerModule
     {
         World world = event.getWorld();
 
-        plugin.debug(world, "WeatherChangeEvent called");
+        plugin.debug(world, "WeatherChangeEvent called. toWeatherState: " + event.toWeatherState());
 
         final boolean rainBreaksTorchesEnabled = CFG.getBoolean(RootNode.RAIN_BREAKS_TORCHES, world.getName());
         final boolean rainExtinguishesCampfiresEnabled = CFG.getBoolean(RootNode.RAIN_EXTINGUISHES_CAMPFIRES, world.getName());
@@ -171,14 +171,16 @@ public class Torches extends ListenerModule
                 Chunk[] chunks = world.getLoadedChunks();
                 if (chunks.length > 0)
                 {
+                    int i;
                     int startOffset = plugin.getRandom().nextInt(chunks.length);
-                    for (int i = 0; i < chunks.length; i++)
+                    for (i = 0; i < chunks.length; i++)
                     {
                         Chunk chunk = chunks[(startOffset + i) % chunks.length];
 
                         RemoveExposedTorchesTask task = new RemoveExposedTorchesTask(plugin, chunk);
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, task, i * 100L);
                     }
+                    plugin.debug(world, "Scheduled " + i + " tasks.");
                 }
             }
         }
