@@ -410,7 +410,8 @@ public class EHMConfig
      */
     public void loadWorlds()
     {
-        mWorlds.addAll(mConfig.getStringList(mWorldsNode.getPath()));
+        //mWorlds.addAll(mConfig.getStringList(mWorldsNode.getPath()));
+        mWorlds.addAll((List<String>)mLoadedNodes.get(RootNode.WORLDS));
 
         //Check for all worlds placeholder = Enables plugin for all worlds
         for (String world : mWorlds)
