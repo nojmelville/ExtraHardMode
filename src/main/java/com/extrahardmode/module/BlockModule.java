@@ -432,11 +432,18 @@ public class BlockModule extends EHMModule
     /** Is this a natural block for netherspawning? */
     public boolean isNaturalNetherSpawn(Material material)
     {
-        return material == Material.NETHERRACK
-                || material == Material.NETHER_BRICK
-                || material == Material.SOUL_SAND
-                || material == Material.GRAVEL
-                || material == Material.AIR;
+        switch (material)
+        {
+            case NETHERRACK:
+            case NETHER_BRICK: //I'm guessing this is the nether brick item, not the block. If so, this should be removed.
+            case NETHER_BRICKS:
+            case NETHER_BRICK_SLAB:
+            case SOUL_SAND:
+            case GRAVEL:
+            case AIR:
+                return true;
+        }
+        return false;
     }
 
 
