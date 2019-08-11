@@ -186,10 +186,10 @@ public class EHMConfig
         if (mConfigNodes.isEmpty())
             throw new IllegalStateException("You forgot to add nodes to " + mConfigFile.getName());
         loadMode();
-        loadWorlds();
         loadCommentOptions();
         loadNodes();
         validateNodes();
+        loadWorlds();
     }
 
 
