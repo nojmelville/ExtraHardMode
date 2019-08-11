@@ -185,11 +185,6 @@
             <id>spigot-repo</id>
             <url>http://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <!--PaperSpigot Repo -->
-        <repository>
-            <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
-        </repository>
         <!--WorldGuard Repo -->
         <repository>
             <id>sk89q-repo</id>
