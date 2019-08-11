@@ -185,10 +185,10 @@ public class EHMConfig
         if (mConfigNodes.isEmpty())
             throw new IllegalStateException("You forgot to add nodes to " + mConfigFile.getName());
         loadMode();
-        loadWorlds();
         loadCommentOptions();
         loadNodes();
         validateNodes();
+        loadWorlds();
     }
 
 
@@ -409,7 +409,7 @@ public class EHMConfig
      */
     public void loadWorlds()
     {
-        mWorlds.addAll(mConfig.getStringList(mWorldsNode.getPath()));
+        mWorlds.addAll((List<String>)mLoadedNodes.get(RootNode.WORLDS));
 
         //Check for all worlds placeholder = Enables plugin for all worlds
         for (String world : mWorlds)
