@@ -66,6 +66,7 @@ public class RootConfig extends MultiWorldConfig
     @Override
     public void load()
     {
+        plugin.getLogger().info("load()ing");
         init();
         //find all ymls
         File[] configFiles = findAllYmlFiles(plugin.getDataFolder());
@@ -90,6 +91,7 @@ public class RootConfig extends MultiWorldConfig
         //has config.yml been found? not -> create it
         if (mainEhmConfig == null)
         {
+            plugin.getLogger().info("mainEhmConfig is null");
             File mainFile = new File(plugin.getDataFolder().getPath() + File.separator + "config.yml");
             if (!mainFile.exists())
             {
@@ -110,6 +112,8 @@ public class RootConfig extends MultiWorldConfig
         //Load config.yml
         if (mainEhmConfig.isEnabledForAll())
             enabledForAll = true;
+        plugin.getLogger().info("no worlds? " + mainEhmConfig.getWorlds().isEmpty());
+        plugin.getLogger().info("enabled for all? " + mainEhmConfig.isEnabledForAll());
         for (Map.Entry<ConfigNode, Object> node : mainEhmConfig.getLoadedNodes().entrySet())
         {
             for (String world : mainEhmConfig.getWorlds())

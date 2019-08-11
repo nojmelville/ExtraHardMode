@@ -96,6 +96,8 @@ public class HardenedStone extends ListenerModule
         World world = block.getWorld();
         Player player = event.getPlayer();
 
+        plugin.getLogger().info("BlockBreakEvent called");
+
         final boolean hardStoneEnabled = CFG.getBoolean(RootNode.SUPER_HARD_STONE, world.getName());
         final boolean hardStonePhysix = CFG.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS, world.getName());
         final boolean applyPhysics = CFG.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS_APPLY, world.getName());
@@ -121,6 +123,7 @@ public class HardenedStone extends ListenerModule
                 }
                 int durability = Integer.parseInt(parsedTool[1]);
                 toolDurabilityMap.put(material, durability);
+                plugin.getLogger().info("Tool: " + material + durability);
             }
         }
         catch (Throwable rock)
@@ -128,6 +131,13 @@ public class HardenedStone extends ListenerModule
             plugin.getLogger().severe("Mining.Inhibit Tunneling config node is not properly formatted. Should be MATERIAL@durability in blocks e.g. IRON_PICKAXE@32 for each entry.");
             return;
         }
+
+        for (Material material : hardBlocks)
+        {
+            plugin.getLogger().info("hardblock: " + material.name());
+        }
+
+        plugin.getLogger().info("does player bypass?" + playerBypasses);
 
         // FEATURE: stone breaks tools much quicker
         if (hardStoneEnabled && hardBlocks.contains(block.getType()) && !playerBypasses)
@@ -160,6 +170,7 @@ public class HardenedStone extends ListenerModule
                     event.setCancelled(true);
                     return;
                 }
+                plugin.getLogger().info("stuff happened but it did not");
             }
         }
 

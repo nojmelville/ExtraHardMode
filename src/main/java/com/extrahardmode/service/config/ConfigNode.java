@@ -74,7 +74,6 @@ public interface ConfigNode
         COLOR,
         POTION_EFFECT,
         MATERIAL,
-        @Deprecated MATERIAL_LIST,
         @Deprecated BLOCK_RELATION_LIST,
         COMMENT
     }

@@ -22,6 +22,7 @@
 package com.extrahardmode.config;
 
 
+import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.service.IoHelper;
 import com.extrahardmode.service.config.*;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
@@ -511,8 +512,10 @@ public class EHMConfig
      */
     public void validateNodes()
     {
+        ExtraHardMode.getPlugin(ExtraHardMode.class).getLogger().info("validateNodes()");
         for (ConfigNode node : mConfigNodes)
         {
+            ExtraHardMode.getPlugin(ExtraHardMode.class).getLogger().info("validateNodes() has a mconfignode");
             switch (node.getVarType())
             {
                 case INTEGER:

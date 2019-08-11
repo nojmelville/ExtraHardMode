@@ -91,6 +91,7 @@ public abstract class MultiWorldConfig extends EHMModule
     {
         Validate.notNull(node, "Supplied ConfigNode was null - world: " + world + " value: " + value);
         Validate.notNull(world, "Supplied World was null - node: " + node + " value: " + value);
+        plugin.getLogger().info("set" + world + node + value);
         switch (node.getVarType())
         {
             case LIST:
