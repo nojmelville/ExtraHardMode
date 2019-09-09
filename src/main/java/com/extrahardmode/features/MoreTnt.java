@@ -10,6 +10,7 @@ import com.extrahardmode.service.Feature;
 import com.extrahardmode.service.ListenerModule;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -74,7 +75,7 @@ public class MoreTnt extends ListenerModule
                             CraftingInventory craftInv = event.getInventory();
 
                             //The vanilla tnt recipe
-                            ShapedRecipe vanillaTnt = new ShapedRecipe(new ItemStack(Material.TNT)).shape("gsg", "sgs", "gsg").setIngredient('g', Material.GUNPOWDER).setIngredient('s', Material.SAND);
+                            ShapedRecipe vanillaTnt = new ShapedRecipe(new NamespacedKey(plugin, "moretnt"), new ItemStack(Material.TNT)).shape("gsg", "sgs", "gsg").setIngredient('g', Material.GUNPOWDER).setIngredient('s', Material.SAND);
 
                             //Multiply the amount of tnt in enabled worlds
                             if (UtilityModule.isSameRecipe(craftRecipe, vanillaTnt))
