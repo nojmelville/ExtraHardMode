@@ -116,7 +116,7 @@ public class HardenedStone extends ListenerModule
                 Material material = Material.matchMaterial(parsedTool[0]);
                 if (material == null)
                 {
-                    plugin.getLogger().warning("Material " + material + " does not exist. Please remove this entry from Mining.Inhibit Tunneling.");
+                    plugin.getLogger().warning("Material " + parsedTool[0] + " does not exist. Please remove this entry from Mining.Inhibit Tunneling.");
                     continue;
                 }
                 int durability = Integer.parseInt(parsedTool[1]);
