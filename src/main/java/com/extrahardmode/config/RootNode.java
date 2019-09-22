@@ -132,7 +132,7 @@ public enum RootNode implements ConfigNode
      * Stone Blocks and their counter respective cobblestone blocks
      */
     SUPER_HARD_STONE_STONE_BLOCKS("World Rules.Mining.Breaking Blocks Softens Surrounding Stone.Stone Blocks", VarType.BLOCK_RELATION_LIST, new DefaultStoneBlocks(),
-            "Here you can specify custom stone blocks or change what stone softens into. (Stone@data-Cobble@data)"),
+            "Here you can specify custom stone blocks or change what stone softens into. (STONE-COBBLESTONE)"),
     /**
      * ###########
      * # TORCHES #
