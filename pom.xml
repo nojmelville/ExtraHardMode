@@ -26,7 +26,7 @@
     <!-- Project properties. -->
     <groupId>com.extrahardmode</groupId>
     <artifactId>ExtraHardMode</artifactId>
-    <version>3.14.0</version>
+    <version>3.14.1</version>
     <name>ExtraHardMode</name>
     <description>New game rules and mechanics for Minecraft.</description>
     <url>http://dev.bukkit.org/projects/fun-hard-mode</url>
@@ -37,7 +37,7 @@
         <project.mainclass>com.extrahardmode.ExtraHardMode</project.mainclass>
         <!--Use a profile to overwrite this-->
         <outputdir>${project.build.outputDirectory}</outputdir>
-        <mc-version>1.14.4</mc-version>
+        <mc-version>1.16.1</mc-version>
         <bukkit-ver>R0.1-SNAPSHOT</bukkit-ver>
         <testDir>${basedir}/src/test/</testDir>
         <srcDir>${basedir}/src/main/java/</srcDir>

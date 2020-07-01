@@ -105,7 +105,7 @@ public class Tutorial extends ListenerModule
                         messenger.send(player, MessageNode.GHAST_TARGET);
                     break;
                 }
-                case PIG_ZOMBIE:
+                case ZOMBIFIED_PIGLIN:
                 {
                     if (CFG.getBoolean(RootNode.ALWAYS_ANGRY_PIG_ZOMBIES, world.getName()))
                         messenger.send(player, MessageNode.PIGZOMBIE_TARGET);

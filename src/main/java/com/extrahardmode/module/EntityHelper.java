@@ -255,7 +255,7 @@ public class EntityHelper
                 case SKELETON:
                     entity.getEquipment().setItemInHand(new ItemStack(Material.BOW));
                     break;
-                case PIG_ZOMBIE:
+                case ZOMBIFIED_PIGLIN:
                     entity.getEquipment().setItemInHand(new ItemStack(Material.GOLDEN_SWORD));
                     break;
                 case ENDER_DRAGON:

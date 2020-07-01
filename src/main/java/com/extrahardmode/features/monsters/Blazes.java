@@ -88,7 +88,7 @@ public class Blazes extends ListenerModule
         EntityType entityType = entity.getType();
 
         // FEATURE: more blazes in nether
-        if (entityType == EntityType.PIG_ZOMBIE && world.getEnvironment() == World.Environment.NETHER)
+        if (entityType == EntityType.ZOMBIFIED_PIGLIN && world.getEnvironment() == World.Environment.NETHER)
         {
             if (plugin.random(bonusNetherBlazeSpawnPercent))
             {
