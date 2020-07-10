@@ -99,7 +99,7 @@ public class TestAntiGrinder
     @Test
     public void naturalSpawns()
     {
-        MockCreatureSpawnEvent event = new MockCreatureSpawnEvent(EntityType.PIG_ZOMBIE, "world", CreatureSpawnEvent.SpawnReason.NATURAL);
+        MockCreatureSpawnEvent event = new MockCreatureSpawnEvent(EntityType.ZOMBIFIED_PIGLIN, "world", CreatureSpawnEvent.SpawnReason.NATURAL);
 
         //Set a Block at the given Location
         MockBlock block = new MockBlock();
