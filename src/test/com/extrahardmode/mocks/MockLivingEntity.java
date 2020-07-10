@@ -78,7 +78,7 @@ public class MockLivingEntity
             case GHAST:
                 entity = mock(Ghast.class);
                 break;
-            case PIG_ZOMBIE:
+            case ZOMBIFIED_PIGLIN:
                 entity = mock(PigZombie.class);
                 break;
             case SILVERFISH:
