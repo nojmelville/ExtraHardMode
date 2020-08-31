@@ -54,6 +54,9 @@ public class Guardians extends ListenerModule
 
         final int guardiansSpawnPercent = CFG.getInt(RootNode.BONUS_GUARDIANS_SPAWN_PERCENT, world.getName());
 
+        if (guardiansSpawnPercent == 0)
+            return;
+
         // FEATURE: Guardians spawns naturally 
         if (entityType == EntityType.SQUID && world.getEnvironment() == World.Environment.NORMAL
                 && entity.getLocation().getBlock().getBiome() == Biome.DEEP_OCEAN 

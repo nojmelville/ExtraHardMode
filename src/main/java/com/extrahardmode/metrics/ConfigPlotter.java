@@ -13,6 +13,8 @@ import java.util.concurrent.Callable;
  * Output all the choosen modules to mcstats in nice plots
  *
  * @author Diemex
+ *
+ * Well, now it goes to bstats.
  */
 public class ConfigPlotter
 {
@@ -36,7 +38,7 @@ public class ConfigPlotter
         Metrics metrics;
         try
         {
-            metrics = new Metrics(plugin);
+            metrics = new Metrics(plugin, 3342);
 
             metrics.addCustomChart(new Metrics.SimplePie("bukkit_implementation", new Callable<String>()
             {
@@ -145,6 +147,30 @@ public class ConfigPlotter
                         metrics.addCustomChart(new Metrics.SimplePie(node.toString(), () -> result));
                         break;
                     }
+                    //Please add future config nodes here, the bstats site defaults IDs to lowercase and does not allow editing of existing charts, nor easy bulk input of new ones...
+//                    case SOMETHING_ELSE:
+//                    {
+//                        final int metricsVal = getMetricsValue(node);
+//                        String result;
+//                        switch (metricsVal)
+//                        {
+//                            case 0:
+//                                result = "Completely disabled";
+//                                break;
+//                            case 1:
+//                                result = "Enabled in all worlds";
+//                                break;
+//                            case 2:
+//                                result = "Enabled in some";
+//                                break;
+//                            default:
+//                                result = "Unknown";
+//                                break;
+//                        }
+//
+//                        metrics.addCustomChart(new Metrics.SimplePie(node.toString().toLowerCase(), () -> result));
+//                        break;
+//                    }
                 }
             }
         } catch (Exception ignored)
