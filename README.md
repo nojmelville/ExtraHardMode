@@ -1,7 +1,7 @@
 ExtraHardMode
 =============
 
-Official repository for [ExtraHardMode Bukkit Plugin. Download and more info here.](http://dev.bukkit.org/bukkit-plugins/fun-hard-mode/).
+Official repository for [ExtraHardMode Bukkit Plugin.](https://dev.bukkit.org/bukkit-plugins/fun-hard-mode/) Project page and downloads can be found here: https://dev.bukkit.org/bukkit-plugins/fun-hard-mode/
 
 ## Build instructions
 
