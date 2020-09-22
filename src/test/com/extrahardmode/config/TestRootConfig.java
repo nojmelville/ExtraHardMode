@@ -41,7 +41,7 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({RootConfig.class, ExtraHardMode.class})
+//@PrepareForTest({RootConfig.class, ExtraHardMode.class}) //Breaks in JDK 11 apparently
 public class TestRootConfig
 {
     //Mock Plugin
