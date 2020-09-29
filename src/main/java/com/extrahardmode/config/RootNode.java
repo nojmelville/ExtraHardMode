@@ -111,7 +111,8 @@ public enum RootNode implements ConfigNode
      */
     SUPER_HARD_STONE_TOOLS("World Rules.Mining.Inhibit Tunneling.Amount of Stone Tool Can Mine", VarType.LIST, new DefaultToolDurabilities(),
             "List of tools that can mine stone. If a tool isn't in the list it can't mine stone.",
-            "E.g. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken"),
+            "E.g. DIAMOND_PICKAXE@100 = Mine 100 stone blocks -> pick broken",
+            "Vanilla reference: Iron: 250, Diamond: 1561, Netherite: 2031"),
     /**
      * Breaking an ore will cause surrounding stone to turn to cobble and fall
      */
@@ -1496,8 +1497,9 @@ public enum RootNode implements ConfigNode
             super();
             //this.add(new BlockType(Material.IRON_PICKAXE, (short) 32));
             //this.add(new BlockType(Material.DIAMOND_PICKAXE, (short) 64));
-            this.add(Material.IRON_PICKAXE.name() + "@32");
-            this.add(Material.DIAMOND_PICKAXE.name() + "@64");
+            this.add(Material.IRON_PICKAXE.name() + "@128");
+            this.add(Material.DIAMOND_PICKAXE.name() + "@512");
+            this.add(Material.NETHERITE_PICKAXE.name() + "@1024");
         }
     }
 
