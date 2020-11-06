@@ -39,6 +39,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -107,6 +108,7 @@ public class HardenedStone extends ListenerModule
         final List<Material> hardBlocks = CFG.getStringListAsMaterialList(RootNode.SUPER_HARD_BLOCKS, world.getName());
 
         final Map<Material, Integer> toolDurabilityMap = new HashMap<>();
+        final Map<Material, Integer> toolUnbreakingMap = new HashMap<>();
 
         try
         {
@@ -121,6 +123,12 @@ public class HardenedStone extends ListenerModule
                 }
                 int durability = Integer.parseInt(parsedTool[1]);
                 toolDurabilityMap.put(material, durability);
+
+                if (parsedTool.length > 2)
+                {
+                    int unbreakingDurability = Integer.parseInt(parsedTool[1]);
+                    toolUnbreakingMap.put(material, unbreakingDurability);
+                }
             }
         }
         catch (Throwable rock)
@@ -139,8 +147,13 @@ public class HardenedStone extends ListenerModule
                 Material tool = inHandStack.getType();
                 int blocks = 0;
                 Integer toolSettings = toolDurabilityMap.get(tool);
+
+                if (toolUnbreakingMap.containsKey(tool) && inHandStack.containsEnchantment(Enchantment.DURABILITY))
+                    toolSettings *= toolUnbreakingMap.get(tool);
+
                 if (toolSettings != null)
                     blocks = toolSettings;
+
                 EhmHardenedStoneEvent hardEvent = new EhmHardenedStoneEvent(player, inHandStack, blocks);
 
                 if (toolSettings != null)
