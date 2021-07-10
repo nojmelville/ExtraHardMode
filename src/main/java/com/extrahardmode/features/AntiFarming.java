@@ -438,7 +438,7 @@ public class AntiFarming extends ListenerModule
     }
 
     /**
-     * When a player place kelp or seagrass in markd water.
+     * When a player place kelp or seagrass in marked water.
      * 
      * @param event Event that occurred.
      */

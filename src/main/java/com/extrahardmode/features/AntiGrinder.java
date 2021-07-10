@@ -214,9 +214,9 @@ public class AntiGrinder extends ListenerModule
 
                         for (Block adjacentBlock : adjacentBlocks)
                         {
-                            if (adjacentBlock != null && (adjacentBlock.getType() == Material.WATER))
+                            if (adjacentBlock != null && adjacentBlock.getType() == Material.WATER && entity.getType() != EntityType.DROWNED)
                             {
-                                plugin.debug(world, event.getEntity().getType().name() +
+                                plugin.debug(world, entity.getType().name() +
                                         "'s drops at " + entity.getLocation() + " was cleared (in/near water)");
                                 return clearDrops(event);
                             }
