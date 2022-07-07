@@ -282,14 +282,8 @@
         </dependency>
 
         <!-- Compatibility Dependencies -->
-        <!-- WorldGuard -->
-        <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldguard</artifactId>
-            <version>6.1.1-SNAPSHOT</version>
-        </dependency>
 
-        <!-- Block Loggers -->
+      <!-- Block Loggers -->
         <!-- Prism -->
         <!--<dependency>-->
             <!--<groupId>me.botsko</groupId>-->
